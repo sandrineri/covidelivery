@@ -1,0 +1,1 @@
+yarn build && surge -p ./build -d https://.surge.sh
