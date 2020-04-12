@@ -7,6 +7,8 @@ Pour le mettre en ligne : up
 Pour lancer les tests : yarn test
 
 TODO :
+- COMPOSANTS
+    
 - PETOUILLES
     [x] Réparer la recherche
     [x] mettre des dates par défaut (ex: min: -1 semaine, max: aujourd'hui)
