@@ -18,47 +18,55 @@ const Products = (props) => {
             //console.log('productsArray ', productsArray);
         }
     };
-    
 
-    if ( props.message !== "") {
+
+    if (props.message !== "") {
         return (
-            <div></div>
+            <article></article>
         )
     }
 
     if (productsArray.length === 0) {
         return (
             <article>
-                <div>
-                    <p>Aucun produit n'est en vente en ce moment.</p>
-                </div>
+                <p>Aucun produit n'est en vente en ce moment.</p>
             </article>
         );
     }
 
     return (
-        <ul>
-            {props.productsList.map( (family) => {
-                return (
-                    <li className="products-family" key={family.id}>{family.name}
-                        <ul> {family.categories.map(category => {
-                            return (
-                                <li className="category" key={category.id}>{category.name}
-                                    <ul>
-                                        {category.products.map( product => {
-                                            return (
-                                                <Product key={product.id} product={product} />
-                                            )
-                                            
-                                        })}
-                                    </ul>
-                                </li>
-                            )
-                        })} </ul>
-                    </li>
-                )
-            })}
-        </ul>
+        <article>
+            <ul>
+                {props.productsList.map((family) => {
+                    return (
+                        <li className="products-family" key={family.id}>{family.name}
+                            <ul> {family.categories.map(category => {
+                                return (
+                                    <li className="category" key={category.id}>{category.name}
+                                        <ul>
+                                            <li className="product-info-labels">
+                                                <span className="product-info product-info-label">Produit</span>
+                                                <span className="product-info product-info-label">Provenance</span>
+                                                <span className="product-info product-info-label">Prix</span>
+                                                <span className="product-info product-info-label">Unité</span>
+                                                <span className="product-info product-info-label">Promo</span>
+                                            </li>
+                                            {category.products.map(product => {
+                                                return (
+                                                    <React.Fragment>
+                                                        <Product key={product.id} product={product} />
+                                                    </React.Fragment>
+                                                )
+                                            })}
+                                        </ul>
+                                    </li>
+                                )
+                            })} </ul>
+                        </li>
+                    )
+                })}
+            </ul>
+        </article>
     )
 }
 

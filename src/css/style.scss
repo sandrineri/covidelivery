@@ -1,6 +1,8 @@
+$borderBottom: 1px solid #000000;
+
 html,
 body {
-    font-size: 16px;
+    font-size: 18px;
     margin: 0;
     padding: 0;
 }
@@ -20,4 +22,30 @@ h1 {
     color: white;
     margin: 0;
     padding: 4rem;
+}
+
+// PRODUCTS
+.category {
+    margin: 1rem 0;
+}
+
+// PRODUCT
+.product,
+.product-info-labels {
+    border-bottom: $borderBottom;
+
+    .product-info-label {
+        background-color: #f0eded;
+        font-variant: small-caps;
+        font-feature-settings: normal;
+        letter-spacing: 1px;
+    }
+
+    .product-info {
+        width: 15rem;
+    }
+
+    .product-name {
+        text-transform: capitalize;
+    }
 }
