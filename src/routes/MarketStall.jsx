@@ -3,6 +3,7 @@ import React, { useState, useEffect }  from 'react';
 import settings from '../config/settings';
 
 import Header from '../components/Header';
+import Connect from '../components/Connect';
 import Message from '../components/Message';
 import Products from '../components/Products';
 
@@ -37,6 +38,7 @@ const MarketStall = () => {
     return (
         <React.Fragment>
             <Header />
+            <Connect />
             <Message message={errorMessage} />
             <Products productsList={productsList} message={errorMessage} />
             

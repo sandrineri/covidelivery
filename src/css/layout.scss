@@ -2,8 +2,24 @@
     box-sizing: border-box;
 }
 
+// CONNEXION
+.connect-container {
+    display: flex;
+}
 
+.person {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+// PRODUCT
 .product, 
 .product-info-labels {
     display: flex;
+}
+
+.product-basket {
+    display: flex;
+    align-items: center;
 }

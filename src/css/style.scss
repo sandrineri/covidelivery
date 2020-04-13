@@ -11,6 +11,7 @@ ul {
     list-style-type: none;
 }
 
+
 // HEADER
 header {
     text-align: center;
@@ -33,6 +34,7 @@ h1 {
 .product,
 .product-info-labels {
     border-bottom: $borderBottom;
+    padding: .2rem 0;
 
     .product-info-label {
         background-color: #f0eded;
@@ -42,10 +44,29 @@ h1 {
     }
 
     .product-info {
+        width: 10rem;
+    }
+
+    .product-name,
+    .product-info-label-product {
         width: 15rem;
     }
 
     .product-name {
         text-transform: capitalize;
+    }
+
+    .product-basket,
+    .product-info-label-quantity {
+        width: 15rem;
+    }
+
+    .quantity-input {
+        width: 3rem;
+    }
+
+    .unit-select {
+        width: 7rem;
+        margin: 0 .5rem;
     }
 }
