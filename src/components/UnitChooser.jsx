@@ -1,8 +1,8 @@
 import React from 'react';
 import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
+//import makeAnimated from 'react-select/animated';
 
-const animatedComponents = makeAnimated();
+//const animatedComponents = makeAnimated();
 
 const options = [
     { value: 'kilo', label: 'kilo(s)' },
@@ -18,7 +18,7 @@ const UnitChooser = (props) => {
         <Select
             className="unit-select"
             closeMenuOnSelect={false}
-            components={animatedComponents}
+            //components={animatedComponents}
             options={options}
             placeholder={props.unit}
             defaultValue={props.unit}
