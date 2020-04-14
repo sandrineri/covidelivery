@@ -1,13 +1,13 @@
 import React from 'react';
 import CreatableSelect from 'react-select/creatable';
+import _ from 'lodash';
 
 import Header from '../components/Header';
 
 import settings from '../config/settings';
 
-let unitOptions = [
-    { value: 'grammes', label: 'grammes', name: "grammes" },
-];
+
+let unitOptions = [];
 
 let unitArray = [];
 
@@ -35,17 +35,18 @@ const Form = () => {
                     categoryOptions.push({ value: `${categoriesArray[category].id}`, label: `${categoriesArray[category].name}`, name: `${categoriesArray[category].name.toLowerCase()}` });
 
                     for (let product = 0; product < productsArray.length; product++) {
-                        unitArray.push(productsArray[product].unit);
+                        unitArray.push( { value: `${productsArray[product].baseUnitId}`, label: `${productsArray[product].baseUnitName}`} );
                     }
                 }
             }
 
-            //console.log(unitArray);
-            const uniqueArray = [...new Set(unitArray)];
-            //console.log(uniqueArray);
+            console.log('unitArray : ',unitArray );
+            const uniqueArray = _.uniqWith(unitArray, _.isEqual);
+            console.log("uniqueArray2: ", uniqueArray);
+
             uniqueArray.map(unit => {
                 return (
-                    unitOptions.push({ value: `${unit}`, label: `${unit}`, name: `${unit}` })
+                    unitOptions.push(unit)
                 )
             });
             console.log(unitOptions);

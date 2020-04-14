@@ -6,19 +6,19 @@ import Select from 'react-select';
 let options = [];
 
 const UnitChooser = (props) => {
-    //console.log(props);
+    console.log('UnitChooser: ', props);
     
-    if ( props.unit === 'kilo' || props.unit === 'piéce' ) {
+    if ( props.unit.label === 'kilo' || props.unit.label === 'pièce' ) {
         options = [
-            { value: 'kilo', label: 'kilo(s)' },
+            { value: '2', label: 'kilo(s)' },
             { value: 'gramme', label: 'grammes' },
-            { value: 'pièce', label: 'pièce(s)'}
+            { value: '4', label: 'pièce(s)'}
         ]
     }
 
     else {
         options = [
-            { value: `${props.unit}`, label: `${props.unit}(s)`}
+            { value: `${props.unit.value}`, label: `${props.unit.label}(s)`}
         ]
     }
     
@@ -30,9 +30,9 @@ const UnitChooser = (props) => {
             //components={animatedComponents}
             options={options}
             placeholder={`${props.unit}(s)`}
-            defaultValue={{ value: `${props.unit}`, label: `${props.unit}(s)` }}
+            defaultValue={{ value: `${props.unit.value}`, label: `${props.unit.label}(s)` }}
             noOptionsMessage={() => null}
-            onChange={(value) => (props.setUnitState(value.value))}
+            //onChange={(value) => (props.setUnitState(value.value))}
         />
     )
 };

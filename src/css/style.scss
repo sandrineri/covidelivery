@@ -29,6 +29,11 @@ h1 {
     padding: 4rem;
 }
 
+h2 {
+    letter-spacing: .1rem;
+    text-align: center;
+}
+
 // PRODUCTS
 .category {
     margin: 1rem 0;
@@ -91,10 +96,11 @@ h1 {
     }
 
     .form-input {
-        font-size: $primaryFontSize;
+        font-size: .9rem;
         padding: .2rem 1rem;
         height: 36px;
         border-radius: 4px;
+        border: 1px solid #cccccc;
     }
 
     .form-unit-select {

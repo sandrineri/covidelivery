@@ -8,6 +8,7 @@
     "date-fns": "^2.10.0",
     "fslightbox-react": "^1.4.9",
     "google-maps-react": "^2.0.2",
+    "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "moment-range": "^4.0.2",
     "node-sass": "^4.13.1",
