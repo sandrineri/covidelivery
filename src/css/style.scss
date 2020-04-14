@@ -1,4 +1,8 @@
 $borderBottom: 1px solid #000000;
+$primaryFont: Arial;
+$primaryFontSize: 1rem;
+$labelsFont: 'Times New Roman', Times, serif;
+$labelsFontSize: 1.2rem;
 
 html,
 body {
@@ -72,6 +76,39 @@ h1 {
 }
 
 // FORM
-.form-select {
-    font-size: .9rem;
+.form {
+    margin: 1rem 15rem;
+
+    .form-part {
+        margin: 0 1rem 1rem;
+    }
+
+    label {
+        font-family: $labelsFont;
+        font-size: $labelsFontSize;
+        border-bottom: $borderBottom;
+        margin: 0 0 1rem;
+    }
+
+    .form-input {
+        font-size: $primaryFontSize;
+        padding: .2rem 1rem;
+        height: 36px;
+        border-radius: 4px;
+    }
+
+    .form-unit-select {
+        width: 10rem;
+    }
+
+    .form-category-select {
+        font-size: .9rem;
+    }
+
+    #price {
+        width: 8rem;
+    }
 }
+
+
+

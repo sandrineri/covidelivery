@@ -1,18 +1,15 @@
 import React from 'react';
-//import Select from 'react-select';
-//mport Creatable from 'react-select/creatable';
 import CreatableSelect from 'react-select/creatable';
 
 import Header from '../components/Header';
 
 import settings from '../config/settings';
 
-const unitOptions = [
-    { value: 'kilo', label: 'kilo' },
-    { value: 'pièce', label: 'pièce' },
-    { value: 'botte', label: 'botte' },
-    { value: 'barquette', label: 'barquette' }
+let unitOptions = [
+    { value: 'grammes', label: 'grammes', name: "grammes" },
 ];
+
+let unitArray = [];
 
 let categoryOptions = [];
 
@@ -26,87 +23,113 @@ const Form = () => {
         .then((products) => {
             console.log('fetch complete', products);
 
-            const familiesArray = products.map( (family) => (
-                    family.categories
-            ));
+            const familiesArray = products.map((family) => (family.categories));
 
             for (let i = 0; i < familiesArray.length; i++) {
-                const categories = familiesArray[i];
-                for (let category = 0; category < categories.length; category++) {
-                    categoryOptions.push({ value: `${categories[category].id}`, label: `${categories[category].name}` })
+                const categoriesArray = familiesArray[i];
+                //console.log('Form categoriesArray: ', categoriesArray);
+
+                for (let category = 0; category < categoriesArray.length; category++) {
+                    const productsArray = categoriesArray[category].products;
+                    //console.log('Form productsArray: ', productsArray);
+                    categoryOptions.push({ value: `${categoriesArray[category].id}`, label: `${categoriesArray[category].name}`, name: `${categoriesArray[category].name.toLowerCase()}` });
+
+                    for (let product = 0; product < productsArray.length; product++) {
+                        unitArray.push(productsArray[product].unit);
+                    }
                 }
             }
+
+            //console.log(unitArray);
+            const uniqueArray = [...new Set(unitArray)];
+            //console.log(uniqueArray);
+            uniqueArray.map(unit => {
+                return (
+                    unitOptions.push({ value: `${unit}`, label: `${unit}`, name: `${unit}` })
+                )
+            });
+            console.log(unitOptions);
+            console.log(categoryOptions);
+
         })
-
-
 
     return (
         <React.Fragment>
             <Header />
-            <article className="form">
+            <article>
                 <h2>Enregistrer un nouveau produit</h2>
 
-                <form>
-                    <div className="form-text">
-                        <label htmlFor="name">
-                            Produit :
-                            <input type="text" id="name" required />
-                        </label>
+                <form className="form">
+                    <div className="form-part">
+                        <label htmlFor="name">Produit&nbsp;:</label>
+                        <input className="form-input" type="text" name="produit" placeholder="nectarine jaune..." id="name" required />
                     </div>
 
-                    <div>
-                        <label htmlFor="origin">
-                            Provenance :
-                            <input type="text" id="origin" />
-                        </label>
+                    <div className="form-part">
+                        <label htmlFor="origin">Provenance&nbsp;:</label>
+                        <input className="form-input" type="text" name="provenance" placeholder="Bretagne, Espagne..." id="origin" />
                     </div>
 
-                    <div>
-                        <label htmlFor="price">
-                            Prix :
-                            <input type="number" min="0" step="1.00" id="price" />
+                    <div className="form-part">
+                        <label htmlFor="price">Prix&nbsp;:</label>
+                        <div>
+                            <input className="form-input" type="number" name="prix" min="0" placeholder="2,99" step="1,00" lang="fr" id="price" />
                             <span> €</span>
-                        </label>
+                        </div>
                     </div>
 
-                    <div>
-                        <label htmlFor="unit">
-                            Unité :
-                            <CreatableSelect
-                                className="form-select form-unit-select"
-                                required
-                                isClearable
-                                options={unitOptions}
-                                placeholder="Sélectionner une unité dans la liste ou en créer une nouvelle dans cet espace"
-                                defaultValue={ {value: 'kilo', label: 'kilo'} }
-                                noOptionsMessage={() => null}
-                                formatCreateLabel={(value) => `Ajouter ${value}`}
-                                //onChange={(value) => (props.setUnitState(value.value))}
-                            />
-                        </label>
+                    <div className="form-part">
+                        <label htmlFor="unit">Unité&nbsp;:</label>
+                        <CreatableSelect
+                            className="form-select form-unit-select"
+                            required
+                            isClearable
+                            options={unitOptions}
+                            placeholder="Sélectionnez une unité dans la liste ou créez-en une nouvelle dans cet espace"
+                            defaultValue={{ value: 'kilo', label: 'kilo' }}
+                            noOptionsMessage={() => null}
+                            formatCreateLabel={(value) => `Ajouter ${value}`}
+                        //onChange={(value) => (props.setUnitState(value.value))}
+                        />
                     </div>
 
-                    <div>
-                        <label htmlFor="promo">
-                            Promo :
-                            <input type="text" id="promo" />
-                        </label>
+                    <div className="form-part">
+                        <label htmlFor="promo">Promo&nbsp;:</label>
+                        <input className="form-input" type="text" name="promo" placeholder="2 pour 5 €..." id="promo" />
                     </div>
 
-                    <div>
-                        <label htmlFor="category">
-                            Catégorie :
-                            <CreatableSelect
-                                className="form-select form-category-select"
-                                required
-                                isClearable
-                                options={categoryOptions}
-                                placeholder="Sélectionner la catégorie dans laquelle vous souhaitez voir votre produit apparaître dans la liste ou en créer une nouvelle dans cet espace"
-                                noOptionsMessage={() => null}
-                                formatCreateLabel={(value) => `Ajouter ${value}`}
-                                //onChange={(value) => (props.setUnitState(value.value))}
-                            />
-                        </label>
+                    <div className="form-part">
+                        <label htmlFor="unit">Unités dans lesquelles vos clients pourront commander<br></br>(plusieurs options possibles)&nbsp;:</label>
+                        <CreatableSelect
+                            className="form-select form-unit-select"
+                            required
+                            isClearable
+                            isMulti
+                            options={unitOptions}
+                            placeholder="Sélectionnez la/les unité(s) et/ou créez-en une/des nouvelle(s) ici"
+                            defaultValue={{ value: 'kilo', label: 'kilo' }}
+                            noOptionsMessage={() => null}
+                            formatCreateLabel={(value) => `Ajouter ${value}`}
+                        //onChange={(value) => (props.setUnitState(value.value))}
+                        />
+                    </div>
+
+                    <div className="form-part">
+                        <label htmlFor="category">Catégorie dans laquelle vous voulez voir votre produit apparaître&nbsp;:</label>
+                        <CreatableSelect
+                            className="form-select form-category-select"
+                            required
+                            isClearable
+                            options={categoryOptions}
+                            placeholder="Sélectionnez la catégorie dans la liste ou créez-en une nouvelle dans cet espace"
+                            noOptionsMessage={() => null}
+                            formatCreateLabel={(value) => `Ajouter ${value}`}
+                        //onChange={(value) => (props.setUnitState(value.value))}
+                        />
+                    </div>
+
+                    <div >
+                        <input className="form-send-btn" id="submit" type="submit" value="Ajouter"></input>
                     </div>
 
                 </form>
