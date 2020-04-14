@@ -40,8 +40,7 @@ const MarketStall = () => {
             <Header />
             <Connect />
             <Message message={errorMessage} />
-            <Products productsList={productsList} message={errorMessage} />
-            
+            <Products productsList={productsList} message={errorMessage} /> 
         </React.Fragment>
     )
     
