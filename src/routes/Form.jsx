@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import Select from 'react-select'
 import CreatableSelect from 'react-select/creatable';
 import _ from 'lodash';
 import 'react-tippy/dist/tippy.css';
 //import { Tooltip, withTooltip } from 'react-tippy';
 
 import Header from '../components/Header';
-import SendFormButton from '../components/SendFormButton';
+import SendNewProductForm from '../components/SendNewProductForm';
 
 import settings from '../config/settings';
 
@@ -93,6 +94,8 @@ const Form = () => {
             <article>
                 <h2>Enregistrer un nouveau produit</h2>
 
+                <p>Les champs marqués d'un astérisque (<span className="required-sign">*</span>) doivent être remplis.</p>
+
                 <form className="form">
                     <div className="form-part">
                         <label htmlFor="name">Produit<span className="required-sign">*</span>&nbsp;:</label>
@@ -114,13 +117,13 @@ const Form = () => {
 
                     <div className="form-part">
                         <label htmlFor="unit">Unité<span className="required-sign">*</span>&nbsp;:</label>
-                        <CreatableSelect
+                        <Select
                             className="form-select form-unit-select"
                             required
-                            isClearable
+                            //isClearable
                             options={unitOptions}
-                            placeholder="Sélectionnez une unité dans la liste ou créez-en une nouvelle dans cet espace"
-                            defaultValue={{ value: 'kilo', label: 'kilo' }}
+                            //placeholder="Sélectionnez une unité dans la liste ou créez-en une nouvelle dans cet espace"
+                            defaultValue={{ value: '2', label: 'kilo' }}
                             noOptionsMessage={() => null}
                             formatCreateLabel={(value) => `Ajouter ${value}`}
                             onChange={(option) => {
@@ -143,16 +146,16 @@ const Form = () => {
                     <div className="form-part">
                         <label htmlFor="unit">Unités dans lesquelles vos clients pourront commander<span className="required-sign">*</span>&nbsp;:<br></br>
                         <span className="label-plus">(plusieurs options possibles)</span></label>
-                        <CreatableSelect
-                            className="form-select form-unit-select"
+                        <Select
+                            className="form-select form-units-select"
                             required
-                            isClearable
+                            //isClearable
                             isMulti
                             options={unitOptions}
-                            placeholder="Sélectionnez la/les unité(s) et/ou créez-en une/des nouvelle(s) ici"
-                            defaultValue={{ value: 'kilo', label: 'kilo' }}
+                            placeholder="Sélectionner"
+                            //defaultValue={{ value: '2', label: 'kilo' }}
                             noOptionsMessage={() => null}
-                            formatCreateLabel={(value) => `Ajouter ${value}`}
+                            //formatCreateLabel={(value) => `Ajouter ${value}`}
                             onChange={(option) => {
                                 if (option !== null) {
                                     setPossibleBuyingUnits(option.value);
@@ -166,14 +169,14 @@ const Form = () => {
 
                     <div className="form-part">
                         <label htmlFor="category">Catégorie dans laquelle vous voulez voir votre produit apparaître<span className="required-sign">*</span>&nbsp;:</label>
-                        <CreatableSelect
+                        <Select
                             className="form-select form-category-select"
                             required
-                            isClearable
+                            //isClearable
                             options={categoryOptions}
-                            placeholder="Sélectionnez la catégorie dans la liste ou créez-en une nouvelle dans cet espace"
+                            placeholder="Sélectionner une catégorie"
                             noOptionsMessage={() => null}
-                            formatCreateLabel={(value) => `Ajouter ${value}`}
+                            //formatCreateLabel={(value) => `Ajouter ${value}`}
                             onChange={(option) => {
                                 if (option !== null) {
                                     setCategoryOption(option.value);
@@ -186,7 +189,7 @@ const Form = () => {
                     </div>
 
                     <div>
-                        <SendFormButton productName={productName} originInput={originInput} priceNumber={priceNumber} saleUnit={saleUnit} promoInput={promoInput} possibleBuyingUnits={possibleBuyingUnits} categoryOption={categoryOption} />
+                        <SendNewProductForm productName={productName} originInput={originInput} priceNumber={priceNumber} saleUnit={saleUnit} promoInput={promoInput} possibleBuyingUnits={possibleBuyingUnits} categoryOption={categoryOption} />
                     </div>
 
                 </form>

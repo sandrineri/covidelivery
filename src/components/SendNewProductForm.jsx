@@ -10,7 +10,7 @@ const sendForm = (formProductObject) => {
     
 }
 
-const SendFormButton = (props) => {
+const SendNewProductForm = (props) => {
     console.log('SendFormButton: ', props)
 
     const formProductObject = {
@@ -28,4 +28,4 @@ const SendFormButton = (props) => {
     )
 };
 
-export default SendFormButton;
+export default SendNewProductForm;
