@@ -1,4 +1,4 @@
-$borderBottom: 1px solid #000000;
+$borderStandard: 1px solid #000000;
 $primaryFont: Arial;
 $primaryFontSize: 1rem;
 $labelsFont: 'Times New Roman', Times, serif;
@@ -32,6 +32,7 @@ h1 {
 h2 {
     letter-spacing: .1rem;
     text-align: center;
+    margin: 2rem 0;
 }
 
 // PRODUCTS
@@ -42,7 +43,7 @@ h2 {
 // PRODUCT
 .product,
 .product-info-labels {
-    border-bottom: $borderBottom;
+    border-bottom: $borderStandard;
     padding: .2rem 0;
 
     .product-info-label {
@@ -81,18 +82,31 @@ h2 {
 }
 
 // FORM
+.instructions-text {
+    text-align: center;
+}
+
+.required-sign {
+    color: #cc0101;
+}
+
 .form {
-    margin: 1rem 15rem;
+    margin: -1rem auto 3rem;
+    max-width: 80%;
 
     .form-part {
-        margin: 0 1rem 1rem;
+        margin: 1rem;
     }
 
     label {
         font-family: $labelsFont;
         font-size: $labelsFontSize;
-        border-bottom: $borderBottom;
+        border-bottom: $borderStandard;
         margin: 0 0 1rem;
+
+        .label-plus {
+            font-size: 1rem;
+        }
     }
 
     .form-input {
@@ -115,16 +129,27 @@ h2 {
         width: 8rem;
     }
 
+    .form-send-btn {
+        margin-bottom: .5rem;
+        padding: .5rem .8rem;
+        border-radius: 10px;
+    }
+
+    // no arrows in input type=number
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
         /* display: none; <- Crashes Chrome on hover */
         -webkit-appearance: none;
         margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
     }
-
     input[type=number] {
         -moz-appearance:textfield; /* Firefox */
     }
+}
+
+//SELLER PRODUCTS LISTS
+.seller-products-list {
+    border-top: $borderStandard;
 }
 
 
