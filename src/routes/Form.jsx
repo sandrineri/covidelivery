@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Select from 'react-select'
 //import CreatableSelect from 'react-select/creatable';
 import _ from 'lodash';
-import 'react-tippy/dist/tippy.css';
+//import 'react-tippy/dist/tippy.css';
 //import { Tooltip, withTooltip } from 'react-tippy';
 
 import Header from '../components/Header';
@@ -12,83 +12,70 @@ import SellerProductsList from '../components/SellerProductsList';
 import settings from '../config/settings';
 
 
-/* const placeholder = () => {
-    return (
-        <Tooltip
-  // options
-  title="Welcome to React"
-  position="bottom"
-  trigger="click"
-></Tooltip>
-    )
-}
-
-const placeholderWithTooltip = withTooltip(placeholder, {
-    title: 'Welcome to React with tooltip',
-  }); */
-
-let unitOptions = [];
-let unitArray = [];
-let categoryOptions = [];
-
-let productsArray = [];
-
 const Form = () => {
-    const [productsArrayState, setProductsArray] = useState(productsArray);
-
-    // const [formProductInfos, setFormProductInfos] = useState( { productName: '', originInput: '', priceNumber: 0, saleUnit: `${defaultSaleUnit}`, promoInput: '', possibleBuyingUnits: ['2', 'grammes', '4'], categoryOption: '' } )
+    const [productsArrayState, setProductsArrayState] = useState([]);
 
     const [productName, setProductName] = useState('');
     const [originInput, setOriginInput] = useState('');
     const [priceNumber, setPriceNumber] = useState(null);
-    const [saleUnit, setSaleUnit] = useState({ value: '2', label: 'kilo' });
+    const [baseUnitId, setBaseUnitId] = useState({ value: '2', label: 'kilo' });
+    const [baseUnitIdOptions, setBaseUnitIdOptions] = useState([]);
     const [promoInput, setPromoInput] = useState('');
-    const [possibleBuyingUnits, setPossibleBuyingUnits] = useState([]);
-    const [categoryOption, setCategoryOption] = useState('');
-    //console.log(formProductInfos);
+    const [selectableUnits, setSelectableUnits] = useState([]);
+    const [categoryId, setCategoryId] = useState('');
+    const [categoryIdOptions, setCategoryIdOptions] = useState([]);
 
     useEffect(() => {
-    fetch(`${settings.apiBasePath}/products`, {
-        headers: {
-            //"Authorization": `Bearer ${accessToken}`
-        }
-    })
-        .then(response => response.json())
-        .then((products) => {
-            console.log('fetch complete', products);
+        fetch(`${settings.apiBasePath}/products`, {
+            headers: {
+                //"Authorization": `Bearer ${accessToken}`
+            }
+        })
+            .then(response => response.json())
+            .then((products) => {
+                console.log('fetch complete', products);
 
-            const familiesArray = products.map((family) => (family.categories));
+                const familiesArray = products.map((family) => (family.categories));
+                let productsArrayWithoutCategories = [];
+                let apiBaseUnitIdsArray = [];
+                let categoriesOptions = [];
 
-            for (let i = 0; i < familiesArray.length; i++) {
-                const categoriesArray = familiesArray[i];
-                //console.log('Form categoriesArray: ', categoriesArray);
+                for (let family = 0; family < familiesArray.length; family++) {
+                    const categoriesArray = familiesArray[family];
 
-                for (let category = 0; category < categoriesArray.length; category++) {
-                    productsArray = categoriesArray[category].products;
-                    setProductsArray(productsArray);
-                    //console.log('Form productsArray: ', productsArray);
-                    categoryOptions.push({ value: `${categoriesArray[category].id}`, label: `${categoriesArray[category].name}`, name: `${categoriesArray[category].name.toLowerCase()}` });
+                    for (let category = 0; category < categoriesArray.length; category++) {
+                        //console.log('category For loop: ', category);
+                        const productsArray = categoriesArray[category].products;
 
-                    for (let product = 0; product < productsArray.length; product++) {
-                        unitArray.push( { value: `${productsArray[product].baseUnitId}`, label: `${productsArray[product].baseUnitName}`, name: `${productsArray[product].baseUnitName}` } );
+
+                        categoriesOptions.push({ value: `${categoriesArray[category].id}`, label: `${categoriesArray[category].name}`, name: `${categoriesArray[category].name.toLowerCase()}` });
+
+                        for (let product = 0; product < productsArray.length; product++) {
+                            apiBaseUnitIdsArray.push({ value: `${productsArray[product].baseUnitId}`, label: `${productsArray[product].baseUnitName}`, name: `${productsArray[product].baseUnitName}` });
+                            //console.log('Product For loop: ', product);
+                            productsArrayWithoutCategories.push(productsArray[product]);
+                        }
                     }
                 }
-            }
 
-            //console.log('unitArray : ',unitArray );
-            const uniqueArray = _.uniqWith(unitArray, _.isEqual);
-            //console.log("uniqueArray: ", uniqueArray);
+                //console.log('Form productsArrayWithoutCategories: ', productsArrayWithoutCategories);
+                const sortedProductsArrayWithoutCategories = productsArrayWithoutCategories.sort((a, b) => {
+                    if (a.name < b.name) { return -1; }
+                    if (a.name > b.name) { return 1; }
+                    return 0;
+                });
+                setProductsArrayState(sortedProductsArrayWithoutCategories);
 
-            uniqueArray.map(unit => {
-                return (
-                    unitOptions.push(unit)
-                )
-            });
-            console.log('unitOptions: ', unitOptions);
-            console.log('categoryOptions: ', categoryOptions);
+                //console.log('apiBaseUnitIdsArray : ',apiBaseUnitIdsArray );
+                const uniqueArray = _.uniqWith(apiBaseUnitIdsArray, _.isEqual);
+                //console.log("uniqueArray: ", uniqueArray);
 
-        })
-    }, [] );
+                setBaseUnitIdOptions(uniqueArray);
+                //console.log('baseUnitIdOptions: ', baseUnitIdOptions);
+                setCategoryIdOptions(categoriesOptions);
+                //console.log('categoryIdOptions: ', categoryIdOptions);
+            })
+    }, []);
 
     return (
         <React.Fragment>
@@ -101,12 +88,12 @@ const Form = () => {
                 <form className="form">
                     <div className="form-part form-part1">
                         <label htmlFor="name">Produit<span className="required-sign">*</span>&nbsp;:</label>
-                        <input className="form-input" type="text" name="produit" placeholder="nectarine jaune..." id="name" required onChange={(input) => setProductName(input.target.value)}/>
+                        <input className="form-input" type="text" name="produit" placeholder="nectarine jaune..." id="name" required onChange={(input) => setProductName(input.target.value)} />
                     </div>
 
                     <div className="form-part form-part2">
                         <label htmlFor="origin">Provenance&nbsp;:</label>
-                        <input className="form-input" type="text" name="origin" placeholder="Bretagne, Espagne..." id="origin" onChange={(input) => setOriginInput(input.target.value)}/>
+                        <input className="form-input" type="text" name="origin" placeholder="Bretagne, Espagne..." id="origin" onChange={(input) => setOriginInput(input.target.value)} />
                     </div>
 
                     <div className="form-part form-part3">
@@ -123,21 +110,21 @@ const Form = () => {
                             className="form-select form-unit-select"
                             required
                             //isClearable
-                            options={unitOptions}
+                            options={baseUnitIdOptions}
                             placeholder="Sélectionner"
-                            defaultValue={saleUnit}
+                            defaultValue={baseUnitId}
                             //noOptionsMessage={() => null}
                             //formatCreateLabel={(value) => `Ajouter ${value}`}
                             onChange={(option) => {
                                 if (option !== null) {
-                                    setSaleUnit(option);
+                                    setBaseUnitId(option);
                                 }
                                 else if (option.value === null) {
-                                    setSaleUnit(saleUnit);
-                                    console.log(saleUnit);
+                                    setBaseUnitId(baseUnitId);
+                                    console.log(baseUnitId);
                                 }
                             }}
-                                
+
                         />
                     </div>
 
@@ -148,23 +135,23 @@ const Form = () => {
 
                     <div className="form-part form-part6">
                         <label htmlFor="unit">Unités dans lesquelles vos clients pourront commander<span className="required-sign">*</span>&nbsp;:<br></br>
-                        <span className="label-plus">(plusieurs options possibles)</span></label>
+                            <span className="label-plus">(plusieurs options possibles)</span></label>
                         <Select
                             className="form-select form-units-select"
                             required
                             //isClearable
                             isMulti
-                            options={unitOptions}
+                            options={baseUnitIdOptions}
                             placeholder="Sélectionner"
                             //defaultValue={{ value: '2', label: 'kilo' }}
                             noOptionsMessage={() => null}
                             //formatCreateLabel={(value) => `Ajouter ${value}`}
                             onChange={(option) => {
                                 if (option !== null) {
-                                    setPossibleBuyingUnits(option.value);
+                                    setSelectableUnits(option.value);
                                 }
                                 else {
-                                    setPossibleBuyingUnits([]);
+                                    setSelectableUnits([]);
                                 }
                             }}
                         />
@@ -176,23 +163,23 @@ const Form = () => {
                             className="form-select form-category-select"
                             required
                             //isClearable
-                            options={categoryOptions}
+                            options={categoryIdOptions}
                             placeholder="Sélectionner une catégorie"
                             noOptionsMessage={() => null}
                             //formatCreateLabel={(value) => `Ajouter ${value}`}
                             onChange={(option) => {
                                 if (option !== null) {
-                                    setCategoryOption(option.value);
+                                    setCategoryId(option.value);
                                 }
                                 else {
-                                    setCategoryOption('');
+                                    setCategoryId('');
                                 }
                             }}
                         />
                     </div>
 
                     <div className="form-part form-part8">
-                        <SendNewProductForm productName={productName} originInput={originInput} priceNumber={priceNumber} saleUnit={saleUnit} promoInput={promoInput} possibleBuyingUnits={possibleBuyingUnits} categoryOption={categoryOption} />
+                        <SendNewProductForm productName={productName} originInput={originInput} priceNumber={priceNumber} baseUnitId={baseUnitId} promoInput={promoInput} selectableUnits={selectableUnits} categoryId={categoryId} />
                     </div>
 
                 </form>

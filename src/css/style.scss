@@ -147,10 +147,49 @@ h2 {
     }
 }
 
-//SELLER PRODUCTS LISTS
+//SELLER PRODUCTS LIST
 .seller-products-list {
     border-top: $borderStandard;
+
+    .sell-product-labels {
+        background-color: #f0eded;
+        font-variant: small-caps;
+        font-feature-settings: normal;
+        letter-spacing: 1px;
+    }
+
+    .sell-prod-info,
+    .sell-product-labels {
+        border-bottom: $borderStandard;
+        padding: .2rem 0;
+    }
+
+    .sell-prod-info,
+    .sell-product-label {
+        width: 8rem;
+    }
+
+    .sell-product-label-name,
+    .sell-product-name {
+        width: 16rem;
+    }
+
+    .sell-product-label-cat,
+    .sell-product-cat {
+        width: 20rem;
+    }
+
+    .sell-prod-label-selec,
+    .sell-prod-selectable {
+        width: 10rem;
+    }
 }
+
+
+
+
+
+
 
 
 

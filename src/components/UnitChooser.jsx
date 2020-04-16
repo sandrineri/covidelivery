@@ -6,7 +6,7 @@ import Select from 'react-select';
 let options = [];
 
 const UnitChooser = (props) => {
-    console.log('UnitChooser: ', props);
+    //console.log('UnitChooser: ', props);
     
     if ( props.unit.label === 'kilo' || props.unit.label === 'pièce' ) {
         options = [

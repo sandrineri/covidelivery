@@ -7,7 +7,7 @@ const Product = (props) => {
     //console.log('For each product: ', props);
 
     const [unitState, setUnitState] = useState({value: `${props.product.baseUnitId}`, label: `${props.product.baseUnitName}`});
-    console.log('unitState', unitState);
+    //console.log('unitState', unitState);
 
     return (
         <li className="product">

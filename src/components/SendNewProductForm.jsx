@@ -5,7 +5,7 @@ import { useAuth0 } from '../auth/Auth0Wrapper';
 import settings from '../config/settings';
 
 const SendNewProductForm = (props) => {
-    console.log('SendFormButton: ', props);
+    //console.log('SendNewProductForm: ', props);
 
     // Authorization
     const [accessToken, setAccessToken] = useState(null);
@@ -13,7 +13,7 @@ const SendNewProductForm = (props) => {
         if (isAuthenticated) {
             getTokenSilently().then(token => {
                 setAccessToken(token);
-                console.log('token: ', token);
+                //console.log('token: ', token);
             });
         }
 
@@ -21,12 +21,12 @@ const SendNewProductForm = (props) => {
         "name": props.productName,
         "origin": props.originInput,
         "price": props.priceNumber,
-        "baseUnitId": props.saleUnit.value,
+        "baseUnitId": props.baseUnitId.value,
         "promo" : props.promoInput,
-        "categoryId": props.categoryOption,
-        "selectableUnits": props.possibleBuyingUnits
+        "categoryId": props.categoryId,
+        "selectableUnits": props.selectableUnits
     }
-    console.log('formProductObject: ', formProductObject);
+    //console.log('formProductObject: ', formProductObject);
 
     const sendForm = (e) => {
         e.preventDefault();
@@ -42,17 +42,17 @@ const SendNewProductForm = (props) => {
                 }
             })
                 .then(response => {
-                    console.log('code http : ', response.status);
+                    //console.log('code http : ', response.status);
                     return response.json();
                 })
                 .then(function (response) {
                     console.log('envoyé', response);
                 })
                 .catch(function (error) {
-                    console.log('Erreur de mise à jour : ', error);
+                    //console.log('Erreur de mise à jour : ', error);
                 });
         
-                console.log('formProductObject sent', formProductObject); 
+                //console.log('formProductObject sent', formProductObject); 
         }
     };
 
