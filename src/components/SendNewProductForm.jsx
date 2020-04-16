@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import { useAuth0 } from '../auth/Auth0Wrapper';
 
@@ -10,30 +10,30 @@ const SendNewProductForm = (props) => {
     // Authorization
     const [accessToken, setAccessToken] = useState(null);
     const { isAuthenticated, getTokenSilently } = useAuth0();
-        if (isAuthenticated) {
-            getTokenSilently().then(token => {
-                setAccessToken(token);
-                //console.log('token: ', token);
-            });
-        }
+    if (isAuthenticated) {
+        getTokenSilently().then(token => {
+            setAccessToken(token);
+            //console.log('token: ', token);
+        });
+    }
 
     const formProductObject = {
         "name": props.productName,
         "origin": props.originInput,
         "price": props.priceNumber,
-        "baseUnitId": props.baseUnitId.value,
-        "promo" : props.promoInput,
+        "baseUnitId": props.baseUnit.value,
+        "promo": props.promoInput,
         "categoryId": props.categoryId,
         "selectableUnits": props.selectableUnits
     }
     //console.log('formProductObject: ', formProductObject);
 
-    const sendForm = (e) => {
-        e.preventDefault();
-    
+    const sendForm = () => {
+        //e.preventDefault();
+
         if (accessToken === null) return;
         if (formProductObject.name !== '') {
-    
+
             fetch(`${settings.apiBasePath}/product`, {
                 method: 'POST',
                 body: JSON.stringify(formProductObject),
@@ -42,21 +42,22 @@ const SendNewProductForm = (props) => {
                 }
             })
                 .then(response => {
-                    //console.log('code http : ', response.status);
+                    console.log('code http : ', response.status);
                     return response.json();
                 })
                 .then(function (response) {
                     console.log('envoyé', response);
                 })
                 .catch(function (error) {
-                    //console.log('Erreur de mise à jour : ', error);
+                    console.log('Erreur de mise à jour : ', error);
                 });
-        
-                //console.log('formProductObject sent', formProductObject); 
+
+            //console.log('formProductObject sent', formProductObject);
+            
         }
     };
 
-    return(
+    return (
         <input className="form-send-btn" id="new-product-submit" type="submit" value="Enregistrer" onClick={sendForm}></input>
     )
 };

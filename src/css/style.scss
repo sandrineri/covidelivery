@@ -3,6 +3,7 @@ $primaryFont: Arial;
 $primaryFontSize: 1rem;
 $labelsFont: 'Times New Roman', Times, serif;
 $labelsFontSize: 1.2rem;
+$productPadding: .3rem .5rem;
 
 html,
 body {
@@ -13,6 +14,18 @@ body {
 
 ul {
     list-style-type: none;
+}
+
+button {
+    padding: .3rem .5rem;
+    border-radius: 5px;
+}
+
+
+h2 {
+    letter-spacing: .1rem;
+    text-align: center;
+    margin: 2rem 0;
 }
 
 
@@ -29,29 +42,24 @@ h1 {
     padding: 4rem;
 }
 
-h2 {
-    letter-spacing: .1rem;
-    text-align: center;
-    margin: 2rem 0;
-}
-
 // PRODUCTS
 .category {
     margin: 1rem 0;
 }
 
 // PRODUCT
+.product-info-labels {
+    background-color: #f0eded;
+    font-variant: small-caps;
+    font-feature-settings: normal;
+    letter-spacing: 1px;
+}
+
 .product,
 .product-info-labels {
     border-bottom: $borderStandard;
-    padding: .2rem 0;
+    padding: $productPadding;
 
-    .product-info-label {
-        background-color: #f0eded;
-        font-variant: small-caps;
-        font-feature-settings: normal;
-        letter-spacing: 1px;
-    }
 
     .product-info {
         width: 10rem;
@@ -156,32 +164,36 @@ h2 {
         font-variant: small-caps;
         font-feature-settings: normal;
         letter-spacing: 1px;
+        text-transform: capitalize;
     }
 
     .sell-prod-info,
     .sell-product-labels {
         border-bottom: $borderStandard;
-        padding: .2rem 0;
+        padding: $productPadding;
     }
 
     .sell-prod-info,
-    .sell-product-label {
+    .sell-product-label,
+    .sell-btn {
         width: 8rem;
     }
 
     .sell-product-label-name,
     .sell-product-name {
         width: 16rem;
+        //text-transform: capitalize;
     }
 
     .sell-product-label-cat,
     .sell-product-cat {
         width: 20rem;
+        text-transform: capitalize;
     }
 
     .sell-prod-label-selec,
     .sell-prod-selectable {
-        width: 10rem;
+        width: 17rem;
     }
 }
 

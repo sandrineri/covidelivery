@@ -13,17 +13,22 @@ import settings from '../config/settings';
 
 
 const Form = () => {
-    const [productsArrayState, setProductsArrayState] = useState([]);
+    const [productsState, setProductsState] = useState([]);
 
     const [productName, setProductName] = useState('');
     const [originInput, setOriginInput] = useState('');
     const [priceNumber, setPriceNumber] = useState(null);
-    const [baseUnitId, setBaseUnitId] = useState({ value: '2', label: 'kilo' });
-    const [baseUnitIdOptions, setBaseUnitIdOptions] = useState([]);
+    const [baseUnit, setBaseUnit] = useState({ value: '2', label: 'kilo' });
+    const [baseUnitOptions, setBaseUnitOptions] = useState([]);
     const [promoInput, setPromoInput] = useState('');
     const [selectableUnits, setSelectableUnits] = useState([]);
     const [categoryId, setCategoryId] = useState('');
-    const [categoryIdOptions, setCategoryIdOptions] = useState([]);
+    const [categoryOptions, setCategoryOptions] = useState([]);
+
+
+    //console.log('baseUnitOptions: ', baseUnitOptions);
+    //console.log('categoryOptions: ', categoryOptions);
+    //console.log('categoryId: ', categoryId);
 
     useEffect(() => {
         fetch(`${settings.apiBasePath}/products`, {
@@ -32,48 +37,46 @@ const Form = () => {
             }
         })
             .then(response => response.json())
-            .then((products) => {
-                console.log('fetch complete', products);
+            .then((response) => {
+                console.log('fetch complete', response);
 
-                const familiesArray = products.map((family) => (family.categories));
-                let productsArrayWithoutCategories = [];
-                let apiBaseUnitIdsArray = [];
+                const families = response.map((family) => (family.categories));
+                let productsWithoutCategories = [];
+                let apiBaseUnits = [];
                 let categoriesOptions = [];
 
-                for (let family = 0; family < familiesArray.length; family++) {
-                    const categoriesArray = familiesArray[family];
+                for (let family = 0; family < families.length; family++) {
+                    const categories = families[family];
 
-                    for (let category = 0; category < categoriesArray.length; category++) {
+                    for (let category = 0; category < categories.length; category++) {
                         //console.log('category For loop: ', category);
-                        const productsArray = categoriesArray[category].products;
+                        const products = categories[category].products;
 
 
-                        categoriesOptions.push({ value: `${categoriesArray[category].id}`, label: `${categoriesArray[category].name}`, name: `${categoriesArray[category].name.toLowerCase()}` });
+                        categoriesOptions.push({ value: `${categories[category].id}`, label: `${categories[category].name}`, name: `${categories[category].name.toLowerCase()}` });
 
-                        for (let product = 0; product < productsArray.length; product++) {
-                            apiBaseUnitIdsArray.push({ value: `${productsArray[product].baseUnitId}`, label: `${productsArray[product].baseUnitName}`, name: `${productsArray[product].baseUnitName}` });
+                        for (let product = 0; product < products.length; product++) {
+                            apiBaseUnits.push({ value: `${products[product].baseUnitId}`, label: `${products[product].baseUnitName}`, name: `${products[product].baseUnitName}` });
                             //console.log('Product For loop: ', product);
-                            productsArrayWithoutCategories.push(productsArray[product]);
+                            productsWithoutCategories.push(products[product]);
                         }
                     }
                 }
 
-                //console.log('Form productsArrayWithoutCategories: ', productsArrayWithoutCategories);
-                const sortedProductsArrayWithoutCategories = productsArrayWithoutCategories.sort((a, b) => {
+                //console.log('Form productsWithoutCategories: ', productsWithoutCategories);
+                const sortedProductsWithoutCategories = productsWithoutCategories.sort((a, b) => {
                     if (a.name < b.name) { return -1; }
                     if (a.name > b.name) { return 1; }
                     return 0;
                 });
-                setProductsArrayState(sortedProductsArrayWithoutCategories);
+                setProductsState(sortedProductsWithoutCategories);
 
-                //console.log('apiBaseUnitIdsArray : ',apiBaseUnitIdsArray );
-                const uniqueArray = _.uniqWith(apiBaseUnitIdsArray, _.isEqual);
-                //console.log("uniqueArray: ", uniqueArray);
+                console.log('apiBaseUnits : ',apiBaseUnits );
+                const uniqueBaseUnits = _.uniqWith(apiBaseUnits, _.isEqual);
+                console.log("uniqueBaseUnits: ", uniqueBaseUnits);
 
-                setBaseUnitIdOptions(uniqueArray);
-                //console.log('baseUnitIdOptions: ', baseUnitIdOptions);
-                setCategoryIdOptions(categoriesOptions);
-                //console.log('categoryIdOptions: ', categoryIdOptions);
+                setBaseUnitOptions(uniqueBaseUnits);
+                setCategoryOptions(categoriesOptions);
             })
     }, []);
 
@@ -110,18 +113,18 @@ const Form = () => {
                             className="form-select form-unit-select"
                             required
                             //isClearable
-                            options={baseUnitIdOptions}
+                            options={baseUnitOptions}
                             placeholder="Sélectionner"
-                            defaultValue={baseUnitId}
+                            defaultValue={baseUnit}
                             //noOptionsMessage={() => null}
                             //formatCreateLabel={(value) => `Ajouter ${value}`}
                             onChange={(option) => {
                                 if (option !== null) {
-                                    setBaseUnitId(option);
+                                    setBaseUnit(option);
                                 }
                                 else if (option.value === null) {
-                                    setBaseUnitId(baseUnitId);
-                                    console.log(baseUnitId);
+                                    setBaseUnit(baseUnit);
+                                    console.log(baseUnit);
                                 }
                             }}
 
@@ -141,7 +144,7 @@ const Form = () => {
                             required
                             //isClearable
                             isMulti
-                            options={baseUnitIdOptions}
+                            options={baseUnitOptions}
                             placeholder="Sélectionner"
                             //defaultValue={{ value: '2', label: 'kilo' }}
                             noOptionsMessage={() => null}
@@ -163,7 +166,7 @@ const Form = () => {
                             className="form-select form-category-select"
                             required
                             //isClearable
-                            options={categoryIdOptions}
+                            options={categoryOptions}
                             placeholder="Sélectionner une catégorie"
                             noOptionsMessage={() => null}
                             //formatCreateLabel={(value) => `Ajouter ${value}`}
@@ -179,12 +182,12 @@ const Form = () => {
                     </div>
 
                     <div className="form-part form-part8">
-                        <SendNewProductForm productName={productName} originInput={originInput} priceNumber={priceNumber} baseUnitId={baseUnitId} promoInput={promoInput} selectableUnits={selectableUnits} categoryId={categoryId} />
+                        <SendNewProductForm productName={productName} originInput={originInput} priceNumber={priceNumber} baseUnit={baseUnit} promoInput={promoInput} selectableUnits={selectableUnits} categoryId={categoryId} />
                     </div>
 
                 </form>
             </article>
-            <SellerProductsList productsArrayState={productsArrayState} />
+            <SellerProductsList productsState={productsState} />
         </React.Fragment>
     )
 }
