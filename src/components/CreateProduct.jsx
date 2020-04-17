@@ -3,6 +3,8 @@ import Select from 'react-select';
 import settings from '../config/settings';
 
 const CreateProduct = (props) => {
+    console.log('CreateProduct props: ', props);
+
     const [product, setProduct] = useState({
         "name": '',
         "origin": '',
@@ -16,9 +18,12 @@ const CreateProduct = (props) => {
     const changeProduct = (key, value) => {
         const modifiedProduct = product;
         modifiedProduct[key] = value;
+        console.log('modifiedProduct[key]', modifiedProduct[key]);
         setProduct(modifiedProduct);
-        ///console.log('modifyOrigin: value: ', value + '; name: ');
+        console.log('modifiedProduct: ', modifiedProduct);
     }
+
+    console.log('CreateProduct product: ', product);
 
     const sendForm = (e) => {
         e.preventDefault();
@@ -86,12 +91,12 @@ const CreateProduct = (props) => {
                         //isClearable
                         options={props.baseUnitOptions}
                         placeholder="Sélectionner"
-                        defaultValue={product.baseUnitId}
+                        defaultValue={props.baseUnitOptions[0]}
                         //noOptionsMessage={() => null}
                         //formatCreateLabel={(value) => `Ajouter ${value}`}
                         onChange={(option) => {
                             if (option !== null) {
-                                changeProduct('baseUnitId', option);
+                                changeProduct('baseUnitId', option.value);
                             }
                             else if (option.value === null) {
                                 changeProduct('baseUnitId', product.baseUnitId);

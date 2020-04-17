@@ -29,8 +29,8 @@ const SellerPage = () => {
         });
     }
 
-    //console.log('baseUnitOptions: ', baseUnitOptions);
-    //console.log('categoryOptions: ', categoryOptions);
+    console.log('baseUnitOptions: ', baseUnitOptions);
+    console.log('categoryOptions: ', categoryOptions);
     //console.log('categoryId: ', categoryId);
 
     useEffect(() => {

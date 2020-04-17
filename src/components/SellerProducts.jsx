@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import SellerProduct from './SellerProduct';
 
 const SellerProducts = (props) => {
-    console.log('SellerProducts props: ', props);
+    //console.log('SellerProducts props: ', props);
     //console.log(props.productsState.length);
 
     return (

@@ -76,7 +76,7 @@ const SellerProduct = (props) => {
         } 
     }
 
-    console.log('SellerProduct props: ', props);
+    //console.log('SellerProduct props: ', props);
 
 
     return (
