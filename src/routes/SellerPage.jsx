@@ -29,8 +29,8 @@ const SellerPage = () => {
         });
     }
 
-    console.log('baseUnitOptions: ', baseUnitOptions);
-    console.log('categoryOptions: ', categoryOptions);
+    //console.log('baseUnitOptions: ', baseUnitOptions);
+    //console.log('categoryOptions: ', categoryOptions);
     //console.log('categoryId: ', categoryId);
 
     useEffect(() => {
@@ -72,7 +72,7 @@ const SellerPage = () => {
 
                 //console.log('apiBaseUnits : ',apiBaseUnits );
                 const uniqueBaseUnits = _.uniqWith(apiBaseUnits, _.isEqual);
-                console.log("uniqueBaseUnits: ", uniqueBaseUnits);
+                //console.log("uniqueBaseUnits: ", uniqueBaseUnits);
 
                 setBaseUnitOptions(uniqueBaseUnits);
                 setCategoryOptions(categoriesOptions);
@@ -87,7 +87,7 @@ const SellerPage = () => {
             <CreateProduct accessToken={accessToken} setMessage={setMessage} baseUnitOptions={baseUnitOptions} categoryOptions={categoryOptions} />
             <Message message={message} />
             <SellerProducts
-                accessToken={accessToken} productsState={productsState} setMessage={setMessage} categoryOptions={categoryOptions}
+                accessToken={accessToken} productsState={productsState} setMessage={setMessage} baseUnitOptions={baseUnitOptions} categoryOptions={categoryOptions}
             />
         </React.Fragment>
     )

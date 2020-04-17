@@ -28,7 +28,7 @@ const SellerProducts = (props) => {
                         return (
                             <SellerProduct
                                 accessToken={props.accessToken} key={product.id} product={product} setMessage={props.setMessage}
-                                categoryOptions={props.categoryOptions}
+                                categoryOptions={props.categoryOptions} baseUnitOptions={props.baseUnitOptions}
                             />
                         )
                     })}

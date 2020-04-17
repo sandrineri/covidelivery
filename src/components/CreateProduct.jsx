@@ -3,13 +3,13 @@ import Select from 'react-select';
 import settings from '../config/settings';
 
 const CreateProduct = (props) => {
-    console.log('CreateProduct props: ', props);
+    //console.log('CreateProduct props: ', props);
 
     const [product, setProduct] = useState({
         "name": '',
         "origin": '',
         "price": null,
-        "baseUnitId": { value: '2', label: 'kilo' },
+        "baseUnitId": '2',
         "promo": '',
         "categoryId": '',
         "selectableUnits": []
@@ -20,7 +20,7 @@ const CreateProduct = (props) => {
         modifiedProduct[key] = value;
         console.log('modifiedProduct[key]', modifiedProduct[key]);
         setProduct(modifiedProduct);
-        console.log('modifiedProduct: ', modifiedProduct);
+        console.log('createdProduct: ', modifiedProduct);
     }
 
     console.log('CreateProduct product: ', product);
@@ -38,20 +38,18 @@ const CreateProduct = (props) => {
                 }
             })
                 .then(response => {
-                    console.log('code http : ', response.status);
                     if (response.status === 201) {
-                        props.setMessage("Votre nouveau produit a bien été enregistré. Veuillez attendre quelques instants avant de le voir apparaître dans la liste ci-dessous. Vous pourrez alors le modifier ou le supprimer.");
+                        console.log(product.name + ' créé');
+                        props.setMessage(`Le produit "${product.name}" a bien été créé. La liste sera raffraîchie automatiquement d'ici quelques secondes. Vous pourrez ensuite la modifier.`);
                         //setTimeout(() => { document.location.reload(); }, 3000);
-                        
-                        return response.json();   
                     }
                     else {
                         throw new Error('Code HTTP incorrect');
                     }
                 })
                 .catch(error => {
-                    console.log('Erreur de mise à jour : ', error);
-                    //props.setMessage("Une erreur s'est produite, votre nouveau produit n'a pas pu être enregistré.");
+                    console.log('Erreur de création : ', error);
+                    props.setMessage(`Erreur de création : ${error}`);
                 });
 
             //console.log('formProductObject sent', formProductObject);

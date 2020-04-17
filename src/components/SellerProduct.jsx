@@ -4,6 +4,7 @@ import settings from '../config/settings';
 
 
 const SellerProduct = (props) => {
+    //console.log('SellerProduct props: ', props);
     const [product, setProduct] = useState(props.product);
 
     const changeProduct = (key, value) => {
@@ -98,6 +99,7 @@ const SellerProduct = (props) => {
                 className="sell-prod-info product-unit"
                 placeholder={product.baseUnitName}
                 defaultValue={product.baseUnitName}
+                options={props.baseUnitOptions}
             />
 
             <input className="sell-prod-info product-promo" defaultValue={product.promo}></input>
@@ -107,6 +109,8 @@ const SellerProduct = (props) => {
                 placeholder={product.selectableUnits}
                 defaultValue={product.selectableUnits}
                 noOptionsMessage={() => null}
+                isMulti
+                options={props.baseUnitOptions}
             />
 
             <span className="button sell-btn">
