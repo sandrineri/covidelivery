@@ -167,6 +167,13 @@ h1 {
         text-transform: capitalize;
     }
 
+    .sell-prod-info {
+        border: none;
+        font-size: $primaryFontSize;
+        font-family: $primaryFont;
+        cursor: pointer;
+    }
+
     .sell-prod-info,
     .sell-product-labels {
         border-bottom: $borderStandard;
@@ -187,7 +194,7 @@ h1 {
 
     .sell-product-label-cat,
     .sell-product-cat {
-        width: 20rem;
+        width: 24rem;
         text-transform: capitalize;
     }
 
@@ -195,6 +202,7 @@ h1 {
     .sell-prod-selectable {
         width: 17rem;
     }
+
 }
 
 
