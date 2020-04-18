@@ -11,6 +11,7 @@ const MarketStall = () => {
     // Initialize state
     const [errorMessage, setErrorMessage] = useState('');
     const [productsList, setProductsList] = useState([]);
+    const [lastModified, setLastModified] = useState("");
 
     // Set state from API
     useEffect(() => {
@@ -24,6 +25,7 @@ const MarketStall = () => {
                 console.log('fetch complete', response);
 
                 setProductsList(response.products);
+                setLastModified(response.lastModified);
 
             })
             .catch(error => {
@@ -40,7 +42,7 @@ const MarketStall = () => {
             <Header />
             <Connect />
             <Message message={errorMessage} />
-            <Products productsList={productsList} message={errorMessage} /> 
+            <Products productsList={productsList} message={errorMessage} lastModified={lastModified} /> 
         </React.Fragment>
     )
     
