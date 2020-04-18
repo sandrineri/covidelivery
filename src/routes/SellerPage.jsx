@@ -43,7 +43,9 @@ const SellerPage = () => {
             .then((response) => {
                 console.log('fetch complete', response);
 
-                const families = response.map((family) => (family.categories));
+                const plopapiBaseUnits = response.units;
+                const families = response.products.map((family) => (family.categories));
+
                 let productsWithoutCategories = [];
                 let apiBaseUnits = [];
                 let categoriesOptions = [];

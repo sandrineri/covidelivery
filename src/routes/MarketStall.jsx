@@ -20,10 +20,10 @@ const MarketStall = () => {
             }
         })
             .then(response => response.json())
-            .then((products) => {
-                console.log('fetch complete', products);
+            .then((response) => {
+                console.log('fetch complete', response);
 
-                setProductsList(products);
+                setProductsList(response.products);
 
             })
             .catch(error => {
