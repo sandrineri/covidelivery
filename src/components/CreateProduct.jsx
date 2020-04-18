@@ -3,7 +3,7 @@ import Select from 'react-select';
 import settings from '../config/settings';
 
 const CreateProduct = (props) => {
-    //console.log('CreateProduct props: ', props);
+    console.log('CreateProduct props: ', props);
 
     const [product, setProduct] = useState({
         "name": '',
@@ -89,7 +89,7 @@ const CreateProduct = (props) => {
                         //isClearable
                         options={props.baseUnitOptions}
                         placeholder="Sélectionner"
-                        defaultValue={props.baseUnitOptions[0]}
+                        defaultValue={ {value: '2', label: 'kilo', name: 'kilo' } }
                         //noOptionsMessage={() => null}
                         //formatCreateLabel={(value) => `Ajouter ${value}`}
                         onChange={(option) => {

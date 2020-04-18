@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '../auth/Auth0Wrapper';
 //import CreatableSelect from 'react-select/creatable';
-import _ from 'lodash';
+//import _ from 'lodash';
 //import 'react-tippy/dist/tippy.css';
 //import { Tooltip, withTooltip } from 'react-tippy';
 
@@ -11,7 +11,6 @@ import Message from '../components/Message';
 import SellerProducts from '../components/SellerProducts';
 
 import settings from '../config/settings';
-
 
 const SellerPage = () => {
     const [message, setMessage] = useState('');
@@ -43,11 +42,15 @@ const SellerPage = () => {
             .then((response) => {
                 console.log('fetch complete', response);
 
-                const plopapiBaseUnits = response.units;
+                const apiBaseUnits = response.units;
+                const apiCategories = response.categories;
+
                 const families = response.products.map((family) => (family.categories));
 
+
+
                 let productsWithoutCategories = [];
-                let apiBaseUnits = [];
+                //let apiBaseUnits = [];
                 let categoriesOptions = [];
 
                 for (let family = 0; family < families.length; family++) {
@@ -61,7 +64,7 @@ const SellerPage = () => {
                         categoriesOptions.push({ value: `${categories[category].id}`, label: `${categories[category].name}`, name: `${categories[category].name.toLowerCase()}` });
 
                         for (let product = 0; product < products.length; product++) {
-                            apiBaseUnits.push({ value: `${products[product].baseUnitId}`, label: `${products[product].baseUnitName}`, name: `${products[product].baseUnitName}` });
+                            //apiBaseUnits.push({ value: `${products[product].baseUnitId}`, label: `${products[product].baseUnitName}`, name: `${products[product].baseUnitName}` });
                             //console.log('Product For loop: ', product);
                             productsWithoutCategories.push(products[product]);
                         }
@@ -72,12 +75,14 @@ const SellerPage = () => {
                 const sortedProductsWithoutCategories = productsWithoutCategories.sort((a, b) => (a.name.localeCompare(b.name)));
                 setProductsState(sortedProductsWithoutCategories);
 
-                //console.log('apiBaseUnits : ',apiBaseUnits );
-                const uniqueBaseUnits = _.uniqWith(apiBaseUnits, _.isEqual);
-                //console.log("uniqueBaseUnits: ", uniqueBaseUnits);
-
-                setBaseUnitOptions(uniqueBaseUnits);
-                setCategoryOptions(categoriesOptions);
+                setBaseUnitOptions(apiBaseUnits.map( option => {
+                    return { value: `${option.id}`, label: `${option.name}`, name: `${option.name}` }
+                }));
+                //console.log('baseUnitOptions: ', baseUnitOptions);
+                setCategoryOptions(apiCategories.map( option => {
+                    return { value: `${option.id}`, label: `${option.name}`, name: `${option.name}` }
+                }));
+                //console.log('CreateProduct categoryOptions: ', categoryOptions);
             })
     }, []);
 
