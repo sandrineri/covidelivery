@@ -51,7 +51,6 @@ const SellerPage = () => {
 
 
                 let productsWithoutCategories = [];
-                //let apiBaseUnits = [];
                 let categoriesOptions = [];
 
                 for (let family = 0; family < families.length; family++) {

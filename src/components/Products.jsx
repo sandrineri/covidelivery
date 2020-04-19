@@ -5,7 +5,12 @@ import { fr } from 'date-fns/locale';
 import Product from './Product';
 
 const Products = (props) => {
-    console.log('Products props: ', props);
+    //console.log('Products props: ', props);
+
+    
+    if (props.baseUnitOptions.length === 0) {
+        return (<React.Fragment></React.Fragment>);
+    }
 
     if (props.lastModified === "") {
         return (
@@ -15,7 +20,7 @@ const Products = (props) => {
 
     const formatLastModif = format(new Date(props.lastModified), 'eeee d MMMM yyyy', { locale: fr });
     const deliveryDate = format(new Date(props.lastModified).setDate(new Date(props.lastModified).getDate() + 1), 'eeee d MMMM yyyy', { locale: fr });
-    console.log(deliveryDate);
+    //console.log(deliveryDate);
 
     return (
         <article className="stalls">
@@ -49,7 +54,7 @@ const Products = (props) => {
                                                 </li>
                                                 {category.products.map(product => {
                                                     return (
-                                                        <Product key={product.id} product={product} />
+                                                        <Product key={product.id} product={product} baseUnitOptions={props.baseUnitOptions}/>
                                                     )
                                                 })}
                                             </ul>

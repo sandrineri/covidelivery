@@ -4,6 +4,7 @@ import Select from 'react-select';
 
 const Product = (props) => {
     console.log('For each product: ', props);
+    console.log('props units: ', props.baseUnitOptions);
 
     const [order, setOrder] = useState([
         {
@@ -21,19 +22,10 @@ const Product = (props) => {
         console.log('orderedProduct: ', orderedProduct);
     }
 
+    const selectableUnitsOptions = props.baseUnitOptions.filter(baseUnitOption => props.product.selectableUnits.includes(baseUnitOption.value));
+    console.log('selectableUnitsOptions: ', selectableUnitsOptions);
 
-    let options = [];
-    if (props.product.baseUnitName === 'kilo' || props.product.baseUnitName === 'pièce') {
-        options = [
-            { value: "1", label: "grammes", name: "gramme" },
-            { value: "2", label: "kilo(s)", name: "kilo" },
-            { value: "4", label: "pièce(s)", name: "pièce" }
-        ]
-    } else {
-        options = [
-            { value: `${props.product.baseUnitId}`, label: `${props.product.baseUnitName}(s)`, name: `${props.product.baseUnitName}` },
-        ]
-    }
+    
     //console.log('Product unitOptions', options);
 
     return (
@@ -48,7 +40,7 @@ const Product = (props) => {
                 <Select
                     className="unit-select"
                     closeMenuOnSelect={false}
-                    options={options}
+                    options={selectableUnitsOptions}
                     placeholder={`${props.product.baseUnitName}(s)`}
                     defaultValue={{ value: `${props.product.baseUnitId}`, label: `${props.product.baseUnitName}(s)` }}
                     noOptionsMessage={() => null}
