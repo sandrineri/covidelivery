@@ -6,6 +6,7 @@ import { useAuth0 } from '../auth/Auth0Wrapper';
 //import { Tooltip, withTooltip } from 'react-tippy';
 
 import Header from '../components/Header';
+import Connect from '../components/Connect';
 import CreateProduct from '../components/CreateProduct';
 import Message from '../components/Message';
 import SellerProducts from '../components/SellerProducts';
@@ -91,6 +92,11 @@ const SellerPage = () => {
     return (
         <React.Fragment>
             <Header />
+            <Connect />
+            <div className="buttons-container">
+                <input className="button" type="button" value="Voir les commandes"></input>
+                <input className="button" type="button" value="Ajouter un produit"></input>
+            </div>
             <CreateProduct accessToken={accessToken} setMessage={setMessage} baseUnitOptions={baseUnitOptions} categoryOptions={categoryOptions} />
             <Message message={message} />
             <SellerProducts

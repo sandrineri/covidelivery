@@ -13,8 +13,8 @@ const Products = (props) => {
         )
     }
 
-    const formatLastModif = format(new Date(props.lastModified), 'eeee d MMMM yyyy', {locale: fr});
-    const deliveryDate = format(new Date(props.lastModified).setDate(new Date(props.lastModified).getDate()+ 1), 'eeee d MMMM yyyy', {locale: fr});
+    const formatLastModif = format(new Date(props.lastModified), 'eeee d MMMM yyyy', { locale: fr });
+    const deliveryDate = format(new Date(props.lastModified).setDate(new Date(props.lastModified).getDate() + 1), 'eeee d MMMM yyyy', { locale: fr });
     console.log(deliveryDate);
 
     return (
@@ -37,6 +37,7 @@ const Products = (props) => {
                                 <ul> {family.categories.map(category => {
                                     return (
                                         <li className="category" key={category.id}>{category.name}
+                                        
                                             <ul>
                                                 <li className="product-info-labels">
                                                     <span className="product-info product-info-label product-info-label-product">Produit</span>
@@ -59,6 +60,7 @@ const Products = (props) => {
                         )
                     })}
                 </ul>
+                <button type="submit"><i className="fas fa-shopping-basket"></i></button>
             </section>
         </article>
     )

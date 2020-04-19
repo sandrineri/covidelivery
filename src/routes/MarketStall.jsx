@@ -34,7 +34,6 @@ const MarketStall = () => {
                 setErrorMessage('Le cageot brûle');
             });
 
-
     }, [] );
 
     return (

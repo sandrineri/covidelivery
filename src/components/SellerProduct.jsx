@@ -7,15 +7,17 @@ const SellerProduct = (props) => {
     //console.log('SellerProduct props: ', props);
     const [product, setProduct] = useState(props.product);
 
+    let selectableUnitsOptions = props.baseUnitOptions.filter(baseUnitOption => props.product.selectableUnits.includes(baseUnitOption.value));
+    //console.log(selectableUnitsOptions);
+
     const changeProduct = (key, value) => {
         const modifiedProduct = product;
         modifiedProduct[key] = value;
         setProduct(modifiedProduct);
-        ///console.log('modifyOrigin: value: ', value + '; name: ');
     }
 
     const modifyProduct = () => {
-        //console.log('product: ', product);
+        console.log('product: ', product);
 
         fetch(`${settings.apiBasePath}/product/` + product.id, {
             method: 'PUT',
@@ -100,12 +102,20 @@ const SellerProduct = (props) => {
 
             <Select
                 className="sell-prod-info sell-prod-selectable"
-                placeholder={product.selectableUnits}
-                defaultValue={product.selectableUnits}
+                placeholder="Sélectionner"
+                defaultValue={selectableUnitsOptions}
                 noOptionsMessage={() => null}
                 isMulti
                 options={props.baseUnitOptions}
-                //onChange={(e) => changeProduct('selectableUnits', e.value)}
+                onChange={(options) => {
+                    if (options !== null) {
+                        changeProduct('selectableUnits', options.map(option => option.value));
+                        //console.log('selectable: ', option.value)
+                    }
+                    else {
+                        changeProduct('selectableUnits', []);
+                    }
+                }}
             />
 
             <span className="button sell-btn">

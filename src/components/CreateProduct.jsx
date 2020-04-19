@@ -115,17 +115,16 @@ const CreateProduct = (props) => {
                         <span className="label-plus">(plusieurs options possibles)</span></label>
                     <Select
                         className="form-select form-units-select"
-                        required
-                        //isClearable
                         isMulti
                         options={props.baseUnitOptions}
                         placeholder="Sélectionner"
                         //defaultValue={{ value: '2', label: 'kilo' }}
                         noOptionsMessage={() => null}
                         //formatCreateLabel={(value) => `Ajouter ${value}`}
-                        onChange={(option) => {
-                            if (option !== null) {
-                                changeProduct('selectableUnits', option.value);
+                        onChange={(options) => {
+                            if (options !== null) {
+                                changeProduct('selectableUnits', options.map(option => option.value));
+                                //console.log('selectable: ', option.value)
                             }
                             else {
                                 changeProduct('selectableUnits', []);
