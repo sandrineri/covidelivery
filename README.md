@@ -1,12 +1,14 @@
 # covidelivery
-An app for market retailers to list products and enable customers to command and be delivered at home
+Une application permettant aux commerçants de proposer leurs produits et à leurs clients habituels de commander et d'être livrés à domicile ou à un emplacement autorisé
+An app for market retailers to list products and enable customers to command and be delivered at home or at authorized places
 
+___________
 Première installation : yarn install
 Pour lancer le site : yarn start
 Pour le mettre en ligne : up
 Pour lancer les tests : yarn test
 
-
+___________
 TODO :
 
 - ACCUEIL

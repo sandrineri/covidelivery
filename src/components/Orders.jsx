@@ -99,6 +99,11 @@ const Orders = (props) => {
                             isChecked = 'checked';
                         }
 
+                        let status = "A traiter"
+                        if (order.processed) {
+                            status = "Traitée"
+                        }
+
                         return (
                             <li key={order.id}>
                                 <span>{order.id}</span>
@@ -111,6 +116,7 @@ const Orders = (props) => {
                                 <span>
                                     <button className="" type="button" value={order.id} onClick={(e) => { seeOrder(Number(e.target.value)) }}>Voir la commande</button>
                                 </span>
+                                <span>{status}</span>
                                 <span>
                                     <input type="checkbox" value={order.id} defaultChecked={isChecked} onChange={(e) => {
                                         console.log('checkbox isChecked: ', order.processed, isChecked);
@@ -151,6 +157,9 @@ const Orders = (props) => {
                         </p>
                     </div>
                 </section>
+
+                <section>
+                    <h3>Produits commandés</h3>
                 <ul>
                     {orderDetails.map(product => {
                         return (
@@ -164,6 +173,7 @@ const Orders = (props) => {
 
                     })}
                 </ul>
+                </section>
             </article>
         </React.Fragment>
     )

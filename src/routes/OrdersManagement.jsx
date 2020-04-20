@@ -33,11 +33,15 @@ const OrdersManagement = () => {
         })
             .then(response => response.json())
             .then((response) => {
-                console.log('fetch complete', response);
+                //console.log('fetch complete', response);
 
-                setOrders(response);
-                //const orderStatus = response.map(order => order.processed);
-                //console.log(orderStatus);
+                const sortedOrders = response.sort((a, b) => {
+                    if(a.id < b.id) { return -1; }
+                    if(a.id > b.id) { return 1; }
+                    return 0;
+                });
+                //console.log(sortedOrders);
+                setOrders(sortedOrders);
                 
             })
             .catch(error => {
