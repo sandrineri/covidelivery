@@ -6,18 +6,45 @@ Pour lancer le site : yarn start
 Pour le mettre en ligne : up
 Pour lancer les tests : yarn test
 
+
 TODO :
-- BASES
-    [x] Liste de produits, avec prix, quantité, provenances, etc…
-    [] Le commerçant peut ajouter de nouveaux produits avec un formulaire
+
+- ACCUEIL
+	[] visualiser la liste des produits, avec prix, quantité, provenances, etc…
 
 - COMPTE / CONNEXION
+	[x] Gérer les autorisations
     [] Possibilité de se connecter
-    [] Une fois connecté, possibilité de passer une commande (ajouter des quantités de chaque produit au panier, puis valider).
-    [] Le commerçant peut visualiser les commandes (nom, tel, adresse, produits)
 
+    Une fois connecté :
+	- CLIENT : 
+	[] Le client peut créer son compte en indiquant ses coordonnées de livraison (nom, adresse, téléphone, complément d'infos (digicode...) <!-- moyen de paiement ?, -->)
+	[] Le client peut modifier les infos de son compte
+	- COMMERCANT :
+	[] Le commerçant peut créer son compte et le modifier
+
+- PAGES VENDEUR
+	- GESTION DES PRODUITS :
+	[x] Le commerçant peut ajouter de nouveaux produits avec un formulaire
+	[x] Le comerçant peut modifier un produit
+	[] Le commerçant peut modifier plusieurs produits (ex: plusieurs prix...)
+	[x] Le commerçant peut supprimer un produit
+	[] Le commerçant peut créer une nouvelle catégorie de produits
+
+	- TRAITEMENT DES COMMANDES :
+	[x] Le commerçant peut visualiser la liste des commandes (date de la commande, noms des clients, leurs adresses... ) où il peut sélectionner une commande à traiter
+	[x] Le commerçant peut visualiser une commande avec les informations sur le client (nom, tel, adresse...) et les produits commandés (libellé, quantité...)
+	[] Le commerçant peut imprimer la liste des commandes et chaque commande
+	[x] Le commerçant peut informer l'API qu'une commande est traitée
+
+- PAGES CLIENT
+	[x] Le client peut visualiser la liste des produits et les boutons de validation
+	[] Le client peut passer une commande (ajouter des quantités de chaque produit au panier, puis valider)
+	[] Le client peut visualiser sa commande
+
+_______________________
 - API :
-	[x] User : lister les produits en stock
+	[] User : lister les produits en stock
 	[] User : Commander (en passant un tableau d'objets produits, quantité…)
 	[] User : Ajouter ses coordonnées de livraison
 

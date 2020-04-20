@@ -13,6 +13,41 @@ const Orders = (props) => {
     const [currentOrder, setCurrentOrder] = useState([]);
     const [currentOrderDate, setCurrentOrderDate] = useState('');
 
+    const changeStatus = (id, processed, isChecked) => {
+        console.log('changeStatus: ', id + '; order: ', processed + '; isChecked: ', isChecked);
+        let processedStatus = {}
+
+        if ( isChecked === "") {
+            processedStatus = {
+                "processed": true
+            };
+        } else {
+            processedStatus = {
+                "processed": false
+            };
+        }
+        console.log(processedStatus);
+
+        fetch(`${settings.apiBasePath}/order/` + id, {
+            method: 'PUT',
+            body: JSON.stringify(processedStatus),
+            headers: {
+                "Authorization": `Bearer ${props.accessToken}`
+            }
+        })
+            .then(response => response.json())
+            .then((response) => {
+                console.log('fetch ', response);
+
+                setOrderDetails(response);
+            })
+            .catch(error => {
+                console.log(error);
+                //setErrorMessage('Le cageot est tombé du camion');
+            });
+
+    } 
+
     const seeOrder = (id) => {
         //console.log('clicked id: ', id);
         const thisOrder = props.orders.find(order => {
@@ -59,6 +94,11 @@ const Orders = (props) => {
                         <span>Statut</span>
                     </li>
                     {props.orders.map(order => {
+                        let isChecked = '';
+                        if (order.processed) {
+                            isChecked = 'checked';
+                        }
+
                         return (
                             <li key={order.id}>
                                 <span>{order.id}</span>
@@ -70,6 +110,12 @@ const Orders = (props) => {
                                 <span></span>
                                 <span>
                                     <button className="" type="button" value={order.id} onClick={(e) => { seeOrder(Number(e.target.value)) }}>Voir la commande</button>
+                                </span>
+                                <span>
+                                    <input type="checkbox" value={order.id} defaultChecked={isChecked} onChange={(e) => {
+                                        console.log('checkbox isChecked: ', order.processed, isChecked);
+                                        changeStatus(e.target.value, order.processed, isChecked);
+                                    }}></input>
                                 </span>
                             </li>
                         )
