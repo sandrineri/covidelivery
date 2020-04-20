@@ -17,7 +17,7 @@ const Orders = (props) => {
         console.log('changeStatus: ', id + '; order: ', processed + '; isChecked: ', isChecked);
         let processedStatus = {}
 
-        if ( isChecked === "") {
+        if (isChecked === "") {
             processedStatus = {
                 "processed": true
             };
@@ -46,7 +46,7 @@ const Orders = (props) => {
                 //setErrorMessage('Le cageot est tombé du camion');
             });
 
-    } 
+    }
 
     const seeOrder = (id) => {
         //console.log('clicked id: ', id);
@@ -160,19 +160,26 @@ const Orders = (props) => {
 
                 <section>
                     <h3>Produits commandés</h3>
-                <ul>
-                    {orderDetails.map(product => {
-                        return (
-                            <li key={product.id}>
-                                <span>{product.categoryName}</span>
-                                <span>{product.name}</span>
-                                <span>{product.amount}</span>
-                                <span>{product.selectedUnitName}(s)</span>
-                            </li>
-                        )
-
-                    })}
-                </ul>
+                    <ul>
+                        <li className="order-prod-label">
+                            <span>Catégorie</span>
+                            <span>Produit</span>
+                            <span>Provenance</span>
+                            <span>Prix à l'unité</span>
+                            <span>Quantité</span>
+                        </li>
+                        {orderDetails.map(product => {
+                            return (
+                                <li className="order-prod" key={product.id}>
+                                    <span>{product.categoryName.toLowerCase()}</span>
+                                    <span>{product.name}</span>
+                                    <span>{product.origin}</span>
+                                    <span>{product.price} / {product.baseUnitName}</span>
+                                    <span>{product.amount} {product.selectedUnitName}(s)</span>
+                                </li>
+                            )
+                        })}
+                    </ul>
                 </section>
             </article>
         </React.Fragment>

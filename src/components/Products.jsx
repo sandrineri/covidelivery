@@ -1,6 +1,4 @@
 import React from 'react';
-import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
 
 import Product from './Product';
 
@@ -12,31 +10,7 @@ const Products = (props) => {
         return (<React.Fragment></React.Fragment>);
     }
 
-    if (props.lastModified === "") {
-        return (
-            <article className="stalls"></article>
-        )
-    }
-
-    const lastModifiedDate = new Date(props.lastModified);
-    const datePattern = 'eeee d MMMM yyyy';
-
-    const formatLastModif = format(lastModifiedDate, datePattern, { locale: fr });
-    const deliveryDate = format(lastModifiedDate.setDate(lastModifiedDate.getDate() + 1), datePattern, { locale: fr });
-    //console.log(deliveryDate);
-
     return (
-        <article className="stalls">
-            <section>
-                <p>Mise à jour le&nbsp;
-                    <span>
-                        {formatLastModif}
-                    </span>
-                </p>
-                <p>Pour une livraison du&nbsp;
-                    <span>{deliveryDate}</span>
-                </p>
-            </section>
             <section>
                 <ul>
                     {props.productsList.map((family) => {
@@ -57,7 +31,7 @@ const Products = (props) => {
                                                 </li>
                                                 {category.products.map(product => {
                                                     return (
-                                                        <Product key={product.id} product={product} baseUnitOptions={props.baseUnitOptions}/>
+                                                        <Product key={product.id}  order={props.order} setOrder={props.setOrder} product={product} baseUnitOptions={props.baseUnitOptions}/>
                                                     )
                                                 })}
                                             </ul>
@@ -68,9 +42,7 @@ const Products = (props) => {
                         )
                     })}
                 </ul>
-                <button type="submit"><i className="fas fa-shopping-basket"></i></button>
             </section>
-        </article>
     )
 }
 

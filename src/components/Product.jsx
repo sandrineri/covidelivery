@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Select from 'react-select';
 
 
@@ -6,22 +6,16 @@ const Product = (props) => {
     console.log('For each product: ', props);
     console.log('props baseUnitOptions: ', props.baseUnitOptions);
 
-   /* const [order, setOrder] = useState([
-        {
-            "id": '',
-            "amount": '',
-            "selectedUnit": ''
-        }
-    ]);
-*/
-
     const changeProduct = (key, value) => {
-       /* const orderedProduct = order;
-        orderedProduct[key] = value;
-        setOrder(orderedProduct);*/
-        console.log(props.productsList);
-        props.setProductsList(props.productsList);
-        console.log('orderedProduct: ', key, value);
+        const productToOrder = props.product;
+        productToOrder[key] = value;
+
+        const newOrder = props.order;
+        newOrder[props.product.id] = productToOrder;
+        props.setOrder(newOrder);
+
+
+
     }
 
     if (props.baseUnitOptions.length === 0) {
@@ -31,7 +25,7 @@ const Product = (props) => {
     const selectableUnitsOptions = props.baseUnitOptions.filter(baseUnitOption => props.product.selectableUnits.includes(baseUnitOption.value));
     console.log('selectableUnitsOptions: ', selectableUnitsOptions);
 
-    
+
     //console.log('Product unitOptions', options);
 
     return (
@@ -42,7 +36,7 @@ const Product = (props) => {
             <span className="product-info product-unit">{props.product.baseUnitName}</span>
             <span className="product-info product-promo">{props.product.promo}</span>
             <span className="product-info product-basket">
-                <input className="quantity-input" type="number" min="0" onChange={(input) => changeProduct('amount', input.target.value)}></input>
+                <input className="quantity-input" type="number" min="1" onChange={(input) => changeProduct('amount', input.target.value)}></input>
                 <Select
                     className="unit-select"
                     closeMenuOnSelect={false}
@@ -50,7 +44,7 @@ const Product = (props) => {
                     placeholder={`${props.product.baseUnitName}(s)`}
                     defaultValue={{ value: `${props.product.baseUnitId}`, label: `${props.product.baseUnitName}(s)` }}
                     noOptionsMessage={() => null}
-                    onChange={(option) => changeProduct('selectedUnit', option.value)}
+                    onChange={(option) => changeProduct('selectedUnitId', option.value)}
                 />
             </span>
         </li>
