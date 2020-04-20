@@ -27,17 +27,14 @@ const SellerProduct = (props) => {
             }
         })
             .then(response => {
-                console.log('code http : ', response.status);
-                // if (response.status === 204) {
-                //     console.log(name + ' supprimé');
-                //     props.setMessage(`Le produit "${name}" a bien été supprimé. La liste sera raffraîchie automatiquement d'ici quelques secondes.`);
-                //     setTimeout(() => { document.location.reload(); }, 3000);
-                // }
-                // else {
-                //     throw new Error('Code HTTP incorrect');
-                // }
-
-                return response.json();
+                if (response.status === 204) {
+                    console.log(product.name + ' modifié');
+                    props.setMessage(`Le produit "${product.name}" a bien été modifié. La liste sera raffraîchie automatiquement d'ici quelques secondes.`);
+                    //setTimeout(() => { document.location.reload(); }, 3000);
+                }
+                else {
+                    throw new Error('Code HTTP incorrect');
+                }
             })
             .catch(error => {
                 console.log('Erreur de modification : ', error);

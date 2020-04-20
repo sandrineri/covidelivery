@@ -5,7 +5,7 @@ import { fr } from 'date-fns/locale';
 import Product from './Product';
 
 const Products = (props) => {
-    //console.log('Products props: ', props);
+    console.log('Products props: ', props);
 
     
     if (props.baseUnitOptions.length === 0) {
@@ -18,8 +18,11 @@ const Products = (props) => {
         )
     }
 
-    const formatLastModif = format(new Date(props.lastModified), 'eeee d MMMM yyyy', { locale: fr });
-    const deliveryDate = format(new Date(props.lastModified).setDate(new Date(props.lastModified).getDate() + 1), 'eeee d MMMM yyyy', { locale: fr });
+    const lastModifiedDate = new Date(props.lastModified);
+    const datePattern = 'eeee d MMMM yyyy';
+
+    const formatLastModif = format(lastModifiedDate, datePattern, { locale: fr });
+    const deliveryDate = format(lastModifiedDate.setDate(lastModifiedDate.getDate() + 1), datePattern, { locale: fr });
     //console.log(deliveryDate);
 
     return (
