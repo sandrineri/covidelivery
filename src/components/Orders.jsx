@@ -68,8 +68,8 @@ const Orders = (props) => {
         })
             .then(response => response.json())
             .then((response) => {
-                console.log('fetch ', response);
-
+                console.log('currentOrder fetch ', response);
+                //const sortedCurrentOrder = response.sort( (a, b) => (a.categoryName.localeCompare(b.categoryName)))
                 setOrderDetails(response);
             })
             .catch(error => {
@@ -84,13 +84,13 @@ const Orders = (props) => {
             <article className="orders display-flex">
                 <h2>Liste des commandes</h2>
                 <ul>
-                    <li>
+                    <li className="orders-prod-labels">
                         <span>N°</span>
                         <span>Nom</span>
                         <span>Adresse</span>
                         <span>Téléphone</span>
                         <span>E-mail</span>
-                        <span>Date de la commande</span>
+                        <span>Date</span>
                         <span>Statut</span>
                     </li>
                     {props.orders.map(order => {
@@ -105,7 +105,7 @@ const Orders = (props) => {
                         }
 
                         return (
-                            <li key={order.id}>
+                            <li className="orders-prod" key={order.id}>
                                 <span>{order.id}</span>
                                 <span>{order.userName}</span>
                                 <span>{order.userAddress}</span>
@@ -130,52 +130,53 @@ const Orders = (props) => {
             </article>
             <article className="order display-flex">
                 <h2>Commande</h2>
-                <section>
-                    <h3>Informations de livraison <span>(pas de frais de livraison - pas de montant minimum)</span></h3>
-                    <div>
-                        <p>Nom&nbsp;:
-                            <span> {currentOrder.userName}</span>
+                <section className="delivery-infos-container">
+                    <h3>Informations de livraison <span className="deliver-title-sub">(pas de frais de livraison - pas de montant minimum)</span></h3>
+                    <div className="delivery-infos">
+                        <p className="deliv-label dl1">Nom&nbsp;:
+                            <span className="deliv-info deliv-name">{currentOrder.userName}</span>
                         </p>
-                        <p>Commande n°&nbsp;:
-                            <span> {currentOrder.id}</span>
+                        <p className="deliv-label dl2">Commande n°&nbsp;:
+                            <span className="deliv-info">{currentOrder.id}</span>
                         </p>
-                        <p>Téléphone&nbsp;:
-                            <span> {}</span>
+                        <p className="deliv-label dl3">Téléphone&nbsp;:
+                            <span className="deliv-info deliv-phone"></span>
                         </p>
-                        <p>E-mail&nbsp;:
-                            <span> {currentOrder.userEmail}</span>
+                        <p className="deliv-label dl4">E-mail&nbsp;:
+                            <span className="deliv-info">{currentOrder.userEmail}</span>
                         </p>
-                        <p>Adresse&nbsp;:
-                            <span> {currentOrder.userAddress}</span>
+                        <p className="deliv-label dl5">Adresse&nbsp;:
+                            <span className="deliv-info deliv-adress">{currentOrder.userAddress}</span>
                         </p>
-                        <p>Date de la commande&nbsp;:
-                            <span>{currentOrderDate}</span>
+                        <p className="deliv-label dl6">Date de la commande&nbsp;:
+                            <span className="deliv-info">{currentOrderDate}</span>
                         </p>
-                        <p>Complément d'info&nbsp;:</p>
-                        <p>Réglement par&nbsp;:
-                            <span></span>
+                        <p className="deliv-label dl7">Complément d'info&nbsp;:
+                            <span className="deliv-info"></span>
+                        </p>
+                        <p className="deliv-label dl8">Réglement par&nbsp;:
+                            <span className="deliv-info"></span>
                         </p>
                     </div>
                 </section>
 
-                <section>
-                    <h3>Produits commandés</h3>
+                <section className="delivery-order">
                     <ul>
-                        <li className="order-prod-label">
-                            <span>Catégorie</span>
-                            <span>Produit</span>
-                            <span>Provenance</span>
-                            <span>Prix à l'unité</span>
-                            <span>Quantité</span>
+                        <li className="order-prod-labels">
+                            <span className="product-info order-cat">Catégorie</span>
+                            <span className="product-info order-name">Produit</span>
+                            <span className="product-info order-origin">Provenance</span>
+                            <span className="product-info order-price">Prix à l'unité</span>
+                            <span className="product-info order-quantity">Commande</span>
                         </li>
                         {orderDetails.map(product => {
                             return (
                                 <li className="order-prod" key={product.id}>
-                                    <span>{product.categoryName.toLowerCase()}</span>
-                                    <span>{product.name}</span>
-                                    <span>{product.origin}</span>
-                                    <span>{product.price} / {product.baseUnitName}</span>
-                                    <span>{product.amount} {product.selectedUnitName}(s)</span>
+                                    <span className="product-info order-cat">{product.categoryName.toLowerCase()}</span>
+                                    <span className="product-info order-name">{product.name}</span>
+                                    <span className="product-info order-origin">{product.origin}</span>
+                                    <span className="product-info order-price">{product.price} / {product.baseUnitName}</span>
+                                    <span className="product-info order-quantity">{product.amount} {product.selectedUnitName}(s)</span>
                                 </li>
                             )
                         })}

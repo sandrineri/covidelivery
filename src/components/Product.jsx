@@ -13,9 +13,6 @@ const Product = (props) => {
         const newOrder = props.order;
         newOrder[props.product.id] = productToOrder;
         props.setOrder(newOrder);
-
-
-
     }
 
     if (props.baseUnitOptions.length === 0) {
@@ -23,7 +20,7 @@ const Product = (props) => {
     }
 
     const selectableUnitsOptions = props.baseUnitOptions.filter(baseUnitOption => props.product.selectableUnits.includes(baseUnitOption.value));
-    console.log('selectableUnitsOptions: ', selectableUnitsOptions);
+    //console.log('selectableUnitsOptions: ', selectableUnitsOptions);
 
 
     //console.log('Product unitOptions', options);

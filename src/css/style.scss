@@ -3,6 +3,7 @@ $primaryFont: Arial;
 $primaryFontSize: 1rem;
 $labelsFont: 'Times New Roman', Times, serif;
 $labelsFontSize: 1.2rem;
+$labelsBackgroundColor: #f0eded;
 $productPadding: .3rem .5rem;
 
 html,
@@ -14,6 +15,7 @@ body {
 
 ul {
     list-style-type: none;
+    padding: 0;
 }
 
 button,
@@ -50,7 +52,7 @@ h1 {
 
 // PRODUCT
 .product-info-labels {
-    background-color: #f0eded;
+    background-color: $labelsBackgroundColor;
     font-variant: small-caps;
     font-feature-settings: normal;
     letter-spacing: 1px;
@@ -161,7 +163,7 @@ h1 {
     border-top: $borderStandard;
 
     .sell-product-labels {
-        background-color: #f0eded;
+        background-color: $labelsBackgroundColor;
         font-variant: small-caps;
         font-feature-settings: normal;
         letter-spacing: 1px;
@@ -206,6 +208,86 @@ h1 {
 
 }
 
+
+// ORDERS
+.delivery-infos-container {
+    margin: 0 3rem 1rem;
+    border: $borderStandard;
+
+    h3 {
+        border-bottom: $borderStandard;
+        text-align: center;
+        padding-bottom: 1rem;
+        text-transform: uppercase;
+
+        .deliver-title-sub {
+            font-size: .9rem;
+            font-weight: 400;
+            
+        }
+    }
+
+    .delivery-infos {
+        .deliv-label {
+            padding: 0 2rem;
+            font-weight: 600;
+
+            .deliv-info {
+                padding-left: 1rem;
+            }
+
+            .deliv-name {
+                font-size: 1.3rem;
+                letter-spacing: 1px;
+            }
+
+            .deliv-phone,
+            .deliv-adress {
+                font-size: 1.2rem;
+                letter-spacing: 1px;
+            }
+        }
+    }
+}
+
+.delivery-order {
+    margin: 3rem 2rem;
+
+    .product-info {
+        width: 9rem;
+    }
+
+    .order-cat {
+        width: 17rem;
+        text-transform: capitalize;
+    }
+
+    .order-name,
+    .order-price {
+        width: 12rem;
+    }
+}
+
+.orders-prod-labels,
+.order-prod-labels {
+    background-color: $labelsBackgroundColor;
+    font-variant: small-caps;
+    font-feature-settings: normal;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+}
+
+.orders-prod-labels,
+.orders-prod,
+.order-prod-labels,
+.order-prod {
+    border-bottom: $borderStandard;
+    padding: $productPadding;
+}
+
+.orders-prod-labels span {
+    margin: 0 1rem;
+}
 
 
 
