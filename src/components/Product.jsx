@@ -4,7 +4,7 @@ import Select from 'react-select';
 
 const Product = (props) => {
     console.log('For each product: ', props);
-    console.log('props units: ', props.baseUnitOptions);
+    console.log('props baseUnitOptions: ', props.baseUnitOptions);
 
     const [order, setOrder] = useState([
         {
@@ -14,6 +14,9 @@ const Product = (props) => {
         }
     ]);
 
+    if (props.baseUnitOptions.length === 0) {
+        return (<React.Fragment></React.Fragment>);
+    }
 
     const orderProduct = (key, value) => {
         const orderedProduct = order;

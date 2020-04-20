@@ -7,6 +7,8 @@ import settings from '../config/settings';
 const Order = (props) => {
     console.log('Order props: ', props);
 
+   
+
     
     return (
         <React.Fragment>

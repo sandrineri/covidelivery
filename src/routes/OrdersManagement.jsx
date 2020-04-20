@@ -11,7 +11,6 @@ const OrdersManagement = () => {
     // Initialisation du state
     //const [errorMessage, setErrorMessage] = useState('');
     const [orders, setOrders] = useState([]);
-    const [processedStatus, setProcessedStatus] = useState([]);
 
     // Authorization
     const [accessToken, setAccessToken] = useState(null);
@@ -37,9 +36,8 @@ const OrdersManagement = () => {
                 console.log('fetch complete', response);
 
                 setOrders(response);
-                const orderStatus = response.map(order => order.processed);
-                //console.log(orderStatus)
-                setProcessedStatus(orderStatus);
+                //const orderStatus = response.map(order => order.processed);
+                //console.log(orderStatus);
                 
             })
             .catch(error => {
@@ -49,15 +47,13 @@ const OrdersManagement = () => {
 
     }, [accessToken]);
 
-    console.log('processedStatus: ', processedStatus);
-
     if (accessToken === null) return <React.Fragment></React.Fragment>;
 
     return (
         <React.Fragment>
             <Header />
             {/* <Message message={errorMessage} /> */}
-            <Orders accessToken={accessToken} orders={orders} processedStatus={processedStatus} />
+            <Orders accessToken={accessToken} orders={orders} />
         </React.Fragment>
     )
 }
