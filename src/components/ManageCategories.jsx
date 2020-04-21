@@ -41,7 +41,7 @@ const ManageCategories = (props) => {
 
             <section className="categories-list">
                 <h3>Modifier une catégorie</h3>
-                <ul classname="categories">
+                <ul className="categories">
                     {props.categories.map((category) => {
                         return (
                             <li key={category.id} id={category.id}>

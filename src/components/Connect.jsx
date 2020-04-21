@@ -9,10 +9,10 @@ const Connect = () => {
                     <p>Se connecter</p>
                 </div>
                 <div className="person">
-                    <button>Commerçant</button>
+                    <input className="button" type="button" value="Commerçant"></input>
                 </div>
                 <div className="person">
-                    <button>Client</button>
+                    <input className="button" type="button" value="Client"></input>
                 </div>
             </div>
         </React.Fragment>

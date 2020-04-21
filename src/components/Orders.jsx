@@ -79,9 +79,15 @@ const Orders = (props) => {
 
     }
 
+    const printList = () => {
+        window.print();
+    }
+
     return (
         <React.Fragment>
-            <article className="orders display-flex">
+            <button onClick={printList}>Imprimer la liste</button>
+            
+            <article className="orders display-flex" id="orders-to-print">
                 <h2>Liste des commandes</h2>
                 <ul>
                     <li className="orders-prod-labels">
@@ -128,6 +134,7 @@ const Orders = (props) => {
                     })}
                 </ul>
             </article>
+
             <article className="order display-flex">
                 <h2>Commande</h2>
                 <section className="delivery-infos-container">

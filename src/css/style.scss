@@ -1,5 +1,5 @@
 $borderStandard: 1px solid #000000;
-$primaryFont: Arial;
+$primaryFont: Verdana, "Geneva", sans-serif;
 $primaryFontSize: 1rem;
 $labelsFont: 'Times New Roman', Times, serif;
 $labelsFontSize: 1.2rem;
@@ -8,9 +8,10 @@ $productPadding: .3rem .5rem;
 
 html,
 body {
-    font-size: 18px;
+    font-size: 16px;
     margin: 0;
     padding: 0;
+    font-family: $primaryFont; 
 }
 
 ul {
@@ -20,25 +21,26 @@ ul {
 
 button,
 .button {
-    padding: .3rem .5rem;
+    font-size: $primaryFontSize;
+    padding: .5rem 1rem;
     border-radius: 5px;
 }
 
 h2 {
-    letter-spacing: .1rem;
+    letter-spacing: .2rem;
     text-align: center;
-    margin: 2rem 0;
+    margin: 2rem 0 1rem;
 }
 
 // HEADER
 header {
     text-align: center;
-    background-color: black;
+    background-color: #000000;
 }
 
 h1 {
-    letter-spacing: .2rem;
-    color: white;
+    letter-spacing: .3rem;
+    color: #ffffff;
     margin: 0;
     padding: 2rem;
 }
@@ -46,54 +48,108 @@ h1 {
 // CONNECT
 .connect-container {
     margin: 0 2rem;
+
+    .person {
+        input {
+            font-size: .9rem;
+            padding: .5rem .8rem;
+        }
+    }
 }
 
 // MARKETSTALL
+.stalls {
+    .update-infos-sup {
+        font-weight: 600;
+        letter-spacing: .1rem;
+    }
+    .update-infos-sub {
+        font-size: .9rem;
+    }
 
+    .order-btn button {
+        padding: .8rem 1rem;
+        font-size: 1rem;
+    }
+}
 
 // PRODUCTS
-.category {
-    margin: 1rem 0;
+.products-family {
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 2rem 0 2.5rem;
+
+    .products-category {
+        font-weight: 400;
+        margin: 1rem 1rem 2rem;
+
+        .products {
+            font-size: $primaryFontSize;
+            margin: .5rem 0
+        }
+    }
 }
 
 // PRODUCT
-.product-info-labels {
+.prod-info-labels {
     background-color: $labelsBackgroundColor;
+    font-family: $labelsFont;
     font-variant: small-caps;
     font-feature-settings: normal;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 }
 
 .product,
-.product-info-labels {
+.prod-info-labels {
     border-bottom: $borderStandard;
     padding: $productPadding;
+    margin-right: 1rem;
+    text-align: center;
 
-    .product-info {
+    .prod-info {
         width: 10rem;
     }
 
     .product-name,
-    .product-info-label-product {
-        width: 15rem;
+    .prod-info-label-product {
+        width: 16rem;
+        text-align: left;
     }
 
     .product-name {
         text-transform: capitalize;
+        letter-spacing: .03rem;
+    }
+
+    .prod-info-label-price,
+    .product-price,
+    .prod-info-label-unit,
+    .product-unit {
+        width: 6rem;
     }
 
     .product-basket,
-    .product-info-label-quantity {
-        width: 15rem;
+    .prod-info-label-quantity {
+        width: 14rem;
     }
 
     .quantity-input {
-        width: 3rem;
+        width: 3.5rem;
+        height: 2rem;
+        font-size: $primaryFontSize;
     }
 
     .unit-select {
-        width: 8rem;
-        margin: 0 .5rem;
+        width: 10rem;
+        margin: 0 0 0 1rem;
+    }
+}
+
+// SELLER
+.buttons-container {
+    input {
+        margin: 0 1rem;
     }
 }
 
@@ -267,7 +323,7 @@ h1 {
 .delivery-order {
     margin: 3rem 2rem;
 
-    .product-info {
+    .prod-info {
         width: 9rem;
     }
 
@@ -309,3 +365,22 @@ h1 {
 footer {
     height: 5rem;
 }
+
+
+
+// // Print
+// @media print {
+//     body * {
+//       visibility: hidden;
+//     }
+//     #orders-to-print, #orders-to-print *,
+//     #order-to-print, #order-to-print * {
+//       visibility: visible;
+//     }
+//     #orders-to-print,
+//     #order-to-print {
+//       position: absolute;
+//       left: 0;
+//       top: 0;
+//     }
+// }

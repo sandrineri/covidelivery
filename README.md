@@ -11,6 +11,9 @@ Pour lancer les tests : yarn test
 ___________
 TODO :
 
+- PETOUILLES :
+	[] Cacher le bouton de commande tant que l'on n'est pas connecté
+
 - ACCUEIL
 	[] visualiser la liste des produits, avec prix, quantité, provenances, etc…
 
@@ -41,7 +44,7 @@ TODO :
 
 - PAGES CLIENT
 	[x] Le client peut visualiser la liste des produits et les boutons de validation
-	[x] Le client peut passer une commande (ajouter des quantités de chaque produit au panier, puis valider)
+	[x] Le client peut passer une commande (ajouter des quantités de chaque produit, puis valider)
 	[] Le client peut visualiser sa commande
 
 _______________________

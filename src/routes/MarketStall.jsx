@@ -97,7 +97,7 @@ const MarketStall = () => {
                 setDeliveryDate(formatDeliveryDate);
 
                 setBaseUnitOptions(apiBaseUnits.map(option => {
-                    return { value: `${option.id}`, label: `${option.name}`, name: `${option.name}` }
+                    return { value: `${option.id}`, label: `${option.name}(s)`, name: `${option.name}` }
                 }));
 
             })
@@ -118,18 +118,18 @@ const MarketStall = () => {
             <Message message={errorMessage} />
             <article className="stalls">
                 <h2>Liste des produits et tarifs</h2>
-                <div className="update-infos">
-                    <p>Mise à jour le&nbsp;
+                <section classname="update">
+                    <p className="update-infos update-infos-sup">Mise à jour le&nbsp;
                         <span>{lastModified}</span>
                     </p>
                     <p className="update-infos">Pour une livraison du&nbsp;
                         <span>{deliveryDate}</span>
                     </p>
                     <p className="update-infos update-infos-sub">(Prix et produits actualisés tous les jours en fonction de notre arrivage de Rungis)</p>
-                </div>
+                </section>
                 <Products order={order} setOrder={setOrder} products={products} message={errorMessage} lastModified={lastModified} baseUnitOptions={baseUnitOptions} />
-                <span className="button">
-                    <button type="submit" onClick={sendOrder}><i className="fas fa-shopping-basket"></i></button>
+                <span className="button order-btn">
+                    <button type="submit" onClick={sendOrder}>Envoyer ma commande</button>
                 </span>
             </article>
             <Footer />

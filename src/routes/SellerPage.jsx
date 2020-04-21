@@ -148,11 +148,11 @@ const SellerPage = () => {
                 <SellerProducts
                     accessToken={accessToken} productsState={productsState} setMessage={setMessage} baseUnitOptions={baseUnitOptions} categoryOptions={categoryOptions} modifiedProducts={modifiedProducts} setModifiedProducts={setModifiedProducts}
                 />
-                <span className="button sell-btn">
+                <div className="button sell-btn">
                     <button type="submit" title="Modifier plusieurs produits" alt="Modifier plusieurs produits" value="" name="" onClick={modifyProducts}>
                         Modifier plusieurs produits <i className="fas fa-edit"></i>
                     </button>
-                </span>
+                </div>
             </article>  
             <Footer />
         </React.Fragment>

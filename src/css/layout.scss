@@ -26,24 +26,32 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
 
-section.update-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    
+        .update-infos {
+            display: flex;
+            justify-content: center;
+        }
+    
 }
-
 
 // PRODUCT
 .product, 
-.product-info-labels {
+.prod-info-labels {
     display: flex;
+    align-items: center;
 }
 
 .product-basket {
     display: flex;
     align-items: center;
+}
+
+
+// SELLER
+.buttons-container {
+    display:flex;
+    justify-content: center;
 }
 
 

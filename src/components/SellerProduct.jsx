@@ -78,7 +78,7 @@ const SellerProduct = (props) => {
     return (
         <li className="sell-product" key={product.id} id={product.id}>
             <input className="sell-prod-info sell-product-name" id={`name${product.id}`} defaultValue={product.name} onChange={(e) => changeProduct('name', e.target.value)}></input>
-
+            
             <Select
                 className="sell-prod-info sell-product-cat"
                 placeholder={product.category.toLowerCase()}

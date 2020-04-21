@@ -27,13 +27,13 @@ const Product = (props) => {
 
     return (
         <li className="product" id={props.product.id}>
-            <span className="product-info product-name">{props.product.name}</span>
-            <span className="product-info product-origin">{props.product.origin}</span>
-            <span className="product-info product-price">{props.product.price} €</span>
-            <span className="product-info product-unit">{props.product.baseUnitName}</span>
-            <span className="product-info product-promo">{props.product.promo}</span>
-            <span className="product-info product-basket">
-                <input className="quantity-input" type="number" min="1" onChange={(input) => changeProduct('amount', input.target.value)}></input>
+            <span className="prod-info product-name">{props.product.name}</span>
+            <span className="prod-info product-origin">{props.product.origin}</span>
+            <span className="prod-info product-price">{props.product.price.replace('.', ',')} €</span>
+            <span className="prod-info product-unit">{props.product.baseUnitName}</span>
+            <span className="prod-info product-promo">{props.product.promo}</span>
+            <span className="prod-info product-basket">
+                <input className="quantity-input" type="number" min="1" max="999" onChange={(input) => changeProduct('amount', input.target.value)}></input>
                 <Select
                     className="unit-select"
                     closeMenuOnSelect={false}

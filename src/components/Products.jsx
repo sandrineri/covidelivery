@@ -17,16 +17,16 @@ const Products = (props) => {
                             <li className="products-family" key={family.id}>{family.name}
                                 <ul> {family.categories.map(category => {
                                     return (
-                                        <li className="category" key={category.id}>{category.name}
+                                        <li className="products-category" key={category.id}>{category.name}
                                         
-                                            <ul>
-                                                <li className="product-info-labels">
-                                                    <span className="product-info product-info-label product-info-label-product">Produit</span>
-                                                    <span className="product-info product-info-label">Provenance</span>
-                                                    <span className="product-info product-info-label">Prix</span>
-                                                    <span className="product-info product-info-label">Unité</span>
-                                                    <span className="product-info product-info-label">Promo</span>
-                                                    <span className="product-info product-info-label product-info-label-quantity">Quantité</span>
+                                            <ul className="products">
+                                                <li className="prod-info-labels">
+                                                    <span className="prod-info prod-info-label prod-info-label-product">Produit</span>
+                                                    <span className="prod-info prod-info-label">Provenance</span>
+                                                    <span className="prod-info prod-info-label prod-info-label-price">Prix</span>
+                                                    <span className="prod-info prod-info-label prod-info-label-unit">Unité</span>
+                                                    <span className="prod-info prod-info-label">Promo</span>
+                                                    <span className="prod-info prod-info-label prod-info-label-quantity">Quantité</span>
                                                 </li>
                                                 {category.products.map(product => {
                                                     return (
