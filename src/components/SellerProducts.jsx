@@ -7,8 +7,7 @@ const SellerProducts = (props) => {
     //console.log(props.productsState.length);
 
     return (
-        <article className="seller-products-list">
-            <h2>Produits</h2>
+        
 
             <div>
                 <ul>
@@ -28,13 +27,12 @@ const SellerProducts = (props) => {
                         return (
                             <SellerProduct
                                 accessToken={props.accessToken} key={product.id} product={product} setMessage={props.setMessage}
-                                categoryOptions={props.categoryOptions} baseUnitOptions={props.baseUnitOptions}
+                                categoryOptions={props.categoryOptions} baseUnitOptions={props.baseUnitOptions} modifiedProducts={props.modifiedProducts} setModifiedProducts={props.setModifiedProducts}
                             />
                         )
                     })}
                 </ul>
             </div>
-        </article>
     )
 }
 

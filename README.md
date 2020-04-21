@@ -29,7 +29,7 @@ TODO :
 	- GESTION DES PRODUITS :
 	[x] Le commerçant peut ajouter de nouveaux produits avec un formulaire
 	[x] Le comerçant peut modifier un produit
-	[] Le commerçant peut modifier plusieurs produits (ex: plusieurs prix...)
+	[x] Le commerçant peut modifier plusieurs produits (ex: plusieurs prix...)
 	[x] Le commerçant peut supprimer un produit
 	[] Le commerçant peut créer une nouvelle catégorie de produits
 
@@ -41,7 +41,7 @@ TODO :
 
 - PAGES CLIENT
 	[x] Le client peut visualiser la liste des produits et les boutons de validation
-	[] Le client peut passer une commande (ajouter des quantités de chaque produit au panier, puis valider)
+	[x] Le client peut passer une commande (ajouter des quantités de chaque produit au panier, puis valider)
 	[] Le client peut visualiser sa commande
 
 _______________________

@@ -3,7 +3,7 @@ import Select from 'react-select';
 import settings from '../config/settings';
 
 const CreateProduct = (props) => {
-    console.log('CreateProduct props: ', props);
+    //console.log('CreateProduct props: ', props);
 
     const [product, setProduct] = useState({
         "name": '',
@@ -18,12 +18,12 @@ const CreateProduct = (props) => {
     const changeProduct = (key, value) => {
         const modifiedProduct = product;
         modifiedProduct[key] = value;
-        console.log('modifiedProduct[key]', modifiedProduct[key]);
+        //console.log('modifiedProduct[key]', modifiedProduct[key]);
         setProduct(modifiedProduct);
-        console.log('createdProduct: ', modifiedProduct);
+        //console.log('createdProduct: ', modifiedProduct);
     }
 
-    console.log('CreateProduct product: ', product);
+    //console.log('CreateProduct product: ', product);
 
     const sendForm = (e) => {
         e.preventDefault();
@@ -57,10 +57,10 @@ const CreateProduct = (props) => {
     };
 
     return (
-        <article>
+        <React.Fragment>
             <h2>Enregistrer un nouveau produit</h2>
 
-            <p className="instructions-text">Les champs marqués d'un astérisque (<span className="required-sign">*</span>) doivent être remplis.</p>
+            <p className="instructions-text">Les champs marqués d'un astérisque (<span className="required-sign">*</span>) sont obligatoires.</p>
 
             <form className="form">
                 <div className="form-part form-part1">
@@ -134,7 +134,7 @@ const CreateProduct = (props) => {
                 </div>
 
                 <div className="form-part form-part7">
-                    <label htmlFor="category">Catégorie dans laquelle vous voulez voir votre produit apparaître<span className="required-sign">*</span>&nbsp;:</label>
+                    <label htmlFor="category">Catégorie dans laquelle votre produit apparaîtra<span className="required-sign">*</span>&nbsp;:</label>
                     <Select
                         className="form-select form-category-select"
                         required
@@ -158,7 +158,7 @@ const CreateProduct = (props) => {
                     <input className="form-send-btn" id="new-product-submit" type="submit" value="Enregistrer" onClick={sendForm}></input>
                 </div>
             </form>
-        </article>
+        </React.Fragment>
     )
 }
 

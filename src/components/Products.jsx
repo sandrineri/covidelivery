@@ -5,7 +5,6 @@ import Product from './Product';
 const Products = (props) => {
     console.log('Products props: ', props);
 
-    
     if (props.baseUnitOptions.length === 0) {
         return (<React.Fragment></React.Fragment>);
     }
@@ -13,7 +12,7 @@ const Products = (props) => {
     return (
             <section>
                 <ul>
-                    {props.productsList.map((family) => {
+                    {props.products.map((family) => {
                         return (
                             <li className="products-family" key={family.id}>{family.name}
                                 <ul> {family.categories.map(category => {

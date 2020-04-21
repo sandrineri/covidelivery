@@ -6,6 +6,7 @@ import { fr } from 'date-fns/locale';
 import settings from '../config/settings';
 
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import Connect from '../components/Connect';
 import Message from '../components/Message';
 import Products from '../components/Products';
@@ -13,7 +14,7 @@ import Products from '../components/Products';
 const MarketStall = () => {
     // Initialize state
     const [errorMessage, setErrorMessage] = useState('');
-    const [productsList, setProductsList] = useState([]);
+    const [products, setProducts] = useState([]);
     const [order, setOrder] = useState([]);
     const [lastModified, setLastModified] = useState('');
     const [deliveryDate, setDeliveryDate] = useState('');
@@ -94,7 +95,7 @@ const MarketStall = () => {
                 //console.log('formatLastModif: ', formatLastModif);
                 const formatDeliveryDate = format(lastModifiedDate.setDate(lastModifiedDate.getDate() + 1), datePattern, { locale: fr });
 
-                setProductsList(response.products);
+                setProducts(response.products);
                 setLastModified(formatLastModif);
                 setDeliveryDate(formatDeliveryDate);
 
@@ -105,7 +106,7 @@ const MarketStall = () => {
             })
             .catch(error => {
                 console.log(error);
-                setProductsList([]);
+                setProducts([]);
                 setErrorMessage('Le cageot brûle');
             });
 
@@ -127,9 +128,12 @@ const MarketStall = () => {
                         <span>{deliveryDate}</span>
                     </p>
                 </section>
-                <Products order={order} setOrder={setOrder} productsList={productsList} message={errorMessage} lastModified={lastModified} baseUnitOptions={baseUnitOptions} />
-                <button type="submit" onClick={sendOrder}><i className="fas fa-shopping-basket"></i></button>
+                <Products order={order} setOrder={setOrder} products={products} message={errorMessage} lastModified={lastModified} baseUnitOptions={baseUnitOptions} />
+                <span className="button">
+                    <button type="submit" onClick={sendOrder}><i className="fas fa-shopping-basket"></i></button>
+                </span>
             </article>
+            <Footer />
         </React.Fragment>
     )
 

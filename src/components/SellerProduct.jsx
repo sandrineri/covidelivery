@@ -14,6 +14,10 @@ const SellerProduct = (props) => {
         const modifiedProduct = product;
         modifiedProduct[key] = value;
         setProduct(modifiedProduct);
+        
+        const newProducts = props.modifiedProducts;
+        newProducts[product.id] = modifiedProduct;
+        props.setModifiedProducts(newProducts);
     }
 
     const modifyProduct = () => {

@@ -24,13 +24,11 @@ button,
     border-radius: 5px;
 }
 
-
 h2 {
     letter-spacing: .1rem;
     text-align: center;
     margin: 2rem 0;
 }
-
 
 // HEADER
 header {
@@ -62,7 +60,6 @@ h1 {
 .product-info-labels {
     border-bottom: $borderStandard;
     padding: $productPadding;
-
 
     .product-info {
         width: 10rem;
@@ -160,8 +157,6 @@ h1 {
 
 //SELLER PRODUCTS LIST
 .seller-products-list {
-    border-top: $borderStandard;
-
     .sell-product-labels {
         background-color: $labelsBackgroundColor;
         font-variant: small-caps;
@@ -197,17 +192,19 @@ h1 {
 
     .sell-product-label-cat,
     .sell-product-cat {
-        width: 24rem;
+        width: 22rem;
         text-transform: capitalize;
+
+        .css-1uccc91-singleValue {
+            font-size: .9rem;
+        }
     }
 
     .sell-prod-label-selec,
     .sell-prod-selectable {
         width: 17rem;
     }
-
 }
-
 
 // ORDERS
 .delivery-infos-container {
@@ -291,8 +288,7 @@ h1 {
 
 
 
-
-
-
-
-
+// FOOTER
+footer {
+    height: 5rem;
+}

@@ -4,6 +4,7 @@ import { useAuth0 } from '../auth/Auth0Wrapper';
 import settings from '../config/settings';
 
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 //import Message from '../components/Message';
 import Orders from '../components/Orders';
 
@@ -58,6 +59,7 @@ const OrdersManagement = () => {
             <Header />
             {/* <Message message={errorMessage} /> */}
             <Orders accessToken={accessToken} orders={orders} />
+            <Footer />
         </React.Fragment>
     )
 }

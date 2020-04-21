@@ -6,6 +6,7 @@ import { useAuth0 } from '../auth/Auth0Wrapper';
 //import { Tooltip, withTooltip } from 'react-tippy';
 
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import Connect from '../components/Connect';
 import CreateProduct from '../components/CreateProduct';
 import Message from '../components/Message';
@@ -18,6 +19,8 @@ const SellerPage = () => {
     const [productsState, setProductsState] = useState([]);
     const [baseUnitOptions, setBaseUnitOptions] = useState([]);
     const [categoryOptions, setCategoryOptions] = useState([]);
+    const [modifiedProducts, setModifiedProducts] = useState([]);
+    const [displayCreatorState, setDisplayCreatorState] = useState('display-none');
 
     // Authorization
     const [accessToken, setAccessToken] = useState(null);
@@ -27,6 +30,55 @@ const SellerPage = () => {
             setAccessToken(token);
             //console.log('token: ', token);
         });
+    }
+
+    const displayProductCreator = () => {
+        if (displayCreatorState === 'display-none') {
+            setDisplayCreatorState('display-flex');
+        } else {
+            setDisplayCreatorState('display-none');
+        }
+        console.log(displayCreatorState);
+    }
+
+    const modifyProducts = () => {
+        //if (accessToken === null) return;
+
+        console.log('modifiedProducts: ', modifiedProducts);
+
+        const modifiedProductsToSend = modifiedProducts.filter(() => true);
+        console.log('modifiedProductsToSend: ', modifiedProductsToSend);
+
+        if (modifiedProductsToSend !== []) {
+            if (window.confirm('Voulez-vous modifier ces produits ? ' + JSON.stringify(modifiedProductsToSend.map(product => product.name)) + ' ?')) {
+                fetch(`${settings.apiBasePath}/products`, {
+                    method: 'PUT',
+                    body: JSON.stringify(modifiedProductsToSend),
+                    headers: {
+                        "Authorization": `Bearer ${accessToken}`
+                    }
+                })
+                    .then(response => {
+                        if (response.status === 201) {
+                            //console.log(order + ' envoyé');
+                            // props.setMessage(`Le produit "${product.name}" a bien été créé. La liste sera raffraîchie automatiquement d'ici quelques secondes. Vous pourrez ensuite la modifier.`);
+                            //setTimeout(() => { document.location.reload(); }, 3000);
+                            return response.json();
+                        }
+                        else {
+                            throw new Error('Code HTTP incorrect');
+                        }
+                    })
+                    .catch(error => {
+                        console.log('Erreur de création : ', error);
+                        //props.setMessage(`Erreur de création : ${error}`);
+                    });
+            } else {
+                window.alert('modifier la commande.');
+            }
+        }
+
+
     }
 
     //console.log('baseUnitOptions: ', baseUnitOptions);
@@ -47,8 +99,6 @@ const SellerPage = () => {
                 const apiCategories = response.categories;
 
                 const families = response.products.map((family) => (family.categories));
-
-
 
                 let productsWithoutCategories = [];
                 let categoriesOptions = [];
@@ -94,13 +144,24 @@ const SellerPage = () => {
             <Connect />
             <div className="buttons-container">
                 <input className="button" type="button" value="Voir les commandes"></input>
-                <input className="button" type="button" value="Ajouter un produit"></input>
+                <input className="button" type="button" value="Ajouter un produit" onClick={displayProductCreator}></input>
             </div>
-            <CreateProduct accessToken={accessToken} setMessage={setMessage} baseUnitOptions={baseUnitOptions} categoryOptions={categoryOptions} />
+            <article id="create-product" className={displayCreatorState}>
+                <CreateProduct accessToken={accessToken} setMessage={setMessage} baseUnitOptions={baseUnitOptions} categoryOptions={categoryOptions} />
+            </article>
             <Message message={message} />
-            <SellerProducts
-                accessToken={accessToken} productsState={productsState} setMessage={setMessage} baseUnitOptions={baseUnitOptions} categoryOptions={categoryOptions}
-            />
+            <article className="seller-products-list">
+                <h2>Produits</h2>
+                <SellerProducts
+                    accessToken={accessToken} productsState={productsState} setMessage={setMessage} baseUnitOptions={baseUnitOptions} categoryOptions={categoryOptions} modifiedProducts={modifiedProducts} setModifiedProducts={setModifiedProducts}
+                />
+                <span className="button sell-btn">
+                    <button type="submit" title="Modifier plusieurs produits" alt="Modifier plusieurs produits" value="" name="" onClick={modifyProducts}>
+                        Modifier plusieurs produits <i className="fas fa-edit"></i>
+                    </button>
+                </span>
+            </article>  
+            <Footer />
         </React.Fragment>
     )
 }
