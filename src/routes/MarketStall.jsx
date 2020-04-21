@@ -13,6 +13,7 @@ import Products from '../components/Products';
 
 const MarketStall = () => {
     // Initialize state
+    // Initialisation des variables d'état
     const [errorMessage, setErrorMessage] = useState('');
     const [products, setProducts] = useState([]);
     const [order, setOrder] = useState([]);
@@ -75,6 +76,7 @@ const MarketStall = () => {
 
 
     // Set state from API
+    // Met à jour l'état en appelant l’API
     useEffect(() => {
 
         fetch(`${settings.apiBasePath}/products`, {

@@ -1,26 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '../auth/Auth0Wrapper';
-//import CreatableSelect from 'react-select/creatable';
-//import _ from 'lodash';
-//import 'react-tippy/dist/tippy.css';
-//import { Tooltip, withTooltip } from 'react-tippy';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Connect from '../components/Connect';
-import CreateProduct from '../components/CreateProduct';
+import SellerButtons from '../components/SellerButtons';
 import Message from '../components/Message';
 import SellerProducts from '../components/SellerProducts';
 
 import settings from '../config/settings';
 
 const SellerPage = () => {
+    // Initialisation des variables d'état
     const [message, setMessage] = useState('');
     const [productsState, setProductsState] = useState([]);
     const [baseUnitOptions, setBaseUnitOptions] = useState([]);
     const [categoryOptions, setCategoryOptions] = useState([]);
     const [modifiedProducts, setModifiedProducts] = useState([]);
-    const [displayCreatorState, setDisplayCreatorState] = useState('display-none');
+
 
     // Authorization
     const [accessToken, setAccessToken] = useState(null);
@@ -30,15 +27,6 @@ const SellerPage = () => {
             setAccessToken(token);
             //console.log('token: ', token);
         });
-    }
-
-    const displayProductCreator = () => {
-        if (displayCreatorState === 'display-none') {
-            setDisplayCreatorState('display-flex');
-        } else {
-            setDisplayCreatorState('display-none');
-        }
-        console.log(displayCreatorState);
     }
 
     const modifyProducts = () => {
@@ -80,10 +68,10 @@ const SellerPage = () => {
 
 
     }
-
     //console.log('baseUnitOptions: ', baseUnitOptions);
     //console.log('categoryOptions: ', categoryOptions);
     //console.log('categoryId: ', categoryId);
+
 
     useEffect(() => {
         fetch(`${settings.apiBasePath}/products`, {
@@ -142,14 +130,8 @@ const SellerPage = () => {
         <React.Fragment>
             <Header />
             <Connect />
-            <div className="buttons-container">
-                <input className="button" type="button" value="Voir les commandes"></input>
-                <input className="button" type="button" value="Ajouter un produit" onClick={displayProductCreator}></input>
-            </div>
-            <article id="create-product" className={displayCreatorState}>
-                <CreateProduct accessToken={accessToken} setMessage={setMessage} baseUnitOptions={baseUnitOptions} categoryOptions={categoryOptions} />
-            </article>
             <Message message={message} />
+            <SellerButtons accessToken={accessToken} setMessage={setMessage} baseUnitOptions={baseUnitOptions} categoryOptions={categoryOptions} />
             <article className="seller-products-list">
                 <h2>Produits</h2>
                 <SellerProducts
