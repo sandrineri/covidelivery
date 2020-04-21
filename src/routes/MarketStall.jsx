@@ -31,8 +31,7 @@ const MarketStall = () => {
         });
     }
 
-    console.log('order: ', order);
-
+    //console.log('order: ', order);
     const sendOrder = () => {
         if (accessToken === null) return;
 
@@ -42,7 +41,7 @@ const MarketStall = () => {
             }
             return product;
         });
-        console.log('sendOrder orderToSend: ', orderToSend);
+        //console.log('sendOrder orderToSend: ', orderToSend);
 
         if (orderToSend !== []) {
             if (window.confirm('Voulez-vous envoyer cette commande ? ' + JSON.stringify(orderToSend) + ' ?')) {
@@ -76,14 +75,10 @@ const MarketStall = () => {
 
 
     // Set state from API
-    // Met à jour l'état en appelant l’API
+    // Met à jour l'état de la liste des produits en appelant l’API
     useEffect(() => {
 
-        fetch(`${settings.apiBasePath}/products`, {
-            headers: {
-                //"Authorization": `Bearer ${accessToken}`
-            }
-        })
+        fetch(`${settings.apiBasePath}/products`)
             .then(response => response.json())
             .then((response) => {
                 console.log('fetch complete', response);
@@ -114,7 +109,7 @@ const MarketStall = () => {
 
     }, []);
 
-    console.log('Marketstall');
+    //console.log('Marketstall');
 
     return (
         <React.Fragment>
@@ -122,14 +117,16 @@ const MarketStall = () => {
             <Connect />
             <Message message={errorMessage} />
             <article className="stalls">
-                <section>
+                <h2>Liste des produits et tarifs</h2>
+                <div className="update-infos">
                     <p>Mise à jour le&nbsp;
                         <span>{lastModified}</span>
                     </p>
-                    <p>Pour une livraison du&nbsp;
+                    <p className="update-infos">Pour une livraison du&nbsp;
                         <span>{deliveryDate}</span>
                     </p>
-                </section>
+                    <p className="update-infos update-infos-sub">(Prix et produits actualisés tous les jours en fonction de notre arrivage de Rungis)</p>
+                </div>
                 <Products order={order} setOrder={setOrder} products={products} message={errorMessage} lastModified={lastModified} baseUnitOptions={baseUnitOptions} />
                 <span className="button">
                     <button type="submit" onClick={sendOrder}><i className="fas fa-shopping-basket"></i></button>

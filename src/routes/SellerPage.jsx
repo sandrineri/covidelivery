@@ -13,6 +13,8 @@ import settings from '../config/settings';
 const SellerPage = () => {
     // Initialisation des variables d'état
     const [message, setMessage] = useState('');
+    const [families, setFamilies] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [productsState, setProductsState] = useState([]);
     const [baseUnitOptions, setBaseUnitOptions] = useState([]);
     const [categoryOptions, setCategoryOptions] = useState([]);
@@ -85,14 +87,23 @@ const SellerPage = () => {
 
                 const apiBaseUnits = response.units;
                 const apiCategories = response.categories;
+                //console.log('categories: ', apiCategories);
+                setCategories(apiCategories);
 
-                const families = response.products.map((family) => (family.categories));
+
+                const apiFamilies = response.products;
+                //console.log('upperCategories: ', apiFamilies);
+                setFamilies(apiFamilies);
+
+                const upperCategories = response.products.map((family) => (family.categories));
+                console.log('upperCategories: ', upperCategories);
 
                 let productsWithoutCategories = [];
                 let categoriesOptions = [];
 
-                for (let family = 0; family < families.length; family++) {
-                    const categories = families[family];
+                for (let family = 0; family < upperCategories.length; family++) {
+                    const categories = upperCategories[family];
+                    console.log('categories: ', categories);
 
                     for (let category = 0; category < categories.length; category++) {
                         //console.log('category For loop: ', category);
@@ -131,9 +142,9 @@ const SellerPage = () => {
             <Header />
             <Connect />
             <Message message={message} />
-            <SellerButtons accessToken={accessToken} setMessage={setMessage} baseUnitOptions={baseUnitOptions} categoryOptions={categoryOptions} />
+            <SellerButtons accessToken={accessToken} setMessage={setMessage} baseUnitOptions={baseUnitOptions} families={families} categories={categories}/>
             <article className="seller-products-list">
-                <h2>Produits</h2>
+                <h2>Gérer les produits à vendre</h2>
                 <SellerProducts
                     accessToken={accessToken} productsState={productsState} setMessage={setMessage} baseUnitOptions={baseUnitOptions} categoryOptions={categoryOptions} modifiedProducts={modifiedProducts} setModifiedProducts={setModifiedProducts}
                 />

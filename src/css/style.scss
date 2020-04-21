@@ -40,8 +40,16 @@ h1 {
     letter-spacing: .2rem;
     color: white;
     margin: 0;
-    padding: 4rem;
+    padding: 2rem;
 }
+
+// CONNECT
+.connect-container {
+    margin: 0 2rem;
+}
+
+// MARKETSTALL
+
 
 // PRODUCTS
 .category {
@@ -203,6 +211,15 @@ h1 {
     .sell-prod-label-selec,
     .sell-prod-selectable {
         width: 17rem;
+    }
+}
+
+// CATEGORY MANAGER
+.categories-list ul {
+    margin: 1rem 2rem;
+
+    li {
+        margin: .5rem 1.5rem;
     }
 }
 
