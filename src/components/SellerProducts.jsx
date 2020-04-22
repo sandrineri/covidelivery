@@ -4,13 +4,10 @@ import SellerProduct from './SellerProduct';
 
 const SellerProducts = (props) => {
     //console.log('SellerProducts props: ', props);
-    //console.log(props.productsState.length);
+    //console.log(props.products.length);
 
     return (
-        
-
-            <div>
-                <ul>
+                <ul className="sell-products">
                     <li className="sell-product-labels">
                         <span className="sell-product-label sell-product-label-name">Produit</span>
                         <span className="sell-product-label sell-product-label-cat">Catégorie</span>
@@ -19,10 +16,10 @@ const SellerProducts = (props) => {
                         <span className="sell-product-label">Unité</span>
                         <span className="sell-product-label">Promo</span>
                         <span className="sell-product-label sell-prod-label-selec">Unités pour le client</span>
-                        <span className="sell-product-label">Modifier</span>
-                        <span className="sell-product-label">Supprimer</span>
+                        <span className="sell-product-label sell-prod-btn">Modifier</span>
+                        <span className="sell-product-label sell-prod-btn">Supprimer</span>
                     </li>
-                    {props.productsState.map(product => {
+                    {props.products.map(product => {
                         //console.log('product: ', product);
                         return (
                             <SellerProduct
@@ -32,7 +29,6 @@ const SellerProducts = (props) => {
                         )
                     })}
                 </ul>
-            </div>
     )
 }
 

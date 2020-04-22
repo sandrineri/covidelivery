@@ -92,7 +92,7 @@ const SellerProduct = (props) => {
             <input type="number" className="sell-prod-info product-price" id={`price${product.id}`} defaultValue={product.price} onChange={(e) => changeProduct('price', e.target.value)}></input>
 
             <Select
-                className="sell-prod-info product-unit"
+                className="sell-prod-info sell-product-unit"
                 placeholder={product.baseUnitName}
                 defaultValue={{ value: `${product.baseUnitId}`, label: `${product.baseUnitName}`, name: `${product.baseUnitName}` }}
                 options={props.baseUnitOptions}

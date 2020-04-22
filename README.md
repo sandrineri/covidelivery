@@ -14,7 +14,7 @@ TODO :
 - PETOUILLES :
 	[x] Cacher le bouton de commande tant que l'on n'est pas connecté
 	[x] Ne pas envoyer la commande pour un panier vide (message d'alerte)
-	[] 
+	[] Champs "required"
 
 - ACCUEIL
 	[x] visualiser la liste des produits, avec prix, quantité, provenances, etc…

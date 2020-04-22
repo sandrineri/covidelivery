@@ -129,16 +129,38 @@
 
 
 // SELLER PRODUCTS LIST
-.seller-products-list {
+.sell-products-container {
     display: flex;
     flex-direction: column;
-}
 
-.sell-product,
-.sell-product-labels {
-    display: flex;
-}
+    .sell-products {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
+    .sell-product,
+    .sell-product-labels {
+        display: flex;
+        align-items: center;
+    }
+
+    .sell-product-label,
+    .sell-prod-info {
+        display: flex;
+        justify-content: center;
+    }
+
+    .sell-product-label-name {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .sell-btn {
+        display: flex;
+        justify-content: center;
+    }
+}
 
 // ORDERS
 .delivery-infos {

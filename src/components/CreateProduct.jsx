@@ -3,7 +3,8 @@ import Select from 'react-select';
 import settings from '../config/settings';
 
 const CreateProduct = (props) => {
-    //console.log('CreateProduct props: ', props);
+    console.log('CreateProduct props: ', props);
+
 
     const [product, setProduct] = useState({
         "name": '',
@@ -16,6 +17,16 @@ const CreateProduct = (props) => {
     });
 
     const changeProduct = (key, value) => {
+        console.log('CreateProduct props: ', props);
+
+        let registeredProduct = '';
+        if (['selectableUnits', 'baseUnitId', 'baseUnitId'].includes(key)) return;
+        registeredProduct = props.products.filter( product => {
+            return product[key].toLowerCase().includes(value);
+        }).map(product => product[key]);
+        console.log('registeredProduct: ', registeredProduct);
+        
+
         const modifiedProduct = product;
         modifiedProduct[key] = value;
         //console.log('modifiedProduct[key]', modifiedProduct[key]);

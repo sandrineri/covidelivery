@@ -15,7 +15,7 @@ const SellerPage = () => {
     const [message, setMessage] = useState('');
     const [families, setFamilies] = useState([]);
     const [categories, setCategories] = useState([]);
-    const [productsState, setProductsState] = useState([]);
+    const [products, setProducts] = useState([]);
     const [baseUnitOptions, setBaseUnitOptions] = useState([]);
     const [categoryOptions, setCategoryOptions] = useState([]);
     const [modifiedProducts, setModifiedProducts] = useState([]);
@@ -34,10 +34,10 @@ const SellerPage = () => {
     const modifyProducts = () => {
         //if (accessToken === null) return;
 
-        console.log('modifiedProducts: ', modifiedProducts);
+        //console.log('modifiedProducts: ', modifiedProducts);
 
         const modifiedProductsToSend = modifiedProducts.filter(() => true);
-        console.log('modifiedProductsToSend: ', modifiedProductsToSend);
+        //console.log('modifiedProductsToSend: ', modifiedProductsToSend);
 
         if (modifiedProductsToSend !== []) {
             if (window.confirm('Voulez-vous modifier ces produits ? ' + JSON.stringify(modifiedProductsToSend.map(product => product.name)) + ' ?')) {
@@ -96,33 +96,33 @@ const SellerPage = () => {
                 setFamilies(apiFamilies);
 
                 const upperCategories = response.products.map((family) => (family.categories));
-                console.log('upperCategories: ', upperCategories);
+                //console.log('upperCategories: ', upperCategories);
 
                 let productsWithoutCategories = [];
                 let categoriesOptions = [];
 
                 for (let family = 0; family < upperCategories.length; family++) {
                     const categories = upperCategories[family];
-                    console.log('categories: ', categories);
+                    //console.log('categories: ', categories);
 
                     for (let category = 0; category < categories.length; category++) {
                         //console.log('category For loop: ', category);
-                        const products = categories[category].products;
+                        const apiProducts = categories[category].products;
 
 
                         categoriesOptions.push({ value: `${categories[category].id}`, label: `${categories[category].name}`, name: `${categories[category].name.toLowerCase()}` });
 
-                        for (let product = 0; product < products.length; product++) {
-                            //apiBaseUnits.push({ value: `${products[product].baseUnitId}`, label: `${products[product].baseUnitName}`, name: `${products[product].baseUnitName}` });
+                        for (let product = 0; product < apiProducts.length; product++) {
+                            //apiBaseUnits.push({ value: `${apiProducts[product].baseUnitId}`, label: `${apiProducts[product].baseUnitName}`, name: `${apiProducts[product].baseUnitName}` });
                             //console.log('Product For loop: ', product);
-                            productsWithoutCategories.push(products[product]);
+                            productsWithoutCategories.push(apiProducts[product]);
                         }
                     }
                 }
 
                 //console.log('Form productsWithoutCategories: ', productsWithoutCategories);
                 const sortedProductsWithoutCategories = productsWithoutCategories.sort((a, b) => (a.name.localeCompare(b.name)));
-                setProductsState(sortedProductsWithoutCategories);
+                setProducts(sortedProductsWithoutCategories);
 
                 setBaseUnitOptions(apiBaseUnits.map( option => {
                     return { value: `${option.id}`, label: `${option.name}`, name: `${option.name}` }
@@ -136,17 +136,18 @@ const SellerPage = () => {
     }, []);
 
     if (accessToken === null) return <React.Fragment></React.Fragment>;
+    //console.log('SellerPage sortedProductsWithoutCategories: ', products);
 
     return (
         <React.Fragment>
             <Header />
             <Connect accessToken={accessToken} setAccessToken={setAccessToken} />
             <Message message={message} />
-            <SellerButtons accessToken={accessToken} setMessage={setMessage} baseUnitOptions={baseUnitOptions} families={families} categories={categories}/>
-            <article className="seller-products-list">
+            <SellerButtons accessToken={accessToken} products={products} setMessage={setMessage} baseUnitOptions={baseUnitOptions} families={families} categories={categories} categoryOptions={categoryOptions} />
+            <article className="sell-products-container">
                 <h2>Gérer les produits à vendre</h2>
                 <SellerProducts
-                    accessToken={accessToken} productsState={productsState} setMessage={setMessage} baseUnitOptions={baseUnitOptions} categoryOptions={categoryOptions} modifiedProducts={modifiedProducts} setModifiedProducts={setModifiedProducts}
+                    accessToken={accessToken} products={products} setMessage={setMessage} baseUnitOptions={baseUnitOptions} categoryOptions={categoryOptions} modifiedProducts={modifiedProducts} setModifiedProducts={setModifiedProducts}
                 />
                 <div className="button sell-btn">
                     <button type="submit" title="Modifier plusieurs produits" alt="Modifier plusieurs produits" value="" name="" onClick={modifyProducts}>

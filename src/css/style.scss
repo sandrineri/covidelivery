@@ -274,8 +274,12 @@ input[type=number] {
 
 
 //SELLER PRODUCTS LIST
-.seller-products-list {
+.sell-products-container {
     margin: 2rem;
+
+    .sell-product {
+        border-bottom: $borderStandard;
+    }
     
     .sell-product-labels {
         background-color: $labelsBackgroundColor;
@@ -283,6 +287,7 @@ input[type=number] {
         font-feature-settings: normal;
         letter-spacing: 1px;
         text-transform: capitalize;
+        border-bottom: $borderStandard;
     }
 
     .sell-prod-info {
@@ -290,29 +295,28 @@ input[type=number] {
         font-size: $primaryFontSize;
         font-family: $primaryFont;
         cursor: pointer;
+        text-align: center;
     }
 
     .sell-prod-info,
     .sell-product-labels {
-        border-bottom: $borderStandard;
         padding: $productPadding;
     }
 
     .sell-prod-info,
-    .sell-product-label,
-    .sell-btn {
+    .sell-product-label {
         width: 8rem;
     }
 
     .sell-product-label-name,
     .sell-product-name {
+        text-align: left;
         width: 16rem;
-        //text-transform: capitalize;
     }
 
     .sell-product-label-cat,
     .sell-product-cat {
-        width: 22rem;
+        width: 23rem;
         text-transform: capitalize;
 
         .css-1uccc91-singleValue {
@@ -320,9 +324,21 @@ input[type=number] {
         }
     }
 
+    .sell-product-unit {
+        width: 9rem;
+    }
+
     .sell-prod-label-selec,
     .sell-prod-selectable {
-        width: 17rem;
+        width: 22rem;
+    }
+
+    .sell-prod-btn {
+        width: 6rem;
+    }
+
+    .css-yk16xz-control {
+        width: 100%;
     }
 }
 

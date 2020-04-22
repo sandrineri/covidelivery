@@ -38,7 +38,7 @@ const SellerButtons = (props) => {
             </div>
 
             <article className={`form-container create-form-container ${prodCreationDisplay}`}>
-                <CreateProduct accessToken={props.accessToken} setMessage={props.setMessage} baseUnitOptions={props.baseUnitOptions} categoryOptions={props.categoryOptions} />
+                <CreateProduct accessToken={props.accessToken} products={props.products} baseUnitOptions={props.baseUnitOptions} categoryOptions={props.categoryOptions} setMessage={props.setMessage} />
             </article>
 
             <article className={`form-container cat-form-container ${catManageDisplay}`}>
