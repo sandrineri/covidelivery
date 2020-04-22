@@ -2,7 +2,7 @@ import React from 'react';
 import Select from 'react-select';
 
 const ManageCategories = (props) => {
-    console.log('ManageCategories props: ', props);
+    //console.log('ManageCategories props: ', props);
 
     let familyOptions = [
         { value: "0", label: "Sera une nouvelle famille", name: "Sera une nouvelle famille" }
@@ -10,7 +10,7 @@ const ManageCategories = (props) => {
     props.families.forEach(family => {
         familyOptions.push({ value: `${family.id}`, label: `${family.name}`, name: `${family.name}` });
     });
-    console.log('familyOptions: ', familyOptions);
+    //console.log('familyOptions: ', familyOptions);
 
 
     return (
@@ -20,12 +20,12 @@ const ManageCategories = (props) => {
             <section>
                 <h3>Créer une catégorie ou une famille</h3>
                 <p className="instructions-text">Tous les champs sont obligatoires.</p>
-                <form className="form">
-                    <div>
+                <form className="form category-form">
+                    <div className="form-part form-part1">
                         <label htmlFor="category-name">Créer une nouvelle catégorie ou famille :</label>
                         <input className="form-input" type="text" name="produit" placeholder="Herbes, Petite épicerie, Fruits exotiques..." id="category-name" /* onChange={(input) => changeProduct('name', input.target.value)} */ />
                     </div>
-                    <div>
+                    <div className="form-part form-part2">
                         <label htmlFor="family-choice">Choisir la famille :</label>
                         <Select
                             id="family-choice"
@@ -33,7 +33,7 @@ const ManageCategories = (props) => {
                             placeholder="Sélectionnez" /* onChange={(input) => changeProduct('name', input.target.value)} */
                         />
                     </div>
-                    <div>
+                    <div className="form-part form-part3">
                         <input className="form-send-btn" id="new-product-submit" type="submit" value="Enregistrer"></input>
                     </div>
                 </form>
@@ -46,7 +46,7 @@ const ManageCategories = (props) => {
                         return (
                             <li key={category.id} id={category.id}>
                                 <input placeholder={category.name}></input>
-                                <span className="button sell-btn">
+                                <span className="cat-modif-btn">
                                     <button type="submit" title="Modifier" alt="Modifier" value={category.id} name={category.name}>
                                         <i className="fas fa-edit"></i>
                                     </button>

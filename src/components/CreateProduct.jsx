@@ -62,7 +62,7 @@ const CreateProduct = (props) => {
 
             <p className="instructions-text">Les champs marqués d'un astérisque (<span className="required-sign">*</span>) sont obligatoires.</p>
 
-            <form className="form">
+            <form className="form new-prod-form">
                 <div className="form-part form-part1">
                     <label htmlFor="name">Produit<span className="required-sign">*</span>&nbsp;:</label>
                     <input className="form-input" type="text" name="produit" placeholder="nectarine jaune..." id="name" required onChange={(input) => changeProduct('name', input.target.value)} />
