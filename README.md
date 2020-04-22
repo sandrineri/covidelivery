@@ -12,10 +12,12 @@ ___________
 TODO :
 
 - PETOUILLES :
-	[] Cacher le bouton de commande tant que l'on n'est pas connecté
+	[x] Cacher le bouton de commande tant que l'on n'est pas connecté
+	[x] Ne pas envoyer la commande pour un panier vide (message d'alerte)
+	[] 
 
 - ACCUEIL
-	[] visualiser la liste des produits, avec prix, quantité, provenances, etc…
+	[x] visualiser la liste des produits, avec prix, quantité, provenances, etc…
 
 - COMPTE / CONNEXION
 	[x] Gérer les autorisations
@@ -39,7 +41,7 @@ TODO :
 	- TRAITEMENT DES COMMANDES :
 	[x] Le commerçant peut visualiser la liste des commandes (date de la commande, noms des clients, leurs adresses... ) où il peut sélectionner une commande à traiter
 	[x] Le commerçant peut visualiser une commande avec les informations sur le client (nom, tel, adresse...) et les produits commandés (libellé, quantité...)
-	[] Le commerçant peut imprimer la liste des commandes et chaque commande
+	[] Le commerçant peut imprimer la liste des commandes et chaque commande (créer un pdf)
 	[x] Le commerçant peut informer l'API qu'une commande est traitée
 
 - PAGES CLIENT

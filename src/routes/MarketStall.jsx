@@ -31,49 +31,6 @@ const MarketStall = () => {
         });
     }
 
-    //console.log('order: ', order);
-    const sendOrder = () => {
-        if (accessToken === null) return;
-
-        const orderToSend = order.filter(() => true).map(product => {
-            if (product.selectedUnitId === undefined) {
-                product.selectedUnitId = product.baseUnitId
-            }
-            return product;
-        });
-        //console.log('sendOrder orderToSend: ', orderToSend);
-
-        if (orderToSend !== []) {
-            if (window.confirm('Voulez-vous envoyer cette commande ? ' + JSON.stringify(orderToSend) + ' ?')) {
-                fetch(`${settings.apiBasePath}/order`, {
-                    method: 'POST',
-                    body: JSON.stringify(orderToSend),
-                    headers: {
-                        "Authorization": `Bearer ${accessToken}`
-                    }
-                })
-                    .then(response => {
-                        if (response.status === 201) {
-                            //console.log(order + ' envoyé');
-                            // props.setMessage(`Le produit "${product.name}" a bien été créé. La liste sera raffraîchie automatiquement d'ici quelques secondes. Vous pourrez ensuite la modifier.`);
-                            //setTimeout(() => { document.location.reload(); }, 3000);
-                            return response.json();
-                        }
-                        else {
-                            throw new Error('Code HTTP incorrect');
-                        }
-                    })
-                    .catch(error => {
-                        console.log('Erreur de création : ', error);
-                        //props.setMessage(`Erreur de création : ${error}`);
-                    });
-            } else {
-                window.alert('modifier la commande.');
-            }
-        }
-    }
-
-
     // Set state from API
     // Met à jour l'état de la liste des produits en appelant l’API
     useEffect(() => {
@@ -110,15 +67,73 @@ const MarketStall = () => {
     }, []);
 
     //console.log('Marketstall');
+    //console.log('order: ', order);
+    const sendOrder = () => {
+        if (accessToken === null) return;
+
+        const orderToSend = order.filter(() => true).map(product => {
+            if (product.selectedUnitId === undefined) {
+                product.selectedUnitId = product.baseUnitId
+            }
+            return product;
+        });
+        console.log('sendOrder orderToSend: ', orderToSend);
+
+        if (orderToSend.length === 0) {
+            window.alert("Vous ne pouvez pas envoyer une commande vide.");
+            return;
+        }
+
+        fetch(`${settings.apiBasePath}/order`, {
+            method: 'POST',
+            body: JSON.stringify(orderToSend),
+            headers: {
+                "Authorization": `Bearer ${accessToken}`
+            }
+        })
+            .then(response => {
+                if (response.status === 201) {
+                    //console.log(order + ' envoyé');
+                    // props.setMessage(`Le produit "${product.name}" a bien été créé. La liste sera raffraîchie automatiquement d'ici quelques secondes. Vous pourrez ensuite la modifier.`);
+                    //setTimeout(() => { document.location.reload(); }, 3000);
+                    return response.json();
+                }
+                else {
+                    throw new Error('Code HTTP incorrect');
+                }
+            })
+            .catch(error => {
+                console.log('Erreur de création : ', error);
+                //props.setMessage(`Erreur de création : ${error}`);
+            });
+    }
+
+    // Accéder au bouton de commande quand on est connecté
+    // let orderBtnDisplay = 'display-flex';
+    // if (isAuthenticated) orderBtnDisplay = 'display-none';
 
     return (
         <React.Fragment>
             <Header />
-            <Connect />
+            <Connect accessToken={accessToken} setAccessToken={setAccessToken} />
             <Message message={errorMessage} />
+
             <article className="stalls">
+                <section className={`${isAuthenticated ? 'display-none' : 'display-flex'}`}>
+                    <p className="update-infos update-infos-sub">
+                        Pour pouvoir commander, vous devez avoir un compte et être connecté.
+                    </p>
+                </section>
+                <section className={`${isAuthenticated ? 'display-flex' : 'display-none'}`}>
+                    <p className="update-infos update-infos-sub">
+                        Pour commander, choisissez la quantité des produits que vous voulez puis envoyez la commande avec le bouton en bas de la liste.
+                    </p>
+                </section>
+
+
                 <h2>Liste des produits et tarifs</h2>
-                <section classname="update">
+
+                <section className="update">
                     <p className="update-infos update-infos-sup">Mise à jour le&nbsp;
                         <span>{lastModified}</span>
                     </p>
@@ -127,8 +142,10 @@ const MarketStall = () => {
                     </p>
                     <p className="update-infos update-infos-sub">(Prix et produits actualisés tous les jours en fonction de notre arrivage de Rungis)</p>
                 </section>
+
                 <Products order={order} setOrder={setOrder} products={products} message={errorMessage} lastModified={lastModified} baseUnitOptions={baseUnitOptions} />
-                <span className="button order-btn">
+
+                <span className={`button order-btn ${isAuthenticated ? 'display-flex' : 'display-none'}`}>
                     <button type="submit" onClick={sendOrder}>Envoyer ma commande</button>
                 </span>
             </article>

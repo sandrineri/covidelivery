@@ -4,6 +4,7 @@ $primaryFontSize: 1rem;
 $labelsFont: 'Times New Roman', Times, serif;
 $labelsFontSize: 1.2rem;
 $labelsBackgroundColor: #f0eded;
+$formBackground: #f6f6f6;
 $productPadding: .3rem .5rem;
 
 html,
@@ -44,6 +45,7 @@ h1 {
     margin: 0;
     padding: 2rem;
 }
+
 
 // CONNECT
 .connect-container {
@@ -154,6 +156,14 @@ h1 {
 }
 
 // FORM
+.form-container {
+    margin: 2rem auto 3rem;
+    padding: 0 2rem 2rem;
+    border: $borderStandard;
+    background-color: $formBackground;
+    max-width: fit-content;
+}
+
 .instructions-text {
     text-align: center;
 }
@@ -162,44 +172,44 @@ h1 {
     color: #cc0101;
 }
 
-.form {
-    margin: -1rem auto 3rem;
-    max-width: 80%;
+.create-form-container {
+    .form {
+        .form-part {
+            margin: 1rem;
+        }
 
-    .form-part {
-        margin: 1rem;
-    }
+        label {
+            font-family: $labelsFont;
+            font-size: $labelsFontSize;
+            border-bottom: $borderStandard;
+            margin: 0 0 1rem;
 
-    label {
-        font-family: $labelsFont;
-        font-size: $labelsFontSize;
-        border-bottom: $borderStandard;
-        margin: 0 0 1rem;
+            .label-plus {
+                font-size: 1rem;
+            }
+        }
 
-        .label-plus {
-            font-size: 1rem;
+        .form-input {
+            font-size: .9rem;
+            padding: .2rem 1rem;
+            height: 36px;
+            border-radius: 4px;
+            border: 1px solid #cccccc;
+        }
+
+        .form-unit-select {
+            width: 10rem;
+        }
+
+        .form-category-select {
+            font-size: .9rem;
+        }
+
+        #price {
+            width: 8rem;
         }
     }
-
-    .form-input {
-        font-size: .9rem;
-        padding: .2rem 1rem;
-        height: 36px;
-        border-radius: 4px;
-        border: 1px solid #cccccc;
-    }
-
-    .form-unit-select {
-        width: 10rem;
-    }
-
-    .form-category-select {
-        font-size: .9rem;
-    }
-
-    #price {
-        width: 8rem;
-    }
+}
 
     .form-send-btn {
         margin-bottom: .5rem;
@@ -217,7 +227,7 @@ h1 {
     input[type=number] {
         -moz-appearance:textfield; /* Firefox */
     }
-}
+
 
 //SELLER PRODUCTS LIST
 .seller-products-list {

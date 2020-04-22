@@ -140,7 +140,7 @@ const SellerPage = () => {
     return (
         <React.Fragment>
             <Header />
-            <Connect />
+            <Connect accessToken={accessToken} setAccessToken={setAccessToken} />
             <Message message={message} />
             <SellerButtons accessToken={accessToken} setMessage={setMessage} baseUnitOptions={baseUnitOptions} families={families} categories={categories}/>
             <article className="seller-products-list">

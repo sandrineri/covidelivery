@@ -3,8 +3,8 @@ import Select from 'react-select';
 
 
 const Product = (props) => {
-    console.log('For each product: ', props);
-    console.log('props baseUnitOptions: ', props.baseUnitOptions);
+    //console.log('For each product: ', props);
+    //console.log('props baseUnitOptions: ', props.baseUnitOptions);
 
     const changeProduct = (key, value) => {
         const productToOrder = props.product;

@@ -3,7 +3,7 @@ import React from 'react';
 import Product from './Product';
 
 const Products = (props) => {
-    console.log('Products props: ', props);
+    //console.log('Products props: ', props);
 
     if (props.baseUnitOptions.length === 0) {
         return (<React.Fragment></React.Fragment>);

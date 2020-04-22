@@ -37,11 +37,11 @@ const SellerButtons = (props) => {
                 <input className="button" type="button" value="Gérer les catégories" onClick={displayCategManager}></input>
             </div>
 
-            <article className={prodCreationDisplay}>
+            <article className={`form-container create-form-container ${prodCreationDisplay}`}>
                 <CreateProduct accessToken={props.accessToken} setMessage={props.setMessage} baseUnitOptions={props.baseUnitOptions} categoryOptions={props.categoryOptions} />
             </article>
 
-            <article className={catManageDisplay}>
+            <article className={`form-container cat-form-container ${catManageDisplay}`}>
                 <ManageCategories accessToken={props.accessToken} families={props.families} categories={props.categories} />
             </article>
         </React.Fragment>
