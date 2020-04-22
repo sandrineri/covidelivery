@@ -17,14 +17,14 @@ const CreateProduct = (props) => {
     });
 
     const changeProduct = (key, value) => {
-        console.log('CreateProduct props: ', props);
+        //console.log('CreateProduct props: ', props);
 
         let registeredProduct = '';
         if (['selectableUnits', 'baseUnitId', 'baseUnitId'].includes(key)) return;
         registeredProduct = props.products.filter( product => {
             return product[key].toLowerCase().includes(value);
         }).map(product => product[key]);
-        console.log('registeredProduct: ', registeredProduct);
+        //console.log('registeredProduct: ', registeredProduct);
         
 
         const modifiedProduct = product;

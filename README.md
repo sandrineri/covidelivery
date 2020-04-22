@@ -11,16 +11,20 @@ Pour lancer les tests : yarn test
 ___________
 TODO :
 
+[] PROBLEME GIT !!!!!!!
+
 - PETOUILLES :
 	[x] Cacher le bouton de commande tant que l'on n'est pas connecté
 	[x] Ne pas envoyer la commande pour un panier vide (message d'alerte)
 	[] Champs "required"
+	[] Autocomplete
 
 - ACCUEIL
 	[x] visualiser la liste des produits, avec prix, quantité, provenances, etc…
 
 - COMPTE / CONNEXION
 	[x] Gérer les autorisations
+	[] S'inscrire et navigation
     [] Possibilité de se connecter
 
     Une fois connecté :

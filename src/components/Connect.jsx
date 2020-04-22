@@ -24,10 +24,20 @@ const Connect = (props) => {
                 </div>
 
                 <div className="person">
-                    <input className="button" type="button" value="Commerçant"></input>
+                    <button type="submit">
+                        Commerçant
+                        <span className="btn-icon">
+                            <i className="fas fa-user-circle"></i>
+                        </span>
+                    </button>
                 </div>
                 <div className="person">
-                    <input className="button" type="button" value="Client"></input>
+                <button type="submit">
+                        Client
+                        <span className="btn-icon">
+                            <i className="far fa-user-circle"></i>
+                        </span>
+                    </button>
                 </div>
             </div>
         </React.Fragment>

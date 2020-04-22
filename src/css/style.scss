@@ -46,6 +46,11 @@ h1 {
     padding: 2rem;
 }
 
+.btn-icon {
+    font-size: 1.1rem;
+    margin-left: .5rem;
+}
+
 
 // CONNECT
 .connect-container {
@@ -150,8 +155,8 @@ h1 {
 
 // SELLER
 .buttons-container {
-    input {
-        margin: 0 1rem;
+    button {
+        margin: 1rem;
     }
 }
 

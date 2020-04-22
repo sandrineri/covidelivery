@@ -32,9 +32,24 @@ const SellerButtons = (props) => {
     return (
         <React.Fragment>
             <div className="buttons-container">
-                <input className="button" type="button" value="Voir les commandes"></input>
-                <input className="button" type="button" value="Ajouter un produit" onClick={displayProductCreator}></input>
-                <input className="button" type="button" value="Gérer les catégories" onClick={displayCategManager}></input>
+                <button type="submit">
+                    Voir les commandes
+                    <span className="btn-icon">
+                        <i className="fas fa-list-alt"></i>
+                    </span>
+                </button>
+                <button type="submit" onClick={displayProductCreator}>
+                    Enregistrer un produit
+                    <span className="btn-icon">
+                        <i className="fas fa-plus-square"></i>
+                    </span>
+                </button>
+                <button type="submit" onClick={displayCategManager}>
+                    Gérer les catégories
+                    <span className="btn-icon">
+                        <i className="fas fa-folder-plus"></i>
+                    </span>
+                </button>
             </div>
 
             <article className={`form-container create-form-container ${prodCreationDisplay}`}>
