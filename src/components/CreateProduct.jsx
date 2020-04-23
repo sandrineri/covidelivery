@@ -168,7 +168,7 @@ const CreateProduct = (props) => {
                     <button className="form-send-btn" id="new-product-submit" type="submit" onClick={sendForm}>
                         Enregistrer
                         <span className="btn-icon">
-                            <i class="fas fa-save"></i>
+                            <i className="fas fa-save"></i>
                         </span>
                     </button>
                 </div>

@@ -20,8 +20,7 @@ ul {
     padding: 0;
 }
 
-button,
-.button {
+button {
     font-size: $primaryFontSize;
     padding: .5rem 1rem;
     border-radius: 5px;
@@ -211,6 +210,11 @@ h1 {
             .cat-modif-btn {
                 margin-left: .5rem;
             }
+        }
+
+        .family-select {
+            width: 8rem;
+            font-size: .9rem;
         }
     }
 }
