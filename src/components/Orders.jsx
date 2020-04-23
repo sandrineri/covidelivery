@@ -79,25 +79,29 @@ const Orders = (props) => {
 
     }
 
-    const printList = () => {
-        window.print();
-    }
-
     return (
         <React.Fragment>
-            <button onClick={printList}>Imprimer la liste</button>
-            
-            <article className="orders display-flex" id="orders-to-print">
+            <div className="print-btn">
+                <button>
+                    Imprimer la liste
+                    <span className="btn-icon">
+                        <i className="fas fa-print"></i>
+                    </span>
+                </button>
+            </div>
+
+            <article className="orders-container display-flex">
                 <h2>Liste des commandes</h2>
-                <ul>
+                <ul className="orders">
                     <li className="orders-prod-labels">
-                        <span>N°</span>
-                        <span>Nom</span>
-                        <span>Adresse</span>
-                        <span>Téléphone</span>
-                        <span>E-mail</span>
-                        <span>Date</span>
-                        <span>Statut</span>
+                        <span className="orders-info orders-info-label orders-id-label">N°</span>
+                        <span className="orders-info orders-info-label orders-name-label">Nom</span>
+                        <span className="orders-info orders-info-label orders-adress-label">Adresse</span>
+                        <span className="orders-info orders-info-label orders-phone-label">Téléphone</span>
+                        <span className="orders-info orders-info-label orders-mail-label">E-mail</span>
+                        <span className="orders-info orders-info-label orders-date-label">Date</span>
+                        <span className="orders-info orders-info-label orders-btn-label"></span>
+                        <span className="orders-info orders-info-label orders-status-label">Statut</span>
                     </li>
                     {props.orders.map(order => {
                         let isChecked = '';
@@ -112,22 +116,28 @@ const Orders = (props) => {
 
                         return (
                             <li className="orders-prod" key={order.id}>
-                                <span>{order.id}</span>
-                                <span>{order.userName}</span>
-                                <span>{order.userAddress}</span>
-                                <span></span>
-                                <span>{order.userEmail}</span>
-                                <span>{format(new Date(order.date), 'dd-MM-yyyy', { locale: fr })}</span>
-                                <span></span>
-                                <span>
-                                    <button className="" type="button" value={order.id} onClick={(e) => { seeOrder(Number(e.target.value)) }}>Voir la commande</button>
+                                <span className="orders-info orders-id">{order.id}</span>
+                                <span className="orders-info orders-name">{order.userName}</span>
+                                <span className="orders-info orders-adress">{order.userAddress}</span>
+                                <span className="orders-info orders-phone"></span>
+                                <span className="orders-info orders-mail">{order.userEmail}</span>
+                                <span className="orders-info orders-date">{format(new Date(order.date), 'dd-MM-yyyy', { locale: fr })}</span>
+                                <span className="orders-info orders-btn">
+                                    <button className="" type="button" value={order.id} onClick={(e) => { seeOrder(Number(e.target.value)) }}>
+                                        Voir la commande
+                                        <span className="btn-icon">
+                                            <i className="fas fa-clipboard-list"></i>
+                                        </span>
+                                    </button>
                                 </span>
-                                <span>{status}</span>
-                                <span>
-                                    <input type="checkbox" value={order.id} defaultChecked={isChecked} onChange={(e) => {
-                                        console.log('checkbox isChecked: ', order.processed, isChecked);
-                                        changeStatus(e.target.value, order.processed, isChecked);
-                                    }}></input>
+                                <span className="orders-info orders-status">
+                                    {status}
+                                    <span>
+                                        <input type="checkbox" value={order.id} defaultChecked={isChecked} onChange={(e) => {
+                                            console.log('checkbox isChecked: ', order.processed, isChecked);
+                                            changeStatus(e.target.value, order.processed, isChecked);
+                                        }}></input>
+                                    </span>
                                 </span>
                             </li>
                         )
@@ -135,7 +145,27 @@ const Orders = (props) => {
                 </ul>
             </article>
 
-            <article className="order display-flex">
+            <article className="order-container display-flex">
+                <div className="buttons-container">
+                    <div className="print-btn">
+                        <button>
+                            Imprimer la commande
+                            <span className="btn-icon">
+                                <i className="fas fa-print"></i>
+                            </span>
+                        </button>
+                    </div>
+
+                    <div className="back-btn">
+                        <button>
+                            Retourner à la liste
+                            <span className="btn-icon">
+                                <i className="fas fa-undo-alt"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
                 <h2>Commande</h2>
                 <section className="delivery-infos-container">
                     <h3>Informations de livraison <span className="deliver-title-sub">(pas de frais de livraison - pas de montant minimum)</span></h3>
@@ -169,21 +199,21 @@ const Orders = (props) => {
 
                 <section className="delivery-order">
                     <ul>
-                        <li className="order-prod-labels">
-                            <span className="product-info order-cat">Catégorie</span>
-                            <span className="product-info order-name">Produit</span>
-                            <span className="product-info order-origin">Provenance</span>
-                            <span className="product-info order-price">Prix à l'unité</span>
-                            <span className="product-info order-quantity">Commande</span>
+                        <li className="order-deliv-labels">
+                            <span className="order-info order-name-label">Produit</span>
+                            <span className="order-info order-cat-label">Catégorie</span>
+                            <span className="order-info order-origin-label">Provenance</span>
+                            <span className="order-info order-price-label">Prix à l'unité</span>
+                            <span className="order-info order-quantity-label">Commande</span>
                         </li>
                         {orderDetails.map(product => {
                             return (
                                 <li className="order-prod" key={product.id}>
-                                    <span className="product-info order-cat">{product.categoryName.toLowerCase()}</span>
-                                    <span className="product-info order-name">{product.name}</span>
-                                    <span className="product-info order-origin">{product.origin}</span>
-                                    <span className="product-info order-price">{product.price} / {product.baseUnitName}</span>
-                                    <span className="product-info order-quantity">{product.amount} {product.selectedUnitName}(s)</span>
+                                    <span className="order-info order-name">{product.name}</span>
+                                    <span className="order-info order-cat">{product.categoryName.toLowerCase()}</span>
+                                    <span className="order-info order-origin">{product.origin}</span>
+                                    <span className="order-info order-price">{product.price.replace('.', ',')} / {product.baseUnitName}</span>
+                                    <span className="order-info order-quantity">{product.amount} {product.selectedUnitName}(s)</span>
                                 </li>
                             )
                         })}

@@ -119,13 +119,13 @@ const SellerProduct = (props) => {
                 }}
             />
 
-            <span className="button sell-btn">
+            <span className="sell-prod-btn sell-icon-btn">
                 <button type="submit" title="Modifier" alt="Modifier" value={product.id} name={product.name} onClick={modifyProduct}>
                     <i className="fas fa-edit"></i>
                 </button>
             </span>
 
-            <span className="button sell-btn">
+            <span className="sell-prod-btn sell-icon-btn">
                 <button type="submit" title="Supprimer" alt="Supprimer" value={product.id} name={product.name} onClick={deleteProduct}>
                     <i className="fas fa-trash-alt"></i>
                 </button>

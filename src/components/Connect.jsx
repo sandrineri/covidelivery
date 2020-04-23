@@ -2,7 +2,7 @@ import React from 'react';
 import { useAuth0 } from '../auth/Auth0Wrapper';
 
 const Connect = (props) => {
-    console.log('Connect props: ', props);
+    //console.log('Connect props: ', props);
     
     // Authorization
     const { isAuthenticated, getTokenSilently } = useAuth0();
@@ -35,7 +35,7 @@ const Connect = (props) => {
                 <button type="submit">
                         Client
                         <span className="btn-icon">
-                            <i className="far fa-user-circle"></i>
+                            <i className="fas fa-user-circle"></i>
                         </span>
                     </button>
                 </div>

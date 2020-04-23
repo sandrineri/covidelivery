@@ -27,7 +27,7 @@ const MarketStall = () => {
     if (isAuthenticated) {
         getTokenSilently().then(token => {
             setAccessToken(token);
-            console.log('token: ', token);
+            //console.log('token: ', token);
         });
     }
 
@@ -145,8 +145,13 @@ const MarketStall = () => {
 
                 <Products order={order} setOrder={setOrder} products={products} message={errorMessage} lastModified={lastModified} baseUnitOptions={baseUnitOptions} />
 
-                <span className={`button order-btn ${isAuthenticated ? 'display-flex' : 'display-none'}`}>
-                    <button type="submit" onClick={sendOrder}>Envoyer ma commande</button>
+                <span className={`order-btn ${isAuthenticated ? 'display-flex' : 'display-none'}`}>
+                    <button type="submit" onClick={sendOrder}>
+                        Envoyer ma commande
+                        <span className="btn-icon">
+                            <i className="fas fa-paper-plane"></i>
+                        </span>
+                    </button>
                 </span>
             </article>
             <Footer />

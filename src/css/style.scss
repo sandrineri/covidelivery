@@ -111,7 +111,6 @@ h1 {
 .prod-info-labels {
     border-bottom: $borderStandard;
     padding: $productPadding;
-    margin-right: 1rem;
     text-align: center;
 
     .prod-info {
@@ -120,8 +119,9 @@ h1 {
 
     .product-name,
     .prod-info-label-product {
-        width: 16rem;
+        width: 14rem;
         text-align: left;
+        margin-right: 1rem;
     }
 
     .product-name {
@@ -258,23 +258,22 @@ h1 {
     #price {
         width: 8rem;
     }
-}
 
+    // no arrows in input type=number
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        /* display: none; <- Crashes Chrome on hover */
+        -webkit-appearance: none;
+        margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    }
+    input[type=number] {
+        -moz-appearance:textfield; /* Firefox */
+    }
+}
 
 .form-send-btn {
     padding: .5rem .8rem;
     border-radius: 10px;
-}
-
-// no arrows in input type=number
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
-    -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
-}
-input[type=number] {
-    -moz-appearance:textfield; /* Firefox */
 }
 
 
@@ -345,17 +344,117 @@ input[type=number] {
     .css-yk16xz-control {
         width: 100%;
     }
+
+    .sell-icon-btn {
+        button {
+            padding: .5rem;
+        }
+    }
+
+    .sell-btn {
+        margin: 1.5rem 0;
+    }
 }
 
 // ORDERS
+.print-btn {
+    margin: 1.5rem 0;
+}
+
+.orders-container {
+    .orders-info-label {
+        font-family: $labelsFont;
+        font-feature-settings: normal;
+        letter-spacing: 2px;
+        font-size: .9rem;
+    }
+
+    .orders-id-label,
+    .orders-id {
+        font-size: .9rem;
+    }
+
+    .orders-name-label,
+    .orders-name {
+        width: 9rem;
+    }
+
+    .orders-adress-label,
+    .orders-adress {
+        width: 15rem;
+    }
+
+    .orders-phone-label,
+    .orders-phone {
+        width: 6rem;
+    }
+
+    .orders-mail-label,
+    .orders-mail {
+        width: 14rem;
+        font-size: .9rem;
+    }
+
+    .orders-date-label,
+    .orders-date {
+        width: 6rem;
+        font-size: .9rem;
+    }
+
+    .orders-btn-label,
+    .orders-btn {
+        width: 11rem;
+    }
+
+    .orders-status-label,
+    .orders-status {
+        font-size: .9rem;
+    }
+
+    .orders-info {
+        margin: 0 1rem;
+    }
+
+    .orders-btn button {
+        font-size: .9rem;
+    }
+
+
+    input {
+        -ms-transform: scale(1.3);
+        -moz-transform: scale(1.3);
+        -webkit-transform: scale(1.3);
+        -o-transform: scale(1.3);
+        transform: scale(1.3);
+    }
+}
+
+.orders-prod-labels,
+.orders-prod,
+.order-deliv-labels,
+.order-prod {
+    border-bottom: $borderStandard;
+    padding: $productPadding;
+}
+
+.orders-prod-labels,
+.order-deliv-labels {
+    background-color: $labelsBackgroundColor;
+    font-variant: small-caps;
+    font-feature-settings: normal;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+}
+
+
 .delivery-infos-container {
-    margin: 0 3rem 1rem;
+    margin: 0 auto 1rem;
     border: $borderStandard;
 
     h3 {
         border-bottom: $borderStandard;
         text-align: center;
-        padding-bottom: 1rem;
+        padding: 0 2rem 1rem;
         text-transform: uppercase;
 
         .deliver-title-sub {
@@ -389,66 +488,41 @@ input[type=number] {
 }
 
 .delivery-order {
-    margin: 3rem 2rem;
+    margin: 1rem auto;
 
-    .prod-info {
-        width: 9rem;
+    .order-deliv-labels {
+        font-size: .9rem;
     }
 
+    .order-info {
+        margin: 0 .8rem;
+    }
+
+    .order-cat-label,
     .order-cat {
-        width: 17rem;
+        width: 15rem;
+        font-size: .9rem;
         text-transform: capitalize;
     }
 
-    .order-name,
+    .order-name-label,
+    .order-name {
+        width: 15rem;
+    }
+
+    .order-origin-label,
+    .order-origin {
+        width: 9rem;
+        font-size: .9rem;
+    }
+
+    .order-price-label,
     .order-price {
-        width: 12rem;
+        width: 9rem;
     }
 }
-
-.orders-prod-labels,
-.order-prod-labels {
-    background-color: $labelsBackgroundColor;
-    font-variant: small-caps;
-    font-feature-settings: normal;
-    letter-spacing: 1px;
-    text-transform: capitalize;
-}
-
-.orders-prod-labels,
-.orders-prod,
-.order-prod-labels,
-.order-prod {
-    border-bottom: $borderStandard;
-    padding: $productPadding;
-}
-
-.orders-prod-labels span {
-    margin: 0 1rem;
-}
-
-
 
 // FOOTER
 footer {
     height: 5rem;
 }
-
-
-
-// // Print
-// @media print {
-//     body * {
-//       visibility: hidden;
-//     }
-//     #orders-to-print, #orders-to-print *,
-//     #order-to-print, #order-to-print * {
-//       visibility: visible;
-//     }
-//     #orders-to-print,
-//     #order-to-print {
-//       position: absolute;
-//       left: 0;
-//       top: 0;
-//     }
-// }

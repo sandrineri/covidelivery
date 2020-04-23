@@ -11,6 +11,11 @@
     flex-direction: column;
 }
 
+button,
+.button {
+    display: flex;
+}
+
 // CONNECT
 .connect-container {
     display: flex;
@@ -19,10 +24,6 @@
 
     & div {
         margin: 0 1rem;
-    }
-
-    .person button {
-        display: flex;
     }
 }
 
@@ -57,10 +58,7 @@
 .buttons-container {
     display:flex;
     justify-content: center;
-
-    button {
-        display: flex;
-    }
+    align-items: center;
 }
 
 
@@ -154,7 +152,9 @@
     }
 
     .sell-product-label,
-    .sell-prod-info {
+    .sell-prod-info,
+    .sell-prod-btn,
+    .sell-btn {
         display: flex;
         justify-content: center;
     }
@@ -164,13 +164,33 @@
         justify-content: flex-start;
     }
 
-    .sell-btn {
-        display: flex;
-        justify-content: center;
-    }
 }
 
 // ORDERS
+.orders-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .order-info {
+        display: flex;
+        justify-content: center;
+    }
+
+    .orders-status {
+        display: flex;
+
+        input {
+            margin-left: .5rem;
+        }
+    }
+}
+
+.delivery-order {
+    display: flex;
+    justify-content: center;
+}
+
 .delivery-infos {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -189,9 +209,15 @@
 }
 
 .orders-prod-labels,
-.orders-prod,
-.order-prod-labels, 
+.orders-prod, 
+.order-deliv-labels, 
 .order-prod {
+    display: flex;
+    align-items: center;
+}
+
+
+.print-btn {
     display: flex;
     justify-content: center;
 }

@@ -149,9 +149,12 @@ const SellerPage = () => {
                 <SellerProducts
                     accessToken={accessToken} products={products} setMessage={setMessage} baseUnitOptions={baseUnitOptions} categoryOptions={categoryOptions} modifiedProducts={modifiedProducts} setModifiedProducts={setModifiedProducts}
                 />
-                <div className="button sell-btn">
+                <div className="sell-btn">
                     <button type="submit" title="Modifier plusieurs produits" alt="Modifier plusieurs produits" value="" name="" onClick={modifyProducts}>
-                        Modifier plusieurs produits <i className="fas fa-edit"></i>
+                        Modifier plusieurs produits
+                        <span className="btn-icon">
+                            <i className="fas fa-edit"></i>
+                        </span>
                     </button>
                 </div>
             </article>  
