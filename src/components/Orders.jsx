@@ -212,7 +212,7 @@ const Orders = (props) => {
                                     <span className="order-info order-name">{product.name}</span>
                                     <span className="order-info order-cat">{product.categoryName.toLowerCase()}</span>
                                     <span className="order-info order-origin">{product.origin}</span>
-                                    <span className="order-info order-price">{product.price.replace('.', ',')} / {product.baseUnitName}</span>
+                                    <span className="order-info order-price">{product.price.replace('.', ',')} € / {product.baseUnitName}</span>
                                     <span className="order-info order-quantity">{product.amount} {product.selectedUnitName}(s)</span>
                                 </li>
                             )

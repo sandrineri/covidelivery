@@ -24,12 +24,17 @@ button {
     font-size: $primaryFontSize;
     padding: .5rem 1rem;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 h2 {
     letter-spacing: .2rem;
     text-align: center;
     margin: 2rem 0 1rem;
+}
+
+input {
+    cursor: pointer;
 }
 
 // HEADER
@@ -169,7 +174,7 @@ h1 {
 }
 
 .cat-form-container {
-    width: 60%;
+    width: 70%;
     h3 {
         text-align: center;
         padding-bottom: 1rem;
@@ -199,7 +204,7 @@ h1 {
         li {
             margin: .5rem 1.5rem;
 
-            input {
+            .cat-modif-name {
                 font-size: .9rem;
                 padding: .2rem 1rem;
                 width: 20rem;
@@ -287,6 +292,7 @@ h1 {
 
     .sell-product {
         border-bottom: $borderStandard;
+        padding: .2rem 0;
     }
     
     .sell-product-labels {
@@ -302,7 +308,6 @@ h1 {
         border: none;
         font-size: $primaryFontSize;
         font-family: $primaryFont;
-        cursor: pointer;
         text-align: center;
     }
 
@@ -522,7 +527,7 @@ h1 {
 
     .order-price-label,
     .order-price {
-        width: 9rem;
+        width: 10rem;
     }
 }
 

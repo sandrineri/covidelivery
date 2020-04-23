@@ -80,7 +80,7 @@ const SellerProduct = (props) => {
             <input className="sell-prod-info sell-product-name" id={`name${product.id}`} defaultValue={product.name} onChange={(e) => changeProduct('name', e.target.value)}></input>
             
             <Select
-                className="sell-prod-info sell-product-cat"
+                className="sell-product-cat"
                 placeholder={product.category.toLowerCase()}
                 defaultValue={{ value: `${product.categoryId}`, label: `${product.category}`, name: `${product.category}` }}
                 options={props.categoryOptions}
@@ -92,7 +92,7 @@ const SellerProduct = (props) => {
             <input type="number" className="sell-prod-info product-price" id={`price${product.id}`} defaultValue={product.price} onChange={(e) => changeProduct('price', e.target.value)}></input>
 
             <Select
-                className="sell-prod-info sell-product-unit"
+                className="sell-product-unit"
                 placeholder={product.baseUnitName}
                 defaultValue={{ value: `${product.baseUnitId}`, label: `${product.baseUnitName}`, name: `${product.baseUnitName}` }}
                 options={props.baseUnitOptions}
@@ -102,7 +102,8 @@ const SellerProduct = (props) => {
             <input className="sell-prod-info product-promo" defaultValue={product.promo} onChange={(e) => changeProduct('promo', e.target.value)}></input>
 
             <Select
-                className="sell-prod-info sell-prod-selectable"
+                className="sell-prod-selectable"
+                classNamePrefix="select"
                 placeholder="Sélectionner"
                 defaultValue={selectableUnitsOptions}
                 noOptionsMessage={() => null}
