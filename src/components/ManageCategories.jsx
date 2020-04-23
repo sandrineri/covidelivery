@@ -33,8 +33,13 @@ const ManageCategories = (props) => {
                             placeholder="Sélectionnez" /* onChange={(input) => changeProduct('name', input.target.value)} */
                         />
                     </div>
-                    <div className="form-part form-part3">
-                        <input className="form-send-btn" id="new-product-submit" type="submit" value="Enregistrer"></input>
+                    <div className="form-part form-part3 button">
+                        <button className="form-send-btn" id="new-product-submit" type="submit" >
+                            Enregistrer
+                            <span className="btn-icon">
+                                <i class="fas fa-save"></i>
+                            </span>
+                        </button>
                     </div>
                 </form>
             </section>

@@ -18,6 +18,9 @@ TODO :
 	[x] Ne pas envoyer la commande pour un panier vide (message d'alerte)
 	[] Champs "required"
 	[] Autocomplete
+	- Revoir l'arborescence
+		[] Séparer orders et order
+		[] Voir les commandes depuis SellerPage ?
 
 - ACCUEIL
 	[x] visualiser la liste des produits, avec prix, quantité, provenances, etc…

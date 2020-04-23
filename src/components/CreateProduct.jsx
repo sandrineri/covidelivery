@@ -165,7 +165,12 @@ const CreateProduct = (props) => {
                 </div>
 
                 <div className="form-part form-part8">
-                    <input className="form-send-btn" id="new-product-submit" type="submit" value="Enregistrer" onClick={sendForm}></input>
+                    <button className="form-send-btn" id="new-product-submit" type="submit" onClick={sendForm}>
+                        Enregistrer
+                        <span className="btn-icon">
+                            <i class="fas fa-save"></i>
+                        </span>
+                    </button>
                 </div>
             </form>
         </React.Fragment>

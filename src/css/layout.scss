@@ -11,7 +11,6 @@
     flex-direction: column;
 }
 
-button,
 .button {
     display: flex;
 }
@@ -95,6 +94,7 @@ button,
 }
 
 
+// CATEGORIESMANAGER
 .cat-form-container {
     .form {
         grid-template-columns: repeat(2, 1fr);
@@ -128,6 +128,10 @@ button,
         display: flex;
         flex-flow: row wrap;
         justify-content: center;
+
+        li {
+            display: flex;
+        }
     }
 }
 
