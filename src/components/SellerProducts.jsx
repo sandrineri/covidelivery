@@ -8,7 +8,7 @@ const SellerProducts = (props) => {
 
     return (
                 <ul className="sell-products">
-                    <li className="sell-product-labels">
+                    <li className="prod-info-labels sell-product-labels">
                         <span className="sell-product-label sell-product-label-name">Produit</span>
                         <span className="sell-product-label sell-product-label-cat">Catégorie</span>
                         <span className="sell-product-label">Provenance</span>

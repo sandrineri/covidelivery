@@ -81,6 +81,7 @@ const SellerProduct = (props) => {
             
             <Select
                 className="sell-product-cat"
+                classNamePrefix="rs"
                 placeholder={product.category.toLowerCase()}
                 defaultValue={{ value: `${product.categoryId}`, label: `${product.category}`, name: `${product.category}` }}
                 options={props.categoryOptions}
@@ -93,6 +94,7 @@ const SellerProduct = (props) => {
 
             <Select
                 className="sell-product-unit"
+                classNamePrefix="rs"
                 placeholder={product.baseUnitName}
                 defaultValue={{ value: `${product.baseUnitId}`, label: `${product.baseUnitName}`, name: `${product.baseUnitName}` }}
                 options={props.baseUnitOptions}
@@ -103,7 +105,7 @@ const SellerProduct = (props) => {
 
             <Select
                 className="sell-prod-selectable"
-                classNamePrefix="select"
+                classNamePrefix="rs"
                 placeholder="Sélectionner"
                 defaultValue={selectableUnitsOptions}
                 noOptionsMessage={() => null}

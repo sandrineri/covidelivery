@@ -18,6 +18,7 @@ TODO :
 	[x] Ne pas envoyer la commande pour un panier vide (message d'alerte)
 	[] Champs "required"
 	[] Autocomplete
+	[] Sur modifyCategory, si parentId vide (""), crée une nouvelle catégorie (qui sera vide à l'affichage)
 	- Revoir l'arborescence
 		[] Séparer orders et order
 		[] Voir les commandes depuis SellerPage ?
@@ -43,7 +44,7 @@ TODO :
 	[x] Le comerçant peut modifier un produit
 	[x] Le commerçant peut modifier plusieurs produits (ex: plusieurs prix...)
 	[x] Le commerçant peut supprimer un produit
-	[] Le commerçant peut créer une nouvelle catégorie de produits
+	[x] Le commerçant peut créer une nouvelle catégorie de produits
 
 	- TRAITEMENT DES COMMANDES :
 	[x] Le commerçant peut visualiser la liste des commandes (date de la commande, noms des clients, leurs adresses... ) où il peut sélectionner une commande à traiter

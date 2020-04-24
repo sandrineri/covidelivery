@@ -36,6 +36,7 @@ const Product = (props) => {
                 <input className="quantity-input" type="number" min="1" max="999" onChange={(input) => changeProduct('amount', input.target.value)}></input>
                 <Select
                     className="unit-select"
+                    classNamePrefix="rs"
                     closeMenuOnSelect={false}
                     options={selectableUnitsOptions}
                     placeholder={`${props.product.baseUnitName}(s)`}

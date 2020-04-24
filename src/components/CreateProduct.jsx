@@ -95,13 +95,10 @@ const CreateProduct = (props) => {
                     <label htmlFor="unit">Unité<span className="required-sign">*</span>&nbsp;:</label>
                     <Select
                         className="form-select form-unit-select"
-                        required
-                        //isClearable
+                        classNamePrefix="rs"
                         options={props.baseUnitOptions}
                         placeholder="Sélectionner"
                         defaultValue={ {value: '2', label: 'kilo', name: 'kilo' } }
-                        //noOptionsMessage={() => null}
-                        //formatCreateLabel={(value) => `Ajouter ${value}`}
                         onChange={(option) => {
                             if (option !== null) {
                                 changeProduct('baseUnitId', option.value);
@@ -125,6 +122,7 @@ const CreateProduct = (props) => {
                         <span className="label-plus">(plusieurs options possibles)</span></label>
                     <Select
                         className="form-select form-units-select"
+                        classNamePrefix="rs"
                         isMulti
                         options={props.baseUnitOptions}
                         placeholder="Sélectionner"
@@ -147,6 +145,7 @@ const CreateProduct = (props) => {
                     <label htmlFor="category">Catégorie dans laquelle votre produit apparaîtra<span className="required-sign">*</span>&nbsp;:</label>
                     <Select
                         className="form-select form-category-select"
+                        classNamePrefix="rs"
                         required
                         //isClearable
                         options={props.categoryOptions}

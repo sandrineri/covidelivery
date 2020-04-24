@@ -93,7 +93,7 @@ const Orders = (props) => {
             <article className="orders-container display-flex">
                 <h2>Liste des commandes</h2>
                 <ul className="orders">
-                    <li className="orders-prod-labels">
+                    <li className="prod-info-labels orders-prod-labels">
                         <span className="orders-info orders-info-label orders-id-label">N°</span>
                         <span className="orders-info orders-info-label orders-name-label">Nom</span>
                         <span className="orders-info orders-info-label orders-adress-label">Adresse</span>
@@ -199,7 +199,7 @@ const Orders = (props) => {
 
                 <section className="delivery-order">
                     <ul>
-                        <li className="order-deliv-labels">
+                        <li className="prod-info-labels order-deliv-labels">
                             <span className="order-info order-name-label">Produit</span>
                             <span className="order-info order-cat-label">Catégorie</span>
                             <span className="order-info order-origin-label">Provenance</span>
