@@ -18,10 +18,10 @@ TODO :
 	[x] Ne pas envoyer la commande pour un panier vide (message d'alerte)
 	[] Champs "required"
 	[] Autocomplete
-	[] Sur modifyCategory, si parentId vide (""), crée une nouvelle catégorie (qui sera vide à l'affichage)
+	[] Rechargements de pages après envois à l'API
 	- Revoir l'arborescence
 		[] Séparer orders et order
-		[] Voir les commandes depuis SellerPage ?
+		[] Voir les commandes depuis SellerPage
 
 - ACCUEIL
 	[x] visualiser la liste des produits, avec prix, quantité, provenances, etc…

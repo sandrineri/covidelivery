@@ -3,52 +3,54 @@ import Select from 'react-select';
 
 import settings from '../config/settings';
 
+import ManageCategory from '../components/ManageCategory';
+
 const ManageCategories = (props) => {
     console.log('ManageCategories props: ', props);
-    const [category, setCategory] = useState({
-        "name": '',
-        "parentId": ''
-    });
-
     let familyOptions = [
         { value: "" , label: "Nouvelle famille", name: "Nouvelle famille" }
     ];
     props.families.forEach(family => {
-        familyOptions.push({ value: `${family.id}`, label: `${family.name}`, name: `${family.name}` });
+        familyOptions.push({ value: `${family.id}`, label: `${family.name.toLocaleUpperCase('fr')}`, name: `${family.name}` });
     });
-    //console.log('familyOptions: ', familyOptions);
 
-    const createCategory = (key, value) => {
-        //console.log(key, value);
-        const newCategory = category;
-        newCategory[key] = value;
-        setCategory(newCategory);
-    }
+    const [modifiedCategory, setModifiedCategory] = useState({
+        "name": '',
+        "parentId": ''
+    });
+
+    // const categories = props.categories.map(category => {
+    //     return ( { "name": category.name, "parentId": category.products_categories_parent_id } )
+    // });
+
+    //setFamilyOptions(getFamilyOptions);
+    //console.log('familyOptions: ', familyOptions);
+    console.log('newCategory: ', modifiedCategory);
+
 
     const changeCategory =(key, value) => {
         console.log('modifiedCategory: ', key, value);
-        const modified = category;
+        
+        const modified = modifiedCategory;
         modified[key] = value;
-        setCategory(modified);
+        setModifiedCategory(modified);
     }
-
-    console.log('newCategory: ', category);
 
     const sendNewCategory = (e) => {
-        console.log('categoryToSend: ', category);
+        console.log('categoryToSend: ', modifiedCategory);
         e.preventDefault();
 
-        if (category.name === "") window.alert("Vous devez donner un nom à votre catégorie pour pouvoir l'enregistrer");
+        if (modifiedCategory.name === "") window.alert("Vous devez donner un nom à votre catégorie pour pouvoir l'enregistrer");
         fetch(`${settings.apiBasePath}/category`, {
             method: 'POST',
-            body: JSON.stringify(category),
+            body: JSON.stringify(modifiedCategory),
             headers: {
                 "Authorization": `Bearer ${props.accessToken}`
             }
         })
             .then(response => {
                 if (response.status === 201) {
-                    console.log(category.name + ' créée');
+                    console.log(modifiedCategory.name + ' créée');
                     //props.setMessage(`La catégorie "${category.name}" a bien été créée. La liste sera raffraîchie automatiquement d'ici quelques secondes. Vous pourrez ensuite la modifier.`);
                     //setTimeout(() => { document.location.reload(); }, 3000);
                 }
@@ -58,34 +60,7 @@ const ManageCategories = (props) => {
             })
             .catch(error => {
                 console.log('Erreur de création : ', error);
-                props.setMessage(`Erreur de création : ${error}`);
-            });
-    }
-
-    const modifyCategory = (e, id) => {
-        console.log('changingCategoryToSend: ', category + '; id: ', id);
-        e.preventDefault();
-
-        fetch(`${settings.apiBasePath}/category/` + id, {
-            method: 'PUT',
-            body: JSON.stringify(category),
-            headers: {
-                "Authorization": `Bearer ${props.accessToken}`
-            }
-        })
-            .then(response => {
-                if (response.status === 201) {
-                    console.log(category.name + ' changée');
-                    //props.setMessage(`La catégorie "${category.name}" a bien été créée. La liste sera raffraîchie automatiquement d'ici quelques secondes. Vous pourrez ensuite la modifier.`);
-                    //setTimeout(() => { document.location.reload(); }, 3000);
-                }
-                else {
-                    throw new Error('Code HTTP incorrect');
-                }
-            })
-            .catch(error => {
-                console.log('Erreur de création : ', error);
-                props.setMessage(`Erreur de création : ${error}`);
+                //props.setMessage(`Erreur de création : ${error}`);
             });
     }
 
@@ -99,14 +74,15 @@ const ManageCategories = (props) => {
                 <form className="form category-form">
                     <div className="form-part form-part1">
                         <label htmlFor="category-name">Créer une nouvelle catégorie ou famille :</label>
-                        <input className="form-input" type="text" name="produit" placeholder="Herbes, Petite épicerie, Fruits exotiques..." id="category-name" onChange={(input) => createCategory('name', input.target.value)} />
+                        <input className="form-input" type="text" name="produit" placeholder="Herbes, Petite épicerie, Fruits exotiques..." id="category-name" onChange={(input) => changeCategory('name', input.target.value)} />
                     </div>
                     <div className="form-part form-part2">
                         <label htmlFor="family-choice">Choisir la famille :</label>
                         <Select
+                            classNamePrefix="rs"
                             options={familyOptions}
                             placeholder="Sélectionnez" 
-                            onChange={(option) => createCategory('parentId', option.value)}
+                            onChange={(option) => changeCategory('parentId', option.value)}
                         />
                     </div>
                     <div className="form-part form-part3 button">
@@ -125,22 +101,7 @@ const ManageCategories = (props) => {
                 <ul className="categories">
                     {props.categories.map((category) => {
                         return (
-                            <li key={category.id} id={category.id}>
-                                <input className="cat-modif-name" defaultValue={category.name} onChange={(input) => changeCategory('name', input.target.value)}></input>
-
-                                <Select
-                                className="family-select"
-                                    options={familyOptions}
-                                    defaultValue={familyOptions.find(option => category.products_categories_parent_id === Number(option.value))}
-                                    onChange={(option) => changeCategory('parentId', option.value)}
-                                />
-
-                                <span className="cat-modif-btn">
-                                    <button type="submit" title="Modifier" alt="Modifier" value={category.id} name={category.name} onClick={(e) => modifyCategory(e, category.id)}>
-                                        <i className="fas fa-edit"></i>
-                                    </button>
-                                </span>
-                            </li>
+                            <ManageCategory accessToken={props.accessToken} key={category.id} category={category} familyOptions={familyOptions} />
                         )
                     })}
                 </ul>
