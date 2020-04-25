@@ -1,1 +1,1 @@
-yarn build && surge -p ./build -d https://.surge.sh
+yarn build && surge -p ./build -d https://covidelivery.surge.sh

@@ -11,8 +11,6 @@ Pour lancer les tests : yarn test
 ___________
 TODO :
 
-[] PROBLEME GIT !!!!!!!
-
 - PETOUILLES :
 	[x] Cacher le bouton de commande tant que l'on n'est pas connecté
 	[x] Ne pas envoyer la commande pour un panier vide (message d'alerte)
@@ -56,15 +54,4 @@ TODO :
 	[x] Le client peut visualiser la liste des produits et les boutons de validation
 	[x] Le client peut passer une commande (ajouter des quantités de chaque produit, puis valider)
 	[] Le client peut visualiser sa commande
-
-_______________________
-- API :
-	[] User : lister les produits en stock
-	[] User : Commander (en passant un tableau d'objets produits, quantité…)
-	[] User : Ajouter ses coordonnées de livraison
-
-	[] Seller : lister les commandes (a traiter, déjà traitées)
-	[] Seller : marquer une liste de commandes comme traitée
-	[] Seller : Ajouter/Modifier/Supprimer un produit (en passant un objet produit, prix, promo….)
-		
 
