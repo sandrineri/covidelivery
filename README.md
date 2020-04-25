@@ -31,7 +31,7 @@ TODO :
 
     Une fois connecté :
 	- CLIENT : 
-	[] Le client peut créer son compte en indiquant ses coordonnées de livraison (nom, adresse, téléphone, mail, complément d'infos (digicode...) <!-- moyen de paiement ?, -->)
+	[x] Le client peut créer son compte en indiquant ses coordonnées de livraison (nom, adresse, téléphone, mail, complément d'infos (digicode...) <!-- moyen de paiement ?, -->)
 	[x] Le client peut modifier les infos de son compte
 	- COMMERCANT :
 	[] Le commerçant peut accéder aux pages vendeur
@@ -51,7 +51,7 @@ TODO :
 	[x] Le commerçant peut informer l'API qu'une commande est traitée
 
 - PAGES CLIENT
-	[x] Le client peut visualiser la liste des produits et les boutons de validation
+	[x] Le client peut visualiser et utiliser les boutons de validation de sa commande sur la page produits
 	[x] Le client peut passer une commande (ajouter des quantités de chaque produit, puis valider)
 	[] Le client peut visualiser sa commande
 

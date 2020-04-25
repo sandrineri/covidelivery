@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 //import Message from '../components/Message';
 import Orders from '../components/Orders';
+import Connect from '../components/Connect';
 
 const OrdersManagement = () => {
     // Initialisation du state
@@ -57,6 +58,9 @@ const OrdersManagement = () => {
     return (
         <React.Fragment>
             <Header />
+            <nav>
+                <Connect accessToken={accessToken} setAccessToken={setAccessToken} />
+            </nav>
             {/* <Message message={errorMessage} /> */}
             <Orders accessToken={accessToken} orders={orders} />
             <Footer />

@@ -137,7 +137,7 @@ const MarketStall = () => {
             </nav>
             <Message message={errorMessage} />
 
-            <article className={`${buyerInfosFormDisplay}`}>
+            <article className={`form-container buyer-form-container ${buyerInfosFormDisplay}`}>
                 <BuyerInfos accessToken={accessToken}/>
             </article>
 

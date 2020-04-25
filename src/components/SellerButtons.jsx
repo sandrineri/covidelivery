@@ -32,12 +32,6 @@ const SellerButtons = (props) => {
     return (
         <React.Fragment>
             <div className="buttons-container">
-                <button type="submit">
-                    Voir les commandes
-                    <span className="btn-icon">
-                        <i className="fas fa-list-alt"></i>
-                    </span>
-                </button>
                 <button type="submit" onClick={displayProductCreator}>
                     Enregistrer un produit
                     <span className="btn-icon">

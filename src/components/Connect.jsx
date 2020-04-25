@@ -17,9 +17,21 @@ const Connect = (props) => {
 
     return (
         <React.Fragment>
-                <div className="brand"></div>
-                <div className="users-nav">
-                    <div className={`user user-seller ${isAuthenticated ? 'display-flex' : 'display-none'}`}>
+            <div className="brand"></div>
+            <div className={`${isAuthenticated ? 'display-flex' : 'display-none'}`}>
+                <div className="buttons-container">
+                    <div>
+                        <Link to="/">
+                            <button type="submit">
+                                Liste des produits
+                                <span className="btn-icon">
+                                    <i className="fas fa-user-circle"></i>
+                                </span>
+                            </button>
+                        </Link>
+                    </div>
+
+                    <div>
                         <Link to="/vendeur/produits">
                             <button type="submit">
                                 Gérer vos produits
@@ -30,7 +42,21 @@ const Connect = (props) => {
                         </Link>
                     </div>
 
-                    {/* <div className={`user user-buyer ${isAuthenticated ? 'display-flex' : 'display-none'}`}>
+                    <div>
+                        <Link to="/vendeur/commandes">
+                            <button type="submit">
+                                Voir les commandes
+                                <span className="btn-icon">
+                                    <i className="fas fa-list-alt"></i>
+                                </span>
+                            </button>
+                        </Link>
+                    </div>
+
+                </div>
+
+
+                {/* <div className={`user user-buyer ${isAuthenticated ? 'display-flex' : 'display-none'}`}>
                         <button type="submit">
                             Gérer vos coordonnées
                             <span className="btn-icon">
@@ -38,16 +64,16 @@ const Connect = (props) => {
                             </span>
                         </button>
                     </div> */}
-                </div>
+            </div>
 
-                <div className="connect-container">
-                    <div className={`${isAuthenticated ? 'display-none' : 'display-flex'}`}>
-                        <button onClick={loginWithRedirect}>Se connecter</button>
-                    </div>
-                    <div className={`${isAuthenticated ? 'display-flex' : 'display-none'}`}>
-                        <button onClick={logout}>Se déconnecter</button>
-                    </div>
+            <div className="connect-container">
+                <div className={`${isAuthenticated ? 'display-none' : 'display-flex'}`}>
+                    <button onClick={loginWithRedirect}>Se connecter</button>
                 </div>
+                <div className={`${isAuthenticated ? 'display-flex' : 'display-none'}`}>
+                    <button onClick={logout}>Se déconnecter</button>
+                </div>
+            </div>
         </React.Fragment>
     )
 };
