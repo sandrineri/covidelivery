@@ -13,8 +13,8 @@ const App = () => {
         <Router history={history}>
             <Switch>
                 <Route path="/" exact render={(props => <MarketStall {...props} />)} />
-                <PrivateRoute path="/formulaire" exact render={(props => <SellerPage {...props} />)} />
-                <Route path="/commandes" exact render={(props => <OrdersManagement {...props} />)} />
+                <PrivateRoute path="/vendeur/produits" exact render={(props => <SellerPage {...props} />)} />
+                <Route path="/vendeur/commandes" exact render={(props => <OrdersManagement {...props} />)} />
             </Switch>
         </Router>
     )

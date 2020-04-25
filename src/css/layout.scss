@@ -11,6 +11,10 @@
     flex-direction: column;
 }
 
+.connect-display-flex {
+    display: flex;
+}
+
 .buttons-container {
     display:flex;
     justify-content: center;
@@ -18,10 +22,18 @@
 }
 
 // CONNECT
-.connect-container {
+nav {
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
+
+    .users-nav {
+        display: flex;
+    }
+    .connect-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
 }
 
 

@@ -10,6 +10,7 @@ import Footer from '../components/Footer';
 import Connect from '../components/Connect';
 import Message from '../components/Message';
 import Products from '../components/Products';
+import BuyerInfos from '../components/BuyerInfos';
 
 const MarketStall = () => {
     // Initialize state
@@ -20,6 +21,7 @@ const MarketStall = () => {
     const [lastModified, setLastModified] = useState('');
     const [deliveryDate, setDeliveryDate] = useState('');
     const [baseUnitOptions, setBaseUnitOptions] = useState([]);
+    const [buyerInfosFormDisplay, setBuyerInfosFormDisplay] = useState('display-none');
 
     // Authorization
     const [accessToken, setAccessToken] = useState(null);
@@ -34,7 +36,6 @@ const MarketStall = () => {
     // Set state from API
     // Met à jour l'état de la liste des produits en appelant l’API
     useEffect(() => {
-
         fetch(`${settings.apiBasePath}/products`)
             .then(response => response.json())
             .then((response) => {
@@ -112,11 +113,33 @@ const MarketStall = () => {
     // let orderBtnDisplay = 'display-flex';
     // if (isAuthenticated) orderBtnDisplay = 'display-none';
 
+    const displayBuyerInfosForm = () => {
+        if (buyerInfosFormDisplay === 'display-none') {
+            setBuyerInfosFormDisplay('display-flex');
+        } else {
+            setBuyerInfosFormDisplay('display-none');
+        }
+    }
+
     return (
         <React.Fragment>
             <Header />
-            <Connect accessToken={accessToken} setAccessToken={setAccessToken} />
+            <nav>
+                <div className={`user user-buyer ${isAuthenticated ? 'display-flex' : 'display-none'}`}>
+                    <button type="submit" onClick={displayBuyerInfosForm}>
+                        Gérer vos coordonnées
+                        <span className="btn-icon">
+                            <i className="fas fa-user-circle"></i>
+                        </span>
+                    </button>
+                </div>
+                <Connect accessToken={accessToken} setAccessToken={setAccessToken} />
+            </nav>
             <Message message={errorMessage} />
+
+            <article className={`${buyerInfosFormDisplay}`}>
+                <BuyerInfos accessToken={accessToken}/>
+            </article>
 
             <article className="stalls">
                 <section className={`${isAuthenticated ? 'display-none' : 'display-flex'}`}>

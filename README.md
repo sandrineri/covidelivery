@@ -27,14 +27,14 @@ TODO :
 - COMPTE / CONNEXION
 	[x] Gérer les autorisations
 	[] S'inscrire et navigation
-    [] Possibilité de se connecter
+    [x] Possibilité de se connecter
 
     Une fois connecté :
 	- CLIENT : 
-	[] Le client peut créer son compte en indiquant ses coordonnées de livraison (nom, adresse, téléphone, complément d'infos (digicode...) <!-- moyen de paiement ?, -->)
-	[] Le client peut modifier les infos de son compte
+	[] Le client peut créer son compte en indiquant ses coordonnées de livraison (nom, adresse, téléphone, mail, complément d'infos (digicode...) <!-- moyen de paiement ?, -->)
+	[x] Le client peut modifier les infos de son compte
 	- COMMERCANT :
-	[] Le commerçant peut créer son compte et le modifier
+	[] Le commerçant peut accéder aux pages vendeur
 
 - PAGES VENDEUR
 	- GESTION DES PRODUITS :
@@ -55,3 +55,20 @@ TODO :
 	[x] Le client peut passer une commande (ajouter des quantités de chaque produit, puis valider)
 	[] Le client peut visualiser sa commande
 
+
+
+
+Non connecté sur la page principale :
+-> A besoin d'un bouton connecter / s'inscrire
+//Non connecté sur une autre page :
+//-> Connexion auto via Auth0
+
+Connecté en tant que client :
+-> On affiche un bouton se déconnecter + bouton commande
+Connecté en tant que vendeur :
+-> On affiche trois boutons dynamiques (deux à la fois) + bouton se déconnecter
+
+- Finir les pétouilles de navigation/connexion [S]
+- [x] Lorsque une requête est envoyée à l'API, si l'utilisateur n'existe pas mais que son token est reconnu par Auth0, créer l'utilisateur [J]
+- Créer les comptes en mode "inactif" par défaut [J]
+- Pouvoir modifier ses coordonnées [S/J]
