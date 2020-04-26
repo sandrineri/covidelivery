@@ -15,11 +15,12 @@ TODO :
 	[] orders api : manque téléphone
 	[x] Cacher le bouton de commande tant que l'on n'est pas connecté
 	[x] Ne pas envoyer la commande pour un panier vide (message d'alerte)
+	[] Traitée / A traiter : affichage au moment du changement de statut plutôt qu'au rechargement de la page
 	[] Champs "required"
 	[] Autocomplete
 	[] Rechargements de pages après envois à l'API
 	- Revoir l'arborescence
-		[] Séparer orders et order
+		[x] Séparer orders et order
 		[] Voir les commandes depuis SellerPage
 
 - ACCUEIL

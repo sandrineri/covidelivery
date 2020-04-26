@@ -29,7 +29,7 @@ const Orders = (props) => {
                 "processed": false
             };
         }
-        console.log(processedStatus);
+        //console.log(processedStatus);
 
         fetch(`${settings.apiBasePath}/order/` + id, {
             method: 'PUT',
@@ -83,11 +83,6 @@ const Orders = (props) => {
                 //setErrorMessage('Le cageot est tombé du camion');
             });
 
-    }
-
-    const closeOrder = () => {
-        setOrderDisplay('display-none');
-        setOrdersDisplay('display-flex');
     }
 
     return (
@@ -156,28 +151,7 @@ const Orders = (props) => {
             </article>
 
             <article className={`order-container ${orderDisplay}`}>
-                <div className="buttons-container">
-                    <div className="print-btn">
-                        <button>
-                            Imprimer la commande
-                            <span className="btn-icon">
-                                <i className="fas fa-print"></i>
-                            </span>
-                        </button>
-                    </div>
-
-                    <div className="back-btn">
-                        <button onClick={closeOrder}>
-                            Retourner à la liste
-                            <span className="btn-icon">
-                                <i className="fas fa-undo-alt"></i>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-
-                <h2>Commande</h2>
-                <Order currentOrder={currentOrder} orderDetails={orderDetails} currentOrderDate={currentOrderDate} />
+                <Order currentOrder={currentOrder} orderDetails={orderDetails} currentOrderDate={currentOrderDate} setOrderDisplay={setOrderDisplay} setOrdersDisplay={setOrdersDisplay} />
             </article>
         </React.Fragment>
     )
