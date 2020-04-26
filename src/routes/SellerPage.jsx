@@ -13,6 +13,7 @@ import settings from '../config/settings';
 const SellerPage = () => {
     // Initialisation des variables d'état
     const [message, setMessage] = useState('');
+    const [lastResponseStatusCode, setLastResponseStatusCode] = useState(null);
     const [modifiedProducts, setModifiedProducts] = useState([]);
 
     const [productInfo, setProductInfo] = useState({
@@ -134,7 +135,7 @@ const SellerPage = () => {
 
                 console.log('proautocompleteCategoryOptionsductInfo: ', autocompleteCategoryOptions);
             })
-    }, [message]);
+    }, [lastResponseStatusCode]);
 
     if (accessToken === null) return <React.Fragment></React.Fragment>;
     //console.log('SellerPage sortedProductsWithoutCategories: ', products);
@@ -146,8 +147,9 @@ const SellerPage = () => {
                 <div></div>
                 <Connect accessToken={accessToken} setAccessToken={setAccessToken} />
             </nav>
+            
+            <SellerButtons accessToken={accessToken} setMessage={setMessage} {...productInfo} setLastResponseStatusCode={setLastResponseStatusCode} />
             <Message message={message} />
-            <SellerButtons accessToken={accessToken} setMessage={setMessage} {...productInfo} />
             <article className="sell-products-container">
                 <h2>Gérer les produits à vendre</h2>
                 <SellerProducts

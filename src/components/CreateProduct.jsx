@@ -52,8 +52,11 @@ const CreateProduct = (props) => {
                 .then(response => {
                     if (response.status === 201) {
                         console.log(product.name + ' créé');
-                        props.setMessage(`Le produit "${product.name}" a bien été créé. La liste sera raffraîchie automatiquement d'ici quelques secondes. Vous pourrez ensuite la modifier.`);
-                        //setTimeout(() => { document.location.reload(); }, 3000);
+                        props.setMessage(`Le produit "${product.name}" a bien été créé. Vous pouvez désormais le modifier dans la liste des produits ci-desous.`);
+                        setTimeout(() => {
+                            props.setLastResponseStatusCode(response.status);
+                            props.setMessage('');
+                        }, 2500);
                     }
                     else {
                         throw new Error('Code HTTP incorrect');
