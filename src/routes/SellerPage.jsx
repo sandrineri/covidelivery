@@ -13,13 +13,15 @@ import settings from '../config/settings';
 const SellerPage = () => {
     // Initialisation des variables d'état
     const [message, setMessage] = useState('');
-    const [families, setFamilies] = useState([]);
-    const [categories, setCategories] = useState([]);
-    const [products, setProducts] = useState([]);
-    const [baseUnitOptions, setBaseUnitOptions] = useState([]);
-    const [categoryOptions, setCategoryOptions] = useState([]);
     const [modifiedProducts, setModifiedProducts] = useState([]);
 
+    const [productInfo, setProductInfo] = useState({
+        products: [],
+        families: [],
+        categories: [],
+        baseUnitOptions: [],
+        categoryOptions: []
+    });
 
     // Authorization
     const [accessToken, setAccessToken] = useState(null);
@@ -85,21 +87,10 @@ const SellerPage = () => {
             .then((response) => {
                 console.log('fetch complete', response);
 
-                const apiBaseUnits = response.units;
-                const apiCategories = response.categories;
-                //console.log('categories: ', apiCategories);
-                setCategories(apiCategories);
-
-
-                const apiFamilies = response.products;
-                //console.log('upperCategories: ', apiFamilies);
-                setFamilies(apiFamilies);
-
                 const upperCategories = response.products.map((family) => (family.categories));
                 //console.log('upperCategories: ', upperCategories);
 
                 let productsWithoutCategories = [];
-                let categoriesOptions = [];
 
                 for (let family = 0; family < upperCategories.length; family++) {
                     const categories = upperCategories[family];
@@ -109,9 +100,6 @@ const SellerPage = () => {
                         //console.log('category For loop: ', category);
                         const apiProducts = categories[category].products;
 
-
-                        categoriesOptions.push({ value: `${categories[category].id}`, label: `${categories[category].name}`, name: `${categories[category].name.toLowerCase()}` });
-
                         for (let product = 0; product < apiProducts.length; product++) {
                             //apiBaseUnits.push({ value: `${apiProducts[product].baseUnitId}`, label: `${apiProducts[product].baseUnitName}`, name: `${apiProducts[product].baseUnitName}` });
                             //console.log('Product For loop: ', product);
@@ -120,20 +108,33 @@ const SellerPage = () => {
                     }
                 }
 
-                //console.log('Form productsWithoutCategories: ', productsWithoutCategories);
                 const sortedProductsWithoutCategories = productsWithoutCategories.sort((a, b) => (a.name.localeCompare(b.name)));
-                setProducts(sortedProductsWithoutCategories);
+                
+                const categoryOptions = response.categories.map( option => {
+                    return { value: `${option.id}`, label: `${option.name}`, name: `${option.name}` }
+                });
 
-                setBaseUnitOptions(apiBaseUnits.map( option => {
-                    return { value: `${option.id}`, label: `${option.name}`, name: `${option.name}` }
-                }));
-                //console.log('baseUnitOptions: ', baseUnitOptions);
-                setCategoryOptions(apiCategories.map( option => {
-                    return { value: `${option.id}`, label: `${option.name}`, name: `${option.name}` }
-                }));
-                //console.log('CreateProduct categoryOptions: ', categoryOptions);
+                setProductInfo({
+                    categories: response.categories,
+                    families: response.products,
+                    products: sortedProductsWithoutCategories,
+                    baseUnitOptions: response.units.map( option => {
+                        return { value: `${option.id}`, label: `${option.name}`, name: `${option.name}` }
+                    }),
+                    categoryOptions: categoryOptions
+                });
+                
+                let autocompleteCategoryOptions = [];
+                autocompleteCategoryOptions = categoryOptions.map(option => {
+                    return {
+                        ...option,
+                        name: option.name.toLowerCase()
+                    }
+                })
+
+                console.log('proautocompleteCategoryOptionsductInfo: ', autocompleteCategoryOptions);
             })
-    }, []);
+    }, [message]);
 
     if (accessToken === null) return <React.Fragment></React.Fragment>;
     //console.log('SellerPage sortedProductsWithoutCategories: ', products);
@@ -146,11 +147,13 @@ const SellerPage = () => {
                 <Connect accessToken={accessToken} setAccessToken={setAccessToken} />
             </nav>
             <Message message={message} />
-            <SellerButtons accessToken={accessToken} products={products} setMessage={setMessage} baseUnitOptions={baseUnitOptions} families={families} categories={categories} categoryOptions={categoryOptions} />
+            <SellerButtons accessToken={accessToken} setMessage={setMessage} {...productInfo} />
             <article className="sell-products-container">
                 <h2>Gérer les produits à vendre</h2>
                 <SellerProducts
-                    accessToken={accessToken} products={products} setMessage={setMessage} baseUnitOptions={baseUnitOptions} categoryOptions={categoryOptions} modifiedProducts={modifiedProducts} setModifiedProducts={setModifiedProducts}
+                    accessToken={accessToken} setMessage={setMessage}
+                    {...productInfo}
+                    modifiedProducts={modifiedProducts} setModifiedProducts={setModifiedProducts}
                 />
                 <div className="sell-btn">
                     <button type="submit" title="Modifier plusieurs produits" alt="Modifier plusieurs produits" value="" name="" onClick={modifyProducts}>

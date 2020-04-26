@@ -7,6 +7,7 @@ import MarketStall from './routes/MarketStall';
 import SellerPage from './routes/SellerPage';
 import OrdersManagement from './routes/OrdersManagement';
 
+import './fontawesome/css/all.min.css';
 
 const App = () => {
     return (

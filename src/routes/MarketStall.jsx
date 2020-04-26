@@ -130,7 +130,7 @@ const MarketStall = () => {
                     <button type="submit" onClick={displayBuyerInfosForm}>
                         Gérer vos coordonnées
                         <span className="btn-icon">
-                         <i class="fas fa-address-card"></i>
+                         <i className="fas fa-address-card"></i>
                         </span>
                     </button>
                 </div>
