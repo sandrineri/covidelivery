@@ -3,18 +3,21 @@ import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 
 import settings from '../config/settings';
+import Order from './Order';
 
 //import Order from './Product';
 
 const Orders = (props) => {
-    console.log('Orders props: ', props);
+    //console.log('Orders props: ', props);
 
     const [orderDetails, setOrderDetails] = useState([]);
     const [currentOrder, setCurrentOrder] = useState([]);
     const [currentOrderDate, setCurrentOrderDate] = useState('');
+    const [ordersDisplay, setOrdersDisplay] = useState('display-flex');
+    const [orderDisplay, setOrderDisplay] = useState('display-none');
 
     const changeStatus = (id, processed, isChecked) => {
-        console.log('changeStatus: ', id + '; order: ', processed + '; isChecked: ', isChecked);
+        //console.log('changeStatus: ', id + '; order: ', processed + '; isChecked: ', isChecked);
         let processedStatus = {}
 
         if (isChecked === "") {
@@ -61,6 +64,9 @@ const Orders = (props) => {
         //console.log(thisOrderDate);
         setCurrentOrderDate(thisOrderDate);
 
+        setOrdersDisplay('display-none');
+        setOrderDisplay('display-flex');
+
         fetch(`${settings.apiBasePath}/order/` + id, {
             headers: {
                 "Authorization": `Bearer ${props.accessToken}`
@@ -79,18 +85,22 @@ const Orders = (props) => {
 
     }
 
+    const closeOrder = () => {
+        setOrderDisplay('display-none');
+        setOrdersDisplay('display-flex');
+    }
+
     return (
         <React.Fragment>
-            <div className="print-btn">
-                <button>
-                    Imprimer la liste
+            <article className={`orders-container ${ordersDisplay}`}>
+                <div className="print-btn">
+                    <button>
+                        Imprimer la liste
                     <span className="btn-icon">
-                        <i className="fas fa-print"></i>
-                    </span>
-                </button>
-            </div>
-
-            <article className="orders-container display-flex">
+                            <i className="fas fa-print"></i>
+                        </span>
+                    </button>
+                </div>
                 <h2>Liste des commandes</h2>
                 <ul className="orders">
                     <li className="prod-info-labels orders-prod-labels">
@@ -134,7 +144,7 @@ const Orders = (props) => {
                                     {status}
                                     <span>
                                         <input type="checkbox" value={order.id} defaultChecked={isChecked} onChange={(e) => {
-                                            console.log('checkbox isChecked: ', order.processed, isChecked);
+                                            //console.log('checkbox isChecked: ', order.processed, isChecked);
                                             changeStatus(e.target.value, order.processed, isChecked);
                                         }}></input>
                                     </span>
@@ -145,7 +155,7 @@ const Orders = (props) => {
                 </ul>
             </article>
 
-            <article className="order-container display-flex">
+            <article className={`order-container ${orderDisplay}`}>
                 <div className="buttons-container">
                     <div className="print-btn">
                         <button>
@@ -157,7 +167,7 @@ const Orders = (props) => {
                     </div>
 
                     <div className="back-btn">
-                        <button>
+                        <button onClick={closeOrder}>
                             Retourner à la liste
                             <span className="btn-icon">
                                 <i className="fas fa-undo-alt"></i>
@@ -167,58 +177,7 @@ const Orders = (props) => {
                 </div>
 
                 <h2>Commande</h2>
-                <section className="delivery-infos-container">
-                    <h3>Informations de livraison <span className="deliver-title-sub">(pas de frais de livraison - pas de montant minimum)</span></h3>
-                    <div className="delivery-infos">
-                        <p className="deliv-label dl1">Nom&nbsp;:
-                            <span className="deliv-info deliv-name">{currentOrder.userName}</span>
-                        </p>
-                        <p className="deliv-label dl2">Commande n°&nbsp;:
-                            <span className="deliv-info">{currentOrder.id}</span>
-                        </p>
-                        <p className="deliv-label dl3">Téléphone&nbsp;:
-                            <span className="deliv-info deliv-phone">{currentOrder.userPhone}</span>
-                        </p>
-                        <p className="deliv-label dl4">E-mail&nbsp;:
-                            <span className="deliv-info">{currentOrder.userEmail}</span>
-                        </p>
-                        <p className="deliv-label dl5">Adresse&nbsp;:
-                            <span className="deliv-info deliv-adress">{currentOrder.userAddress}</span>
-                        </p>
-                        <p className="deliv-label dl6">Date de la commande&nbsp;:
-                            <span className="deliv-info">{currentOrderDate}</span>
-                        </p>
-                        <p className="deliv-label dl7">Complément d'info&nbsp;:
-                            <span className="deliv-info">{currentOrder.userExtra}</span>
-                        </p>
-                        {/* <p className="deliv-label dl8">Réglement par&nbsp;:
-                            <span className="deliv-info"></span>
-                        </p> */}
-                    </div>
-                </section>
-
-                <section className="delivery-order">
-                    <ul>
-                        <li className="prod-info-labels order-deliv-labels">
-                            <span className="order-info order-name-label">Produit</span>
-                            <span className="order-info order-cat-label">Catégorie</span>
-                            <span className="order-info order-origin-label">Provenance</span>
-                            <span className="order-info order-price-label">Prix à l'unité</span>
-                            <span className="order-info order-quantity-label">Commande</span>
-                        </li>
-                        {orderDetails.map(product => {
-                            return (
-                                <li className="order-prod" key={product.id}>
-                                    <span className="order-info order-name">{product.name}</span>
-                                    <span className="order-info order-cat">{product.categoryName.toLowerCase()}</span>
-                                    <span className="order-info order-origin">{product.origin}</span>
-                                    <span className="order-info order-price">{product.price.replace('.', ',')} € / {product.baseUnitName}</span>
-                                    <span className="order-info order-quantity">{product.amount} {product.selectedUnitName}(s)</span>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                </section>
+                <Order currentOrder={currentOrder} orderDetails={orderDetails} currentOrderDate={currentOrderDate} />
             </article>
         </React.Fragment>
     )
