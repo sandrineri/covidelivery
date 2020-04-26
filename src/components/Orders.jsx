@@ -119,7 +119,7 @@ const Orders = (props) => {
                                 <span className="orders-info orders-id">{order.id}</span>
                                 <span className="orders-info orders-name">{order.userName}</span>
                                 <span className="orders-info orders-adress">{order.userAddress}</span>
-                                <span className="orders-info orders-phone"></span>
+                                <span className="orders-info orders-phone">{order.userPhone}</span>
                                 <span className="orders-info orders-mail">{order.userEmail}</span>
                                 <span className="orders-info orders-date">{format(new Date(order.date), 'dd-MM-yyyy', { locale: fr })}</span>
                                 <span className="orders-info orders-btn">
@@ -177,7 +177,7 @@ const Orders = (props) => {
                             <span className="deliv-info">{currentOrder.id}</span>
                         </p>
                         <p className="deliv-label dl3">Téléphone&nbsp;:
-                            <span className="deliv-info deliv-phone"></span>
+                            <span className="deliv-info deliv-phone">{currentOrder.userPhone}</span>
                         </p>
                         <p className="deliv-label dl4">E-mail&nbsp;:
                             <span className="deliv-info">{currentOrder.userEmail}</span>
@@ -189,11 +189,11 @@ const Orders = (props) => {
                             <span className="deliv-info">{currentOrderDate}</span>
                         </p>
                         <p className="deliv-label dl7">Complément d'info&nbsp;:
-                            <span className="deliv-info"></span>
+                            <span className="deliv-info">{currentOrder.userExtra}</span>
                         </p>
-                        <p className="deliv-label dl8">Réglement par&nbsp;:
+                        {/* <p className="deliv-label dl8">Réglement par&nbsp;:
                             <span className="deliv-info"></span>
-                        </p>
+                        </p> */}
                     </div>
                 </section>
 

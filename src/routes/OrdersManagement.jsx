@@ -35,7 +35,7 @@ const OrdersManagement = () => {
         })
             .then(response => response.json())
             .then((response) => {
-                //console.log('fetch complete', response);
+                console.log('fetch complete', response);
 
                 const sortedOrders = response.sort((a, b) => {
                     if(a.id < b.id) { return -1; }
@@ -59,6 +59,7 @@ const OrdersManagement = () => {
         <React.Fragment>
             <Header />
             <nav>
+                <div></div>
                 <Connect accessToken={accessToken} setAccessToken={setAccessToken} />
             </nav>
             {/* <Message message={errorMessage} /> */}

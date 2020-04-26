@@ -12,6 +12,7 @@ ___________
 TODO :
 
 - PETOUILLES :
+	[] orders api : manque téléphone
 	[x] Cacher le bouton de commande tant que l'on n'est pas connecté
 	[x] Ne pas envoyer la commande pour un panier vide (message d'alerte)
 	[] Champs "required"
@@ -71,4 +72,4 @@ Connecté en tant que vendeur :
 - Finir les pétouilles de navigation/connexion [S]
 - [x] Lorsque une requête est envoyée à l'API, si l'utilisateur n'existe pas mais que son token est reconnu par Auth0, créer l'utilisateur [J]
 - Créer les comptes en mode "inactif" par défaut [J]
-- Pouvoir modifier ses coordonnées [S/J]
+- [x] Pouvoir modifier ses coordonnées [S/J]

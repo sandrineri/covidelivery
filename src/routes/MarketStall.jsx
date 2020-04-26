@@ -125,11 +125,12 @@ const MarketStall = () => {
         <React.Fragment>
             <Header />
             <nav>
+                <div></div>
                 <div className={`user user-buyer ${isAuthenticated ? 'display-flex' : 'display-none'}`}>
                     <button type="submit" onClick={displayBuyerInfosForm}>
                         Gérer vos coordonnées
                         <span className="btn-icon">
-                            <i className="fas fa-user-circle"></i>
+                         <i class="fas fa-address-card"></i>
                         </span>
                     </button>
                 </div>

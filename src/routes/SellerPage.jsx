@@ -141,7 +141,10 @@ const SellerPage = () => {
     return (
         <React.Fragment>
             <Header />
-            <Connect accessToken={accessToken} setAccessToken={setAccessToken} />
+            <nav>
+                <div></div>
+                <Connect accessToken={accessToken} setAccessToken={setAccessToken} />
+            </nav>
             <Message message={message} />
             <SellerButtons accessToken={accessToken} products={products} setMessage={setMessage} baseUnitOptions={baseUnitOptions} families={families} categories={categories} categoryOptions={categoryOptions} />
             <article className="sell-products-container">
