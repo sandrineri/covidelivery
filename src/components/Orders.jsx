@@ -16,20 +16,29 @@ const Orders = (props) => {
     const [ordersDisplay, setOrdersDisplay] = useState('display-flex');
     const [orderDisplay, setOrderDisplay] = useState('display-none');
 
-    const changeStatus = (id, processed, isChecked) => {
-        //console.log('changeStatus: ', id + '; order: ', processed + '; isChecked: ', isChecked);
+    const changeStatus = (id, processed, isChecked, status) => {
+        console.log('changeStatus: ', id + '; order: ', processed + '; isChecked: ', isChecked + '; status: ', status);
         let processedStatus = {}
 
         if (isChecked === "") {
             processedStatus = {
                 "processed": true
             };
+            
         } else {
             processedStatus = {
                 "processed": false
             };
+            
+        }
+
+        if (status === "A traiter") {
+            status = 'Traitée';
+        } else {
+            status = "A traiter";
         }
         //console.log(processedStatus);
+        console.log('new status: ', status);
 
         fetch(`${settings.apiBasePath}/order/` + id, {
             method: 'PUT',
@@ -40,12 +49,12 @@ const Orders = (props) => {
         })
             .then(response => response.json())
             .then((response) => {
-                console.log('fetch ', response);
-
+                console.log('changeStatus fetch: ', response);
                 setOrderDetails(response);
+                props.setLastResponse(response);
             })
             .catch(error => {
-                console.log(error);
+                //console.log(error);
                 //setErrorMessage('Le cageot est tombé du camion');
             });
 
@@ -140,7 +149,7 @@ const Orders = (props) => {
                                     <span>
                                         <input type="checkbox" value={order.id} defaultChecked={isChecked} onChange={(e) => {
                                             //console.log('checkbox isChecked: ', order.processed, isChecked);
-                                            changeStatus(e.target.value, order.processed, isChecked);
+                                            changeStatus(e.target.value, order.processed, isChecked, status);
                                         }}></input>
                                     </span>
                                 </span>

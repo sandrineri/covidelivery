@@ -13,6 +13,7 @@ const OrdersManagement = () => {
     // Initialisation du state
     //const [errorMessage, setErrorMessage] = useState('');
     const [orders, setOrders] = useState([]);
+    const [lastResponse, setLastResponse] = useState(null);
 
     // Authorization
     const [accessToken, setAccessToken] = useState(null);
@@ -51,7 +52,7 @@ const OrdersManagement = () => {
                 //setErrorMessage('Le cageot est tombé du camion');
             });
 
-    }, [accessToken]);
+    }, [accessToken, lastResponse]);
 
     if (accessToken === null) return <React.Fragment></React.Fragment>;
 
@@ -63,7 +64,7 @@ const OrdersManagement = () => {
                 <Connect accessToken={accessToken} setAccessToken={setAccessToken} />
             </nav>
             {/* <Message message={errorMessage} /> */}
-            <Orders accessToken={accessToken} orders={orders} />
+            <Orders accessToken={accessToken} orders={orders} setLastResponse={setLastResponse} />
             <Footer />
         </React.Fragment>
     )
