@@ -37,7 +37,7 @@ const ManageCategories = (props) => {
     }
 
     const sendNewCategory = (e) => {
-        console.log('categoryToSend: ', modifiedCategory);
+        //console.log('categoryToSend: ', modifiedCategory);
         e.preventDefault();
 
         if (modifiedCategory.name === "") window.alert("Vous devez donner un nom à votre catégorie pour pouvoir l'enregistrer");
@@ -51,8 +51,11 @@ const ManageCategories = (props) => {
             .then(response => {
                 if (response.status === 201) {
                     console.log(modifiedCategory.name + ' créée');
-                    //props.setMessage(`La catégorie "${category.name}" a bien été créée. La liste sera raffraîchie automatiquement d'ici quelques secondes. Vous pourrez ensuite la modifier.`);
-                    //setTimeout(() => { document.location.reload(); }, 3000);
+                    props.setMessage(`La catégorie "${modifiedCategory.name}" a bien été créée. Vous pouvez désormais la modifier dans la liste des catégories ci-dessus. Si vous avez créé une nouvelle famille, vous la trouverez dans la liste des familles à choisir.`);
+                    setTimeout(() => {
+                        props.setLastResponseStatusCode(response.status);
+                        props.setMessage('');
+                    }, 3000);
                 }
                 else {
                     throw new Error('Code HTTP incorrect');
@@ -101,7 +104,7 @@ const ManageCategories = (props) => {
                 <ul className="categories">
                     {props.categories.map((category) => {
                         return (
-                            <ManageCategory accessToken={props.accessToken} key={category.id} category={category} familyOptions={familyOptions} />
+                            <ManageCategory accessToken={props.accessToken} key={category.id} category={category} familyOptions={familyOptions} setMessage={props.setMessage} setLastResponseStatusCode={props.setLastResponseStatusCode} />
                         )
                     })}
                 </ul>

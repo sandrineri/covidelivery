@@ -41,7 +41,6 @@ const CreateProduct = (props) => {
         e.preventDefault();
 
         if (product.name !== '') {
-
             fetch(`${settings.apiBasePath}/product`, {
                 method: 'POST',
                 body: JSON.stringify(product),
@@ -64,7 +63,7 @@ const CreateProduct = (props) => {
                 })
                 .catch(error => {
                     console.log('Erreur de création : ', error);
-                    props.setMessage(`Erreur de création : ${error}`);
+                    //props.setMessage(`Erreur de création : ${error}`);
                 });
 
             //console.log('formProductObject sent', formProductObject);

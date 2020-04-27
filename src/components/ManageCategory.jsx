@@ -4,9 +4,8 @@ import Select from 'react-select';
 import settings from '../config/settings';
 
 const ManageCategory = (props) => {
+    //console.log('ManageCategory props: ', props);
     const [category, setCategory] = useState(props.category);
-
-    console.log('ManageCategory props: ', props);
 
     const changeCategory =(key, value) => {
         console.log('modifiedCategory: ', key, value);
@@ -31,8 +30,12 @@ const ManageCategory = (props) => {
             .then(response => {
                 if (response.status === 201) {
                     console.log(category.name + ' changée');
-                    //props.setMessage(`La catégorie "${category.name}" a bien été créée. La liste sera raffraîchie automatiquement d'ici quelques secondes. Vous pourrez ensuite la modifier.`);
-                    //setTimeout(() => { document.location.reload(); }, 3000);
+                    props.setMessage(`La catégorie "${category.name}" a bien été modifiée. Si vous l'avez placée en nouvelle famille, vous la trouverez désormais dans la liste des familles à choisir.`);
+                    setTimeout(() => {
+                        props.setLastResponseStatusCode(response.status);
+                        props.setMessage('');
+                        console.log(response.status);
+                    }, 3000);
                 }
                 else {
                     throw new Error('Code HTTP incorrect');

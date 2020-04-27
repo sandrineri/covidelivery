@@ -51,7 +51,7 @@ const SellerButtons = (props) => {
             </article>
 
             <article className={`form-container cat-form-container ${catManageDisplay}`}>
-                <ManageCategories accessToken={props.accessToken} families={props.families} categories={props.categories} />
+                <ManageCategories accessToken={props.accessToken} families={props.families} categories={props.categories} setMessage={props.setMessage} setLastResponseStatusCode={props.setLastResponseStatusCode} />
             </article>
         </React.Fragment>
     )
