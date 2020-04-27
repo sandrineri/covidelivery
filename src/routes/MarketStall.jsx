@@ -95,7 +95,7 @@ const MarketStall = () => {
             .then(response => {
                 if (response.status === 201) {
                     //console.log(order + ' envoyé');
-                    // props.setMessage(`Le produit "${product.name}" a bien été créé. La liste sera raffraîchie automatiquement d'ici quelques secondes. Vous pourrez ensuite la modifier.`);
+                    //setMessage(`Le produit "${product.name}" a bien été créé. La liste sera raffraîchie automatiquement d'ici quelques secondes. Vous pourrez ensuite la modifier.`);
                     //setTimeout(() => { document.location.reload(); }, 3000);
                     return response.json();
                 }

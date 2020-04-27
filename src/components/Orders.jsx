@@ -24,21 +24,12 @@ const Orders = (props) => {
             processedStatus = {
                 "processed": true
             };
-            
         } else {
             processedStatus = {
                 "processed": false
             };
-            
-        }
-
-        if (status === "A traiter") {
-            status = 'Traitée';
-        } else {
-            status = "A traiter";
         }
         //console.log(processedStatus);
-        console.log('new status: ', status);
 
         fetch(`${settings.apiBasePath}/order/` + id, {
             method: 'PUT',
@@ -47,14 +38,17 @@ const Orders = (props) => {
                 "Authorization": `Bearer ${props.accessToken}`
             }
         })
-            .then(response => response.json())
             .then((response) => {
-                console.log('changeStatus fetch: ', response);
-                setOrderDetails(response);
-                props.setLastResponse(response);
+                if (response.status === 204) {
+                    console.log('changeStatus fetch: ', response);
+                    props.setLastResponse(response);
+                }
+                else {
+                    throw new Error('Code HTTP incorrect');
+                }
             })
             .catch(error => {
-                //console.log(error);
+                console.log(error);
                 //setErrorMessage('Le cageot est tombé du camion');
             });
 
