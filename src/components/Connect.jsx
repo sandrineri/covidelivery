@@ -5,7 +5,7 @@ import { useAuth0 } from '../auth/Auth0Wrapper';
 import settings from '../config/settings';
 
 const Connect = (props) => {
-    console.log('Connect props: ', props);
+    //console.log('Connect props: ', props);
 
     const { logout, loginWithRedirect } = useAuth0();
 
@@ -31,12 +31,12 @@ const Connect = (props) => {
     
     return (
         <React.Fragment>
-            <div className={`user user-seller ${displayIfAuthenticated()}`}>
+            <div className={`user ${displayIfAuthenticated()}`}>
                 <div className={`buttons-container ${displayIfSeller()}`}>
                     <div className={displayIfNotOnPage('/')}>
                         <Link to="/">
                             <button type="submit">
-                                Liste des produitsV
+                                Liste des produits
                                 <span className="btn-icon">
                                     <i className="fas fa-list-alt"></i>
                                 </span>
@@ -46,7 +46,7 @@ const Connect = (props) => {
                     <div className={displayIfNotOnPage('/vendeur/produits')}>
                         <Link to="/vendeur/produits">
                             <button type="submit">
-                                Gérer vos produitsV
+                                Gérer vos produits
                                 <span className="btn-icon">
                                     <i className="fas fa-file-alt"></i>
                                 </span>
@@ -57,7 +57,7 @@ const Connect = (props) => {
                     <div className={displayIfNotOnPage('/vendeur/commandes')}>
                         <Link to="/vendeur/commandes">
                             <button type="submit">
-                                Voir les commandesV
+                                Voir les commandes
                                 <span className="btn-icon">
                                     <i className="fas fa-receipt"></i>
                                 </span>
@@ -66,11 +66,11 @@ const Connect = (props) => {
                     </div>
                 </div>
 
-                <div className={`user user-buyer ${displayIfClient()}`}>
+                <div className={`buttons-container ${displayIfClient()}`}>
                     <button type="submit" onClick={props.displayBuyerInfosForm}>
                         Gérer vos coordonnées
                         <span className="btn-icon">
-                         <i className="fas fa-address-card"></i>
+                            <i className="fas fa-address-card"></i>
                         </span>
                     </button>
                 </div>

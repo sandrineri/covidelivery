@@ -112,7 +112,6 @@ const MarketStall = () => {
     // Accéder au bouton de commande quand on est connecté
     // let orderBtnDisplay = 'display-flex';
     // if (isAuthenticated) orderBtnDisplay = 'display-none';
-
     const displayBuyerInfosForm = () => {
         if (buyerInfosFormDisplay === 'display-none') {
             setBuyerInfosFormDisplay('display-flex');
@@ -121,19 +120,17 @@ const MarketStall = () => {
         }
     }
 
+    const displayIfClient = () => {
+        if (user === undefined) return 'display-none';
+
+        return (user.nickname !== settings.sellerLogin) ? 'display-flex' : 'display-none';
+    }
+
     return (
         <React.Fragment>
             <Header />
             <nav>
-                <div></div>
-                {/* <div className={`user user-buyer ${isAuthenticated ? 'display-flex' : 'display-none'}`}>
-                    <button type="submit" onClick={displayBuyerInfosForm}>
-                        Gérer vos coordonnées
-                        <span className="btn-icon">
-                         <i className="fas fa-address-card"></i>
-                        </span>
-                    </button>
-                </div> */}
+                <div>Mon nom</div>
                 <Connect
                     accessToken={accessToken} setAccessToken={setAccessToken} user={user}
                     displayBuyerInfosForm={displayBuyerInfosForm} />
@@ -171,7 +168,7 @@ const MarketStall = () => {
 
                 <Products order={order} setOrder={setOrder} products={products} message={errorMessage} lastModified={lastModified} baseUnitOptions={baseUnitOptions} />
 
-                <span className={`order-btn ${isAuthenticated ? 'display-flex' : 'display-none'}`}>
+                <span className={`order-btn ${displayIfClient()}`}>
                     <button type="submit" onClick={sendOrder}>
                         Envoyer ma commande
                         <span className="btn-icon">
