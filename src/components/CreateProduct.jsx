@@ -1,9 +1,20 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
+import CreatableSelect from 'react-select/creatable';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+
 import settings from '../config/settings';
 
 const CreateProduct = (props) => {
-    //console.log('CreateProduct props: ', props);
+    console.log('CreateProduct props: ', props);
+
+    const options = props.products.map(product => { 
+        return (
+            { value: product.name, label: product.name }
+        )
+    });
+    console.log(options);
 
     const [product, setProduct] = useState({
         "name": '',
@@ -27,29 +38,17 @@ const CreateProduct = (props) => {
             console.log('registeredProduct: ', registeredProduct);
         }
         
-
         const modifiedProduct = product;
         modifiedProduct[key] = value;
         //console.log('modifiedProduct[key]', modifiedProduct[key]);
+        
         setProduct(modifiedProduct);
         //console.log('createdProduct: ', modifiedProduct);
     }
     //console.log('CreateProduct product: ', product);
 
-    const errors = validate(product.name);
-
-    function validate(name) {
-        // true means invalid, so our conditions got reversed
-        return {
-          name: name.length === 0,
-        };
-      }
-
     const sendForm = (e) => {
-
         e.preventDefault();
-
-        
 
         if (product.name !== '') {
             fetch(`${settings.apiBasePath}/product`, {
@@ -90,7 +89,33 @@ const CreateProduct = (props) => {
             <form className="form new-prod-form">
                 <div className="form-part form-part1">
                     <label htmlFor="name">Produit<span className="required-sign">*</span>&nbsp;:</label>
-                    <input className={`form-input ${errors.email ? "empty" : ""}`} type="text" name="produit" placeholder="nectarine jaune..." id="name" required onChange={(input) => changeProduct('name', input.target.value)} />
+                    <Autocomplete
+                        className="form-select"
+                        //id="free-solo-demo"
+                        freeSolo
+                        options={props.products.map(product => product.name)}
+                        renderInput={(params) => (
+                            <TextField {...params} className="form-select" variant="outlined" placeholder="Nectarine jaune..." />
+                        )}
+                    />
+                    {/* <CreatableSelect
+                        className="form-select"
+                        // className={`form-input`}
+                        isClearable={true}
+                        placeholder="Nectarine jaune..."
+                        options={options}
+                        onChange={(input) => {
+                            console.log(input);
+                            if (input !== null) {
+                                changeProduct('name', input.value)
+                            }
+                            else {
+                                changeProduct('name', '')
+                            }
+                        }}
+                        formatCreateLabel={(value) => `Ajouter ${value}`}
+                    /> */}
+                    {/* <input className={`form-input ${errors.email ? "empty" : ""}`} type="text" name="produit" placeholder="nectarine jaune..." id="name" required onChange={(input) => changeProduct('name', input.target.value)} /> */}
                 </div>
 
                 <div className="form-part form-part2">

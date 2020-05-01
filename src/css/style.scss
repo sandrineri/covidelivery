@@ -6,6 +6,16 @@ $labelsFontSize: 1.2rem;
 $labelsBackgroundColor: #f0eded;
 $formBackground: #f8f8f8;
 $productPadding: .3rem .5rem;
+$placeholderColor: #979797;
+
+.form .form-select .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] {
+    padding: 0;
+    background-color: #ffffff;
+}
+
+.form .form-select .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input {
+    padding-left: 1rem;
+}
 
 .rs-container,
 .rs__control,
@@ -15,6 +25,10 @@ $productPadding: .3rem .5rem;
 .rs__menu-list,
 .rs__option {
     cursor: pointer;
+}
+
+.form .rs__value-container {
+    padding: 0 1rem;
 }
 
 html,
@@ -48,8 +62,50 @@ button {
     margin-left: .5rem;
 }
 
-input {
+input,
+.form .form-select .MuiInputBase-root input,
+.form .form-select {
     cursor: pointer;
+    font-size: .9rem;
+    font-family: $primaryFont;
+
+    &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: $placeholderColor;
+        opacity: 1; /* Firefox */
+    }
+    &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color:  $placeholderColor;
+    }
+    &::-ms-input-placeholder { /* Microsoft Edge */
+        color:  $placeholderColor;
+    }
+}
+
+.form input,
+.form .css-1pahdxg-control,
+.form .rs__control--is-focused {
+    &:focus,
+    &:active,
+    &:hover {
+        border: 1px solid #719ECE;
+        box-shadow: 0 0 1px #719ECE;
+        outline: .5px solid #719ECE;
+        border-radius: 0;
+    }
+}
+
+.form .css-1pahdxg-control,
+.form .rs__control--menu-is-open {
+    border: 1px solid #719ECE;
+    box-shadow: 0 0 2px #719ECE;
+    outline: 1px solid #719ECE;
+    border-radius: 0;
+}
+
+.form .form-select .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,
+.form .form-select .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #719ECE;
+    box-shadow: 0 0 1px #719ECE;
 }
 
 .message {
@@ -128,8 +184,6 @@ nav {
 }
 
 // PRODUCT
-
-
 .product,
 .prod-info-labels {
     text-align: center;

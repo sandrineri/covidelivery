@@ -17,7 +17,8 @@ TODO :
 	[x] Ne pas envoyer la commande pour un panier vide (message d'alerte)
 	[x] Traitée / A traiter : affichage au moment du changement de statut plutôt qu'au rechargement de la page
 	[] Champs "required" (message des champs non remplis)
-	[] Autocomplete
+	[x] Autocomplete
+	[] Si le nom d'un produit est déjà dans la liste, ne pas envoyer le formulaire
 	[] Rechargements de pages après envois à l'API (catégories à régler)
 	- Revoir l'arborescence
 		[x] Séparer orders et order
