@@ -17,7 +17,7 @@ const OrdersManagement = () => {
 
     // Authorization
     const [accessToken, setAccessToken] = useState(null);
-    const { isAuthenticated, getTokenSilently } = useAuth0();
+    const { isAuthenticated, getTokenSilently, user } = useAuth0();
     if (isAuthenticated) {
         getTokenSilently().then(token => {
             setAccessToken(token);
@@ -61,7 +61,7 @@ const OrdersManagement = () => {
             <Header />
             <nav>
                 <div></div>
-                <Connect accessToken={accessToken} setAccessToken={setAccessToken} />
+                <Connect accessToken={accessToken} setAccessToken={setAccessToken} user={user} />
             </nav>
             {/* <Message message={errorMessage} /> */}
             <Orders accessToken={accessToken} orders={orders} setLastResponse={setLastResponse} />

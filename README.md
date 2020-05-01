@@ -15,8 +15,8 @@ TODO :
 	[x] orders api : manque téléphone
 	[x] Cacher le bouton de commande tant que l'on n'est pas connecté
 	[x] Ne pas envoyer la commande pour un panier vide (message d'alerte)
-	[] Traitée / A traiter : affichage au moment du changement de statut plutôt qu'au rechargement de la page
-	[] Champs "required"
+	[x] Traitée / A traiter : affichage au moment du changement de statut plutôt qu'au rechargement de la page
+	[] Champs "required" (message des champs non remplis)
 	[] Autocomplete
 	[] Rechargements de pages après envois à l'API (catégories à régler)
 	- Revoir l'arborescence

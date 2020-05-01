@@ -58,6 +58,15 @@ input {
     color: #cc0101;
 }
 
+.empty {
+    border : 1px solid #cc0101;
+
+    &::before {
+        content: "X";
+        color: #cc0101;
+    }
+}
+
 // HEADER
 header {
     text-align: center;
@@ -264,6 +273,10 @@ header {
         height: 38px;
         border-radius: 4px;
         border: 1px solid #cccccc;
+    }
+
+    .empty {
+        border : 1px solid #cc0101;
     }
 
     .form-unit-select {

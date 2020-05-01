@@ -25,7 +25,7 @@ const MarketStall = () => {
 
     // Authorization
     const [accessToken, setAccessToken] = useState(null);
-    const { isAuthenticated, getTokenSilently } = useAuth0();
+    const { isAuthenticated, getTokenSilently, user } = useAuth0();
     if (isAuthenticated) {
         getTokenSilently().then(token => {
             setAccessToken(token);
@@ -126,15 +126,17 @@ const MarketStall = () => {
             <Header />
             <nav>
                 <div></div>
-                <div className={`user user-buyer ${isAuthenticated ? 'display-flex' : 'display-none'}`}>
+                {/* <div className={`user user-buyer ${isAuthenticated ? 'display-flex' : 'display-none'}`}>
                     <button type="submit" onClick={displayBuyerInfosForm}>
                         Gérer vos coordonnées
                         <span className="btn-icon">
                          <i className="fas fa-address-card"></i>
                         </span>
                     </button>
-                </div>
-                <Connect accessToken={accessToken} setAccessToken={setAccessToken} />
+                </div> */}
+                <Connect
+                    accessToken={accessToken} setAccessToken={setAccessToken} user={user}
+                    displayBuyerInfosForm={displayBuyerInfosForm} />
             </nav>
             <Message message={errorMessage} />
 

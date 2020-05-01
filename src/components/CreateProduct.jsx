@@ -34,11 +34,22 @@ const CreateProduct = (props) => {
         setProduct(modifiedProduct);
         //console.log('createdProduct: ', modifiedProduct);
     }
-
     //console.log('CreateProduct product: ', product);
 
+    const errors = validate(product.name);
+
+    function validate(name) {
+        // true means invalid, so our conditions got reversed
+        return {
+          name: name.length === 0,
+        };
+      }
+
     const sendForm = (e) => {
+
         e.preventDefault();
+
+        
 
         if (product.name !== '') {
             fetch(`${settings.apiBasePath}/product`, {
@@ -79,7 +90,7 @@ const CreateProduct = (props) => {
             <form className="form new-prod-form">
                 <div className="form-part form-part1">
                     <label htmlFor="name">Produit<span className="required-sign">*</span>&nbsp;:</label>
-                    <input className="form-input" type="text" name="produit" placeholder="nectarine jaune..." id="name" required onChange={(input) => changeProduct('name', input.target.value)} />
+                    <input className={`form-input ${errors.email ? "empty" : ""}`} type="text" name="produit" placeholder="nectarine jaune..." id="name" required onChange={(input) => changeProduct('name', input.target.value)} />
                 </div>
 
                 <div className="form-part form-part2">
@@ -90,7 +101,7 @@ const CreateProduct = (props) => {
                 <div className="form-part form-part3">
                     <label htmlFor="price">Prix<span className="required-sign">*</span>&nbsp;:</label>
                     <div>
-                        <input className="form-input number-input" type="number" name="prix" min="0" placeholder="2,99" step="0.01" lang="fr" id="price" onChange={(input) => changeProduct('price', input.target.value)} />
+                        <input className="form-input number-input" type="number" name="prix" min="0" placeholder="2,99" step="0.01" lang="fr" id="price" required onChange={(input) => changeProduct('price', input.target.value)} />
                         <span> €</span>
                     </div>
                 </div>

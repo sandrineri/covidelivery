@@ -2,38 +2,51 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { useAuth0 } from '../auth/Auth0Wrapper';
 
+import settings from '../config/settings';
 
 const Connect = (props) => {
-    //console.log('Connect props: ', props);
+    console.log('Connect props: ', props);
 
-    // Authorization
-    const { isAuthenticated, getTokenSilently, logout, loginWithRedirect } = useAuth0();
-    if (isAuthenticated) {
-        getTokenSilently().then(token => {
-            props.setAccessToken(token);
-            //console.log('token: ', token);
-        });
+    const { logout, loginWithRedirect } = useAuth0();
+
+    const displayIfAuthenticated = () => {
+        return props.accessToken ? 'display-flex' : 'display-none';
     }
+    const displayIfNotAuthenticated = () => {
+        return props.accessToken ? 'display-none' : 'display-flex';
+    }
+    const displayIfNotOnPage = (pathname) => {
+        return window.location.pathname !== pathname ? 'display-flex' : 'display-none';
+    }
+    const displayIfSeller = () => {
+        if (props.user === undefined) return 'display-none';
 
+        return (props.user.nickname === settings.sellerLogin) ? 'display-flex' : 'display-none';
+    }
+    const displayIfClient = () => {
+        if (props.user === undefined) return 'display-none';
+
+        return (props.user.nickname !== settings.sellerLogin) ? 'display-flex' : 'display-none';
+    }
+    
     return (
         <React.Fragment>
-            <div className={`user user-seller ${isAuthenticated ? 'display-flex' : 'display-none'}`}>
-                <div className="buttons-container">
-                    <div>
+            <div className={`user user-seller ${displayIfAuthenticated()}`}>
+                <div className={`buttons-container ${displayIfSeller()}`}>
+                    <div className={displayIfNotOnPage('/')}>
                         <Link to="/">
                             <button type="submit">
-                                Liste des produits
+                                Liste des produitsV
                                 <span className="btn-icon">
                                     <i className="fas fa-list-alt"></i>
                                 </span>
                             </button>
                         </Link>
                     </div>
-
-                    <div>
+                    <div className={displayIfNotOnPage('/vendeur/produits')}>
                         <Link to="/vendeur/produits">
                             <button type="submit">
-                                Gérer vos produits
+                                Gérer vos produitsV
                                 <span className="btn-icon">
                                     <i className="fas fa-file-alt"></i>
                                 </span>
@@ -41,32 +54,30 @@ const Connect = (props) => {
                         </Link>
                     </div>
 
-                    <div>
+                    <div className={displayIfNotOnPage('/vendeur/commandes')}>
                         <Link to="/vendeur/commandes">
                             <button type="submit">
-                                Voir les commandes
+                                Voir les commandesV
                                 <span className="btn-icon">
                                     <i className="fas fa-receipt"></i>
                                 </span>
                             </button>
                         </Link>
                     </div>
-
                 </div>
 
-
-                {/* <div className={`user user-buyer ${isAuthenticated ? 'display-flex' : 'display-none'}`}>
-                        <button type="submit">
-                            Gérer vos coordonnées
-                            <span className="btn-icon">
-                                <i className="fas fa-user-circle"></i>
-                            </span>
-                        </button>
-                    </div> */}
+                <div className={`user user-buyer ${displayIfClient()}`}>
+                    <button type="submit" onClick={props.displayBuyerInfosForm}>
+                        Gérer vos coordonnées
+                        <span className="btn-icon">
+                         <i className="fas fa-address-card"></i>
+                        </span>
+                    </button>
+                </div>
             </div>
 
             <div className="connect-container">
-                <div className={`${isAuthenticated ? 'display-none' : 'display-flex'}`}>
+                <div className={`${displayIfNotAuthenticated()}`}>
                     <button onClick={loginWithRedirect}>
                         Se connecter
                         <span className="btn-icon">
@@ -74,7 +85,7 @@ const Connect = (props) => {
                         </span>
                     </button>
                 </div>
-                <div className={`${isAuthenticated ? 'display-flex' : 'display-none'}`}>
+                <div className={`${displayIfAuthenticated()}`}>
                     <button onClick={logout}>
                         Se déconnecter
                         <span className="btn-icon">

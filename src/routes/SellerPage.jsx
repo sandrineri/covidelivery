@@ -26,8 +26,9 @@ const SellerPage = () => {
 
     // Authorization
     const [accessToken, setAccessToken] = useState(null);
-    const { isAuthenticated, getTokenSilently } = useAuth0();
+    const { isAuthenticated, getTokenSilently, user } = useAuth0();
     if (isAuthenticated) {
+        console.log(user);
         getTokenSilently().then(token => {
             setAccessToken(token);
             //console.log('token: ', token);
@@ -145,7 +146,7 @@ const SellerPage = () => {
             <Header />
             <nav>
                 <div></div>
-                <Connect accessToken={accessToken} setAccessToken={setAccessToken} />
+                <Connect accessToken={accessToken} setAccessToken={setAccessToken} user={user} />
             </nav>
             
             <SellerButtons accessToken={accessToken} setMessage={setMessage} {...productInfo} setLastResponseStatusCode={setLastResponseStatusCode} />
