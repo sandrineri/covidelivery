@@ -17,7 +17,7 @@ const Orders = (props) => {
     const [orderDisplay, setOrderDisplay] = useState('display-none');
 
     const changeStatus = (id, processed, isChecked, status) => {
-        console.log('changeStatus: ', id + '; order: ', processed + '; isChecked: ', isChecked + '; status: ', status);
+        //console.log('changeStatus: ', id + '; order: ', processed + '; isChecked: ', isChecked + '; status: ', status);
         let processedStatus = {}
 
         if (isChecked === "") {
@@ -40,7 +40,7 @@ const Orders = (props) => {
         })
             .then((response) => {
                 if (response.status === 204) {
-                    console.log('changeStatus fetch: ', response);
+                    //console.log('changeStatus fetch: ', response);
                     props.setLastResponse(response);
                 }
                 else {
@@ -48,7 +48,7 @@ const Orders = (props) => {
                 }
             })
             .catch(error => {
-                console.log(error);
+                //console.log(error);
                 //setErrorMessage('Le cageot est tombé du camion');
             });
 
@@ -77,12 +77,12 @@ const Orders = (props) => {
         })
             .then(response => response.json())
             .then((response) => {
-                console.log('currentOrder fetch ', response);
+                //console.log('currentOrder fetch ', response);
                 //const sortedCurrentOrder = response.sort( (a, b) => (a.categoryName.localeCompare(b.categoryName)))
                 setOrderDetails(response);
             })
             .catch(error => {
-                console.log(error);
+                //console.log(error);
                 //setErrorMessage('Le cageot est tombé du camion');
             });
 

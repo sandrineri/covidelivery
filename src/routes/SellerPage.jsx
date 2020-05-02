@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '../auth/Auth0Wrapper';
 
-import Header from '../components/Header';
+//import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Connect from '../components/Connect';
 import SellerButtons from '../components/SellerButtons';
@@ -9,6 +9,7 @@ import Message from '../components/Message';
 import SellerProducts from '../components/SellerProducts';
 
 import settings from '../config/settings';
+import { isSeller } from '../utils/utils';
 
 const SellerPage = () => {
     // Initialisation des variables d'état
@@ -28,7 +29,6 @@ const SellerPage = () => {
     const [accessToken, setAccessToken] = useState(null);
     const { isAuthenticated, getTokenSilently, user } = useAuth0();
     if (isAuthenticated) {
-        console.log(user);
         getTokenSilently().then(token => {
             setAccessToken(token);
             //console.log('token: ', token);
@@ -138,26 +138,42 @@ const SellerPage = () => {
             })
     }, [lastResponseStatusCode]);
 
-    if (accessToken === null) return <React.Fragment></React.Fragment>;
+    if (!isSeller(user)) return <React.Fragment></React.Fragment>;
     //console.log('SellerPage sortedProductsWithoutCategories: ', products);
 
     return (
         <React.Fragment>
-            <Header />
+            {/* <Header /> */}
             <nav>
-                <div></div>
-                <Connect accessToken={accessToken} setAccessToken={setAccessToken} user={user} />
+                <div className="nav-part brand">
+                    <h1>C<span>ovidelivery</span></h1>
+                </div>
+                <Connect 
+                    accessToken={accessToken}
+                    setAccessToken={setAccessToken}
+                    user={user}
+                    isAuthenticated={isAuthenticated} />
             </nav>
             
-            <SellerButtons accessToken={accessToken} setMessage={setMessage} {...productInfo} setLastResponseStatusCode={setLastResponseStatusCode} />
+            <SellerButtons 
+                accessToken={accessToken} 
+                setProductInfo={setProductInfo} 
+                setMessage={setMessage} 
+                {...productInfo} 
+                setLastResponseStatusCode={setLastResponseStatusCode} />
+
             <Message message={message} />
+
             <article className="sell-products-container">
                 <h2>Gérer les produits à vendre</h2>
                 <SellerProducts
-                    accessToken={accessToken} setMessage={setMessage}
+                    accessToken={accessToken} 
+                    setMessage={setMessage}
                     {...productInfo}
-                    modifiedProducts={modifiedProducts} setModifiedProducts={setModifiedProducts}
+                    modifiedProducts={modifiedProducts}
+                    setModifiedProducts={setModifiedProducts}
                 />
+
                 <div className="sell-btn">
                     <button type="submit" title="Modifier plusieurs produits" alt="Modifier plusieurs produits" value="" name="" onClick={modifyProducts}>
                         Modifier plusieurs produits
@@ -166,7 +182,8 @@ const SellerPage = () => {
                         </span>
                     </button>
                 </div>
-            </article>  
+            </article>
+            
             <Footer />
         </React.Fragment>
     )

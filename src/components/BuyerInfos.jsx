@@ -10,7 +10,7 @@ const BuyerInfos = (props) => {
         "email": '',
         "extra": ''
     });
-    console.log(buyerInfos);
+    //console.log(buyerInfos);
 
     useEffect(() => {
         if (props.accessToken === null) return;
@@ -22,7 +22,7 @@ const BuyerInfos = (props) => {
         })
             .then(response => response.json())
             .then((response) => {
-                console.log('buyerInfos fetch complete', response);
+                //console.log('buyerInfos fetch complete', response);
 
                 setBuyerInfos(response);
             })
@@ -32,7 +32,7 @@ const BuyerInfos = (props) => {
     }, [props.accessToken]);
 
     const changeInfo = (key, value) => {
-        console.log(key, value);
+        //console.log(key, value);
 
         const info = buyerInfos;
         info[key] = value;
@@ -51,7 +51,7 @@ const BuyerInfos = (props) => {
         })
             .then(response => {
                 if (response.status === 201) {
-                    console.log(buyerInfos + ' créé');
+                    //console.log(buyerInfos + ' créé');
                     //props.setMessage(`Le produit "${product.name}" a bien été créé. La liste sera raffraîchie automatiquement d'ici quelques secondes. Vous pourrez ensuite la modifier.`);
                     //setTimeout(() => { document.location.reload(); }, 3000);
                 }

@@ -123,6 +123,8 @@ input,
     }
 }
 
+
+
 // HEADER
 header {
     text-align: center;
@@ -138,7 +140,24 @@ header {
 
 // CONNECT
 nav {
-    padding: 0 2rem;
+    width: 100%;
+
+    .nav-part {
+        margin: 0 2rem;
+    }
+
+    .brand h1 {
+        font-family: $labelsFont;
+        font-size: 2rem;
+        //font-variant: small-caps;
+        color: #949245;
+        letter-spacing: .2rem;
+        margin: 0;
+
+        span {
+            font-variant: small-caps;
+        }
+    }
 
     .person {
         input {
@@ -230,7 +249,7 @@ nav {
 // SELLER
 .buttons-container {
     button {
-        margin: 1rem;
+        margin: 0 1rem;
     }
 }
 

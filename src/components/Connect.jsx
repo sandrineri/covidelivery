@@ -2,37 +2,17 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { useAuth0 } from '../auth/Auth0Wrapper';
 
-import settings from '../config/settings';
+import { displayIfAuthenticated, hideIfAuthenticated, displayIfSeller, displayIfNotOnPage, displayIfClient } from '../utils/utils';
 
 const Connect = (props) => {
     //console.log('Connect props: ', props);
 
     const { logout, loginWithRedirect } = useAuth0();
-
-    const displayIfAuthenticated = () => {
-        return props.accessToken ? 'display-flex' : 'display-none';
-    }
-    const displayIfNotAuthenticated = () => {
-        return props.accessToken ? 'display-none' : 'display-flex';
-    }
-    const displayIfNotOnPage = (pathname) => {
-        return window.location.pathname !== pathname ? 'display-flex' : 'display-none';
-    }
-    const displayIfSeller = () => {
-        if (props.user === undefined) return 'display-none';
-
-        return (props.user.nickname === settings.sellerLogin) ? 'display-flex' : 'display-none';
-    }
-    const displayIfClient = () => {
-        if (props.user === undefined) return 'display-none';
-
-        return (props.user.nickname !== settings.sellerLogin) ? 'display-flex' : 'display-none';
-    }
     
     return (
         <React.Fragment>
-            <div className={`user ${displayIfAuthenticated()}`}>
-                <div className={`buttons-container ${displayIfSeller()}`}>
+            <div className={`nav-part user ${displayIfAuthenticated(props.accessToken)}`}>
+                <div className={`buttons-container ${displayIfSeller(props.user)}`}>
                     <div className={displayIfNotOnPage('/')}>
                         <Link to="/">
                             <button type="submit">
@@ -66,7 +46,7 @@ const Connect = (props) => {
                     </div>
                 </div>
 
-                <div className={`buttons-container ${displayIfClient()}`}>
+                <div className={`buttons-container ${displayIfClient(props.user)}`}>
                     <button type="submit" onClick={props.displayBuyerInfosForm}>
                         Gérer vos coordonnées
                         <span className="btn-icon">
@@ -76,8 +56,8 @@ const Connect = (props) => {
                 </div>
             </div>
 
-            <div className="connect-container">
-                <div className={`${displayIfNotAuthenticated()}`}>
+            <div className="nav-part connect-container">
+                <div className={`${hideIfAuthenticated(props.accessToken, props.isAuthenticated)}`}>
                     <button onClick={loginWithRedirect}>
                         Se connecter
                         <span className="btn-icon">
@@ -85,7 +65,7 @@ const Connect = (props) => {
                         </span>
                     </button>
                 </div>
-                <div className={`${displayIfAuthenticated()}`}>
+                <div className={`${displayIfAuthenticated(props.accessToken)}`}>
                     <button onClick={logout}>
                         Se déconnecter
                         <span className="btn-icon">

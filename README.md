@@ -19,7 +19,7 @@ TODO :
 	[] Champs "required" (message des champs non remplis)
 	[x] Autocomplete
 	[] Si le nom d'un produit est déjà dans la liste, ne pas envoyer le formulaire
-	[] Rechargements de pages après envois à l'API (catégories à régler)
+	[] Rechargements de pages après envois à l'API (modifier une catégorie à régler)
 	- Revoir l'arborescence
 		[x] Séparer orders et order
 		[x] Voir les commandes depuis SellerPage
@@ -29,7 +29,7 @@ TODO :
 
 - COMPTE / CONNEXION
 	[x] Gérer les autorisations
-	[] S'inscrire et navigation
+	[x] S'inscrire et navigation
     [x] Possibilité de se connecter
 
     Une fois connecté :
@@ -37,7 +37,7 @@ TODO :
 	[x] Le client peut créer son compte en indiquant ses coordonnées de livraison (nom, adresse, téléphone, mail, complément d'infos (digicode...) <!-- moyen de paiement ?, -->)
 	[x] Le client peut modifier les infos de son compte
 	- COMMERCANT :
-	[] Le commerçant peut accéder aux pages vendeur
+	[x] Le commerçant peut accéder aux pages vendeur
 
 - PAGES VENDEUR
 	- GESTION DES PRODUITS :

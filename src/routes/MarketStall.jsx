@@ -5,12 +5,14 @@ import { fr } from 'date-fns/locale';
 
 import settings from '../config/settings';
 
-import Header from '../components/Header';
+//import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Connect from '../components/Connect';
 import Message from '../components/Message';
 import Products from '../components/Products';
 import BuyerInfos from '../components/BuyerInfos';
+
+import { displayIfClient } from '../utils/utils';
 
 const MarketStall = () => {
     // Initialize state
@@ -120,20 +122,16 @@ const MarketStall = () => {
         }
     }
 
-    const displayIfClient = () => {
-        if (user === undefined) return 'display-none';
-
-        return (user.nickname !== settings.sellerLogin) ? 'display-flex' : 'display-none';
-    }
-
     return (
         <React.Fragment>
-            <Header />
+            {/* <Header /> */}
             <nav>
-                <div>Mon nom</div>
+                <div className="nav-part brand">
+                    <h1>C<span>ovidelivery</span></h1>
+                </div>
                 <Connect
                     accessToken={accessToken} setAccessToken={setAccessToken} user={user}
-                    displayBuyerInfosForm={displayBuyerInfosForm} />
+                    displayBuyerInfosForm={displayBuyerInfosForm} isAuthenticated={isAuthenticated} />
             </nav>
             <Message message={errorMessage} />
 
@@ -168,7 +166,7 @@ const MarketStall = () => {
 
                 <Products order={order} setOrder={setOrder} products={products} message={errorMessage} lastModified={lastModified} baseUnitOptions={baseUnitOptions} />
 
-                <span className={`order-btn ${displayIfClient()}`}>
+                <span className={`order-btn ${displayIfClient(user)}`}>
                     <button type="submit" onClick={sendOrder}>
                         Envoyer ma commande
                         <span className="btn-icon">

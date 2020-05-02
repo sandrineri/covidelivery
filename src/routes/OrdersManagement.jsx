@@ -3,7 +3,7 @@ import { useAuth0 } from '../auth/Auth0Wrapper';
 
 import settings from '../config/settings';
 
-import Header from '../components/Header';
+//import Header from '../components/Header';
 import Footer from '../components/Footer';
 //import Message from '../components/Message';
 import Orders from '../components/Orders';
@@ -21,7 +21,7 @@ const OrdersManagement = () => {
     if (isAuthenticated) {
         getTokenSilently().then(token => {
             setAccessToken(token);
-            console.log('token: ', token);
+            //console.log('token: ', token);
         });
     }
 
@@ -36,7 +36,7 @@ const OrdersManagement = () => {
         })
             .then(response => response.json())
             .then((response) => {
-                console.log('fetch complete', response);
+                //console.log('fetch complete', response);
 
                 const sortedOrders = response.sort((a, b) => {
                     if(a.id < b.id) { return -1; }
@@ -58,10 +58,12 @@ const OrdersManagement = () => {
 
     return (
         <React.Fragment>
-            <Header />
+            {/* <Header /> */}
             <nav>
-                <div></div>
-                <Connect accessToken={accessToken} setAccessToken={setAccessToken} user={user} />
+                <div className="nav-part brand">
+                    <h1>C<span>ovidelivery</span></h1>
+                </div>
+                <Connect accessToken={accessToken} setAccessToken={setAccessToken} user={user} isAuthenticated={isAuthenticated} />
             </nav>
             {/* <Message message={errorMessage} /> */}
             <Orders accessToken={accessToken} orders={orders} setLastResponse={setLastResponse} />
