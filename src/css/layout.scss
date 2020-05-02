@@ -21,7 +21,7 @@
     align-items: center;
 }
 
-// CONNECT
+// NAVIGATION & CONNECT
 nav {
     // display: flex;
     // justify-content: space-between;
@@ -54,6 +54,7 @@ nav {
     .update-infos {
         display: flex;
         justify-content: center;
+        align-items: baseline;
     }
 }
 
@@ -238,4 +239,11 @@ nav {
 .print-btn {
     display: flex;
     justify-content: center;
+}
+
+
+// FOOTER
+footer {
+    display: flex;
+    align-items: center;
 }

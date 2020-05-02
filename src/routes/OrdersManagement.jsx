@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '../auth/Auth0Wrapper';
 
 import settings from '../config/settings';
+import { isSeller } from '../utils/utils';
 
 //import Header from '../components/Header';
 import Footer from '../components/Footer';
 //import Message from '../components/Message';
 import Orders from '../components/Orders';
-import Connect from '../components/Connect';
+import Navigation from '../components/Navigation';
 
 const OrdersManagement = () => {
     // Initialisation du state
@@ -39,13 +40,13 @@ const OrdersManagement = () => {
                 //console.log('fetch complete', response);
 
                 const sortedOrders = response.sort((a, b) => {
-                    if(a.id < b.id) { return -1; }
-                    if(a.id > b.id) { return 1; }
+                    if (a.id < b.id) { return -1; }
+                    if (a.id > b.id) { return 1; }
                     return 0;
                 });
                 //console.log(sortedOrders);
                 setOrders(sortedOrders);
-                
+
             })
             .catch(error => {
                 console.log(error);
@@ -54,18 +55,11 @@ const OrdersManagement = () => {
 
     }, [accessToken, lastResponse]);
 
-    if (accessToken === null) return <React.Fragment></React.Fragment>;
+    if (!isSeller(user)) return <React.Fragment></React.Fragment>;
 
     return (
         <React.Fragment>
-            {/* <Header /> */}
-            <nav>
-                <div className="nav-part brand">
-                    <h1>C<span>ovidelivery</span></h1>
-                </div>
-                <Connect accessToken={accessToken} setAccessToken={setAccessToken} user={user} isAuthenticated={isAuthenticated} />
-            </nav>
-            {/* <Message message={errorMessage} /> */}
+            <Navigation accessToken={accessToken} setAccessToken={setAccessToken} user={user} isAuthenticated={isAuthenticated} />
             <Orders accessToken={accessToken} orders={orders} setLastResponse={setLastResponse} />
             <Footer />
         </React.Fragment>

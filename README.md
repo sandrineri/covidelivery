@@ -12,6 +12,7 @@ ___________
 TODO :
 
 - PETOUILLES :
+	[] Ajouter un loader (demander à J)
 	[x] orders api : manque téléphone
 	[x] Cacher le bouton de commande tant que l'on n'est pas connecté
 	[x] Ne pas envoyer la commande pour un panier vide (message d'alerte)

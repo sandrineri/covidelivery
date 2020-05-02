@@ -3,7 +3,7 @@ import { useAuth0 } from '../auth/Auth0Wrapper';
 
 //import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Connect from '../components/Connect';
+import Navigation from '../components/Navigation';
 import SellerButtons from '../components/SellerButtons';
 import Message from '../components/Message';
 import SellerProducts from '../components/SellerProducts';
@@ -111,17 +111,17 @@ const SellerPage = () => {
                 }
 
                 const sortedProductsWithoutCategories = productsWithoutCategories.sort((a, b) => (a.name.localeCompare(b.name)));
-                
+
                 setProductInfo({
                     categories: response.categories,
                     families: response.products,
                     products: sortedProductsWithoutCategories,
-                    baseUnitOptions: response.units.map( option => {
+                    baseUnitOptions: response.units.map(option => {
                         return { value: `${option.id}`, label: `${option.name}`, name: `${option.name}` }
                     }),
                     categoryOptions: response.categories
                 });
-                
+
                 // let autocompleteCategoryOptions = [];
                 // autocompleteCategoryOptions = categoryOptions.map(option => {
                 //     return {
@@ -143,22 +143,16 @@ const SellerPage = () => {
 
     return (
         <React.Fragment>
-            {/* <Header /> */}
-            <nav>
-                <div className="nav-part brand">
-                    <h1>C<span>ovidelivery</span></h1>
-                </div>
-                <Connect 
-                    accessToken={accessToken}
-                    setAccessToken={setAccessToken}
-                    user={user}
-                    isAuthenticated={isAuthenticated} />
-            </nav>
-            
-            <SellerButtons 
-                accessToken={accessToken} 
-                setProductInfo={setProductInfo} 
-                setMessage={setMessage} 
+            <Navigation
+                accessToken={accessToken}
+                setAccessToken={setAccessToken}
+                user={user}
+                isAuthenticated={isAuthenticated} />
+
+            <SellerButtons
+                accessToken={accessToken}
+                setProductInfo={setProductInfo}
+                setMessage={setMessage}
                 productInfo={productInfo}
                 setLastResponseStatusCode={setLastResponseStatusCode} />
 
@@ -167,7 +161,7 @@ const SellerPage = () => {
             <article className="sell-products-container">
                 <h2>Gérer les produits à vendre</h2>
                 <SellerProducts
-                    accessToken={accessToken} 
+                    accessToken={accessToken}
                     setMessage={setMessage}
                     productInfo={productInfo}
                     modifiedProducts={modifiedProducts}
@@ -184,7 +178,7 @@ const SellerPage = () => {
                     </button>
                 </div>
             </article>
-            
+
             <Footer />
         </React.Fragment>
     )

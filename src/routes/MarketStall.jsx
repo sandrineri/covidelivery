@@ -7,12 +7,12 @@ import settings from '../config/settings';
 
 //import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Connect from '../components/Connect';
+import Navigation from '../components/Navigation';
 import Message from '../components/Message';
 import Products from '../components/Products';
 import BuyerInfos from '../components/BuyerInfos';
 
-import { displayIfClient } from '../utils/utils';
+import { displayIfAuthenticated, displayIfClient } from '../utils/utils';
 
 const MarketStall = () => {
     // Initialize state
@@ -122,35 +122,53 @@ const MarketStall = () => {
         }
     }
 
+    if (accessToken === null) return (
+        <React.Fragment>
+            <Navigation
+                accessToken={accessToken}
+                setAccessToken={setAccessToken}
+                user={user}
+                displayBuyerInfosForm={displayBuyerInfosForm}
+                isAuthenticated={isAuthenticated} />
+        </React.Fragment>
+    );
+
     return (
         <React.Fragment>
-            {/* <Header /> */}
-            <nav>
-                <div className="nav-part brand">
-                    <h1>C<span>ovidelivery</span></h1>
-                </div>
-                <Connect
-                    accessToken={accessToken} setAccessToken={setAccessToken} user={user}
-                    displayBuyerInfosForm={displayBuyerInfosForm} isAuthenticated={isAuthenticated} />
-            </nav>
+            <Navigation
+                accessToken={accessToken}
+                setAccessToken={setAccessToken}
+                user={user}
+                displayBuyerInfosForm={displayBuyerInfosForm}
+                isAuthenticated={isAuthenticated} />
+
             <Message message={errorMessage} />
 
             <article className={`form-container buyer-form-container ${buyerInfosFormDisplay}`}>
-                <BuyerInfos accessToken={accessToken}/>
+                <BuyerInfos accessToken={accessToken} />
             </article>
 
-            <article className="stalls">
-                <section className={`${isAuthenticated ? 'display-none' : 'display-flex'}`}>
-                    <p className="update-infos update-infos-sub">
-                        Pour pouvoir commander, vous devez avoir un compte et être connecté.
-                    </p>
-                </section>
-                <section className={`${isAuthenticated ? 'display-flex' : 'display-none'}`}>
-                    <p className="update-infos update-infos-sub">
-                        Pour commander, choisissez la quantité des produits que vous voulez puis envoyez la commande avec le bouton en bas de la liste.
-                    </p>
-                </section>
+            <article className={`stalls`}>
+                <section className="instructions">
+                    <div className={`${isAuthenticated ? 'display-none' : 'display-flex'}`}>
+                        <p className="update-infos update-infos-sub">
+                            Pour pouvoir commander, vous devez avoir un compte et être connecté.
+                        </p>
+                    </div>
 
+                    <div className={`${isAuthenticated ? 'display-flex' : 'display-none'}`}>
+                        <p className="update-infos update-infos-sub">
+                            <span>
+                                <i class="fas fa-exclamation"></i>
+                                &nbsp;Première visite&nbsp;:&nbsp;
+                            </span>
+                            Remplissez le formulaire dans Gérer vos coordonnées. Vos coordonnées complètes sont indispensables pour que vos futures commandes puissent être prises en compte.
+                        </p>
+                        <p className="update-infos update-infos-sub">
+                            <b>Pour commander, choisissez la quantité des produits que vous voulez puis envoyez la commande avec le bouton en bas de la liste.</b>
+                        </p>
+                    </div>
+                </section>
 
                 <h2>Liste des produits et tarifs</h2>
 
