@@ -47,11 +47,16 @@ const SellerButtons = (props) => {
             </div>
 
             <article className={`form-container create-form-container ${prodCreationDisplay}`}>
-                <CreateProduct accessToken={props.accessToken} products={props.products} baseUnitOptions={props.baseUnitOptions} categoryOptions={props.categoryOptions} setMessage={props.setMessage} setLastResponseStatusCode={props.setLastResponseStatusCode} />
+                <CreateProduct accessToken={props.accessToken} {...props.productInfo} setMessage={props.setMessage} setLastResponseStatusCode={props.setLastResponseStatusCode} categoryOptions={props.categoryOptions} />
             </article>
 
             <article className={`form-container cat-form-container ${catManageDisplay}`}>
-                <ManageCategories accessToken={props.accessToken} families={props.families} categories={props.categories} setMessage={props.setMessage} setLastResponseStatusCode={props.setLastResponseStatusCode} />
+                <ManageCategories 
+                    accessToken={props.accessToken}
+                    productInfo={props.productInfo}
+                    setProductInfo={props.setProductInfo}
+                    setMessage={props.setMessage}
+                    setLastResponseStatusCode={props.setLastResponseStatusCode} />
             </article>
         </React.Fragment>
     )

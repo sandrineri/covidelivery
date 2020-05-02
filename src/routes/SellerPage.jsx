@@ -112,10 +112,6 @@ const SellerPage = () => {
 
                 const sortedProductsWithoutCategories = productsWithoutCategories.sort((a, b) => (a.name.localeCompare(b.name)));
                 
-                const categoryOptions = response.categories.map( option => {
-                    return { value: `${option.id}`, label: `${option.name}`, name: `${option.name}` }
-                });
-
                 setProductInfo({
                     categories: response.categories,
                     families: response.products,
@@ -123,23 +119,27 @@ const SellerPage = () => {
                     baseUnitOptions: response.units.map( option => {
                         return { value: `${option.id}`, label: `${option.name}`, name: `${option.name}` }
                     }),
-                    categoryOptions: categoryOptions
+                    categoryOptions: response.categories
                 });
                 
-                let autocompleteCategoryOptions = [];
-                autocompleteCategoryOptions = categoryOptions.map(option => {
-                    return {
-                        ...option,
-                        name: option.name.toLowerCase()
-                    }
-                })
+                // let autocompleteCategoryOptions = [];
+                // autocompleteCategoryOptions = categoryOptions.map(option => {
+                //     return {
+                //         ...option,
+                //         name: option.name.toLowerCase()
+                //     }
+                // })
 
-                console.log('proautocompleteCategoryOptionsductInfo: ', autocompleteCategoryOptions);
+                // console.log('proautocompleteCategoryOptionsductInfo: ', autocompleteCategoryOptions);
             })
     }, [lastResponseStatusCode]);
 
     if (!isSeller(user)) return <React.Fragment></React.Fragment>;
     //console.log('SellerPage sortedProductsWithoutCategories: ', products);
+
+    const categoryOptions = productInfo.categoryOptions.map(option => {
+        return { value: `${option.id}`, label: `${option.name}`, name: `${option.name}` }
+    });
 
     return (
         <React.Fragment>
@@ -159,7 +159,7 @@ const SellerPage = () => {
                 accessToken={accessToken} 
                 setProductInfo={setProductInfo} 
                 setMessage={setMessage} 
-                {...productInfo} 
+                productInfo={productInfo}
                 setLastResponseStatusCode={setLastResponseStatusCode} />
 
             <Message message={message} />
@@ -169,9 +169,10 @@ const SellerPage = () => {
                 <SellerProducts
                     accessToken={accessToken} 
                     setMessage={setMessage}
-                    {...productInfo}
+                    productInfo={productInfo}
                     modifiedProducts={modifiedProducts}
                     setModifiedProducts={setModifiedProducts}
+                    categoryOptions={categoryOptions}
                 />
 
                 <div className="sell-btn">

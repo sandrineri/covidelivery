@@ -1,20 +1,12 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import CreatableSelect from 'react-select/creatable';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import settings from '../config/settings';
 
 const CreateProduct = (props) => {
-    console.log('CreateProduct props: ', props);
-
-    const options = props.products.map(product => { 
-        return (
-            { value: product.name, label: product.name }
-        )
-    });
-    console.log(options);
+    //console.log('CreateProduct props: ', props);
 
     const [product, setProduct] = useState({
         "name": '',
@@ -28,15 +20,15 @@ const CreateProduct = (props) => {
 
     const changeProduct = (key, value) => {
         //console.log('CreateProduct props: ', props);
-        console.log('key, value: ', key, value);
+        //console.log('key, value: ', key, value);
 
-        let registeredProduct = '';
-        if (!['selectableUnits', 'baseUnitId', 'categoryId'].includes(key)) {
-            registeredProduct = props.products.filter( product => {
-                return product[key].toLowerCase().includes(value);
-            }).map(product => product[key]);
-            console.log('registeredProduct: ', registeredProduct);
-        }
+        // let registeredProduct = '';
+        // if (!['selectableUnits', 'baseUnitId', 'categoryId'].includes(key)) {
+        //     registeredProduct = props.products.filter( product => {
+        //         return product[key].toLowerCase().includes(value);
+        //     }).map(product => product[key]);
+        //     //console.log('registeredProduct: ', registeredProduct);
+        // }
         
         const modifiedProduct = product;
         modifiedProduct[key] = value;
@@ -60,7 +52,7 @@ const CreateProduct = (props) => {
             })
                 .then(response => {
                     if (response.status === 201) {
-                        console.log(product.name + ' créé');
+                        //console.log(product.name + ' créé');
                         props.setMessage(`Le produit "${product.name}" a bien été créé. Vous pouvez désormais le modifier dans la liste des produits ci-desous.`);
                         setTimeout(() => {
                             props.setLastResponseStatusCode(response.status);
@@ -145,7 +137,6 @@ const CreateProduct = (props) => {
                             }
                             else if (option.value === null) {
                                 changeProduct('baseUnitId', product.baseUnitId);
-                                console.log(product.baseUnitId);
                             }
                         }}
 
@@ -172,7 +163,6 @@ const CreateProduct = (props) => {
                         onChange={(options) => {
                             if (options !== null) {
                                 changeProduct('selectableUnits', options.map(option => option.value));
-                                //console.log('selectable: ', option.value)
                             }
                             else {
                                 changeProduct('selectableUnits', []);

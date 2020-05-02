@@ -10,7 +10,7 @@ const ManageCategories = (props) => {
     let familyOptions = [
         { value: "" , label: "Nouvelle famille", name: "Nouvelle famille" }
     ];
-    props.families.forEach(family => {
+    props.productInfo.families.forEach(family => {
         familyOptions.push({ value: `${family.id}`, label: `${family.name.toLocaleUpperCase('fr')}`, name: `${family.name}` });
     });
 
@@ -25,11 +25,11 @@ const ManageCategories = (props) => {
 
     //setFamilyOptions(getFamilyOptions);
     //console.log('familyOptions: ', familyOptions);
-    console.log('newCategory: ', modifiedCategory);
+    //console.log('newCategory: ', modifiedCategory);
 
 
-    const changeCategory =(key, value) => {
-        console.log('modifiedCategory: ', key, value);
+    const changeCategory = (key, value) => {
+        //console.log('modifiedCategory: ', key, value);
         
         const modified = modifiedCategory;
         modified[key] = value;
@@ -50,7 +50,7 @@ const ManageCategories = (props) => {
         })
             .then(response => {
                 if (response.status === 201) {
-                    console.log(modifiedCategory.name + ' créée');
+                    //console.log(modifiedCategory.name + ' créée');
                     props.setMessage(`La catégorie "${modifiedCategory.name}" a bien été créée. Vous pouvez désormais la modifier dans la liste des catégories ci-dessus. Si vous avez créé une nouvelle famille, vous la trouverez dans la liste des familles à choisir.`);
                     setTimeout(() => {
                         props.setLastResponseStatusCode(response.status);
@@ -102,9 +102,19 @@ const ManageCategories = (props) => {
             <section className="categories-list">
                 <h3>Modifier une catégorie</h3>
                 <ul className="categories">
-                    {props.categories.map((category) => {
+                    {props.productInfo.categories.map((category) => {
+                        console.log('MangCats : ', category);
                         return (
-                            <ManageCategory accessToken={props.accessToken} key={category.id} category={category} familyOptions={familyOptions} setMessage={props.setMessage} setLastResponseStatusCode={props.setLastResponseStatusCode} />
+                            <ManageCategory 
+                                accessToken={props.accessToken} 
+                                key={category.id} 
+                                category={category} 
+                                productInfo={props.productInfo}
+                                setProductInfo={props.setProductInfo} 
+                                familyOptions={familyOptions} 
+                                setMessage={props.setMessage} 
+                                setLastResponseStatusCode={props.setLastResponseStatusCode}
+                            />
                         )
                     })}
                 </ul>

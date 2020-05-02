@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
 
-import settings from '../config/settings';
-
 const ManageCategory = (props) => {
     //console.log('ManageCategory props: ', props);
     const [category, setCategory] = useState(props.category);
 
-    const changeCategory =(key, value) => {
+    const changeCategory = (key, value) => {
         console.log('modifiedCategory: ', key, value);
         
         const modifiedCategory = props.category;
@@ -17,34 +15,47 @@ const ManageCategory = (props) => {
 
 
     const modifyCategory = (e, id, name) => {
-        console.log('changingCategoryToSend: ', category + '; id: ', id);
-        e.preventDefault();
-        if (category.name === "") { category.name = name; };
-        fetch(`${settings.apiBasePath}/category/` + id, {
-            method: 'PUT',
-            body: JSON.stringify(category),
-            headers: {
-                "Authorization": `Bearer ${props.accessToken}`
-            }
-        })
-            .then(response => {
-                if (response.status === 201) {
-                    console.log(category.name + ' changée');
-                    props.setMessage(`La catégorie "${category.name}" a bien été modifiée. Si vous l'avez placée en nouvelle famille, vous la trouverez désormais dans la liste des familles à choisir.`);
-                    setTimeout(() => {
-                        props.setLastResponseStatusCode(response.status);
-                        props.setMessage('');
-                        console.log(response.status);
-                    }, 3000);
-                }
-                else {
-                    throw new Error('Code HTTP incorrect');
-                }
-            })
-            .catch(error => {
-                console.log('Erreur de création : ', error);
-                //props.setMessage(`Erreur de création : ${error}`);
-            });
+        console.log('changingCategoryToSend: ', JSON.stringify(category) + '; id: ', id);
+        // e.preventDefault();
+
+        console.log('props.productInfo ', props.productInfo);
+
+        const modifiedCats = props.productInfo.categories;
+        const modifiedCategoryArrayId = props.productInfo.categories.find(category => category.id === id);
+        modifiedCats[modifiedCategoryArrayId] = category;
+        // console.log('modifiedCat: ', modifiedCat);
+
+        props.setProductInfo({
+            ...props.productInfo,
+            categories: modifiedCats
+        });
+
+        // if (category.name === "") { category.name = name; };
+        // fetch(`${settings.apiBasePath}/category/` + id, {
+        //     method: 'PUT',
+        //     body: JSON.stringify(category),
+        //     headers: {
+        //         "Authorization": `Bearer ${props.accessToken}`
+        //     }
+        // })
+        //     .then(response => {
+        //         if (response.status === 201) {
+        //             console.log(category.name + ' changée');
+        //             props.setMessage(`La catégorie "${category.name}" a bien été modifiée. Si vous l'avez déclarée en tant que nouvelle famille, vous la trouverez désormais dans la liste des familles à choisir.`);
+        //             setTimeout(() => {
+        //                 props.setLastResponseStatusCode(response.status);
+        //                 props.setMessage('');
+        //                 console.log(response.status);
+        //             }, 3000);
+        //         }
+        //         else {
+        //             throw new Error('Code HTTP incorrect');
+        //         }
+        //     })
+        //     .catch(error => {
+        //         console.log('Erreur de création : ', error);
+        //         //props.setMessage(`Erreur de création : ${error}`);
+        //     });
     }
 
 

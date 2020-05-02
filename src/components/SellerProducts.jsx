@@ -19,12 +19,14 @@ const SellerProducts = (props) => {
                 <span className="sell-product-label sell-prod-btn">Modifier</span>
                 <span className="sell-product-label sell-prod-btn">Supprimer</span>
             </li>
-            {props.products.map(product => {
+            {props.productInfo.products.map(product => {
                 //console.log('product: ', product);
                 return (
                     <SellerProduct
                         accessToken={props.accessToken} key={product.id} product={product} setMessage={props.setMessage}
-                        categoryOptions={props.categoryOptions} baseUnitOptions={props.baseUnitOptions} modifiedProducts={props.modifiedProducts} setModifiedProducts={props.setModifiedProducts}
+                        {...props.productInfo}
+                        modifiedProducts={props.modifiedProducts} setModifiedProducts={props.setModifiedProducts}
+                        categoryOptions={props.categoryOptions}
                     />
                 )
             })}
