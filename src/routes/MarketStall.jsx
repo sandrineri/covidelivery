@@ -159,8 +159,9 @@ const MarketStall = () => {
                     <div className={`${isAuthenticated ? 'display-flex' : 'display-none'}`}>
                         <p className="update-infos update-infos-sub">
                             <span>
-                                <i class="fas fa-exclamation"></i>
-                                &nbsp;Première visite&nbsp;:&nbsp;
+                                <i class="fas fa-exclamation-triangle"></i>
+                                {/* <i class="fas fa-exclamation"></i> */}
+                                &nbsp;<b>Première visite</b>&nbsp;:&nbsp;
                             </span>
                             Remplissez le formulaire dans Gérer vos coordonnées. Vos coordonnées complètes sont indispensables pour que vos futures commandes puissent être prises en compte.
                         </p>
